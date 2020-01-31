@@ -83,9 +83,8 @@
                         </div>
                     </li>
                     <li class="">
-                        <a href="index.html" aria-expanded="false"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span> <span class="fa arrow"></span></a>
+                        <a href="index.html" aria-expanded="false"><i class="fa fa-book"></i> <span class="nav-label">Learning Module</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
-                            <li class="active"><a href="index.html">Dashboard v.1</a></li>
                             <li><a href="dashboard_2.html">Dashboard v.2</a></li>
                             <li><a href="dashboard_3.html">Dashboard v.3</a></li>
                             <li><a href="dashboard_4_1.html">Dashboard v.4</a></li>
@@ -93,29 +92,13 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">Layouts</span></a>
+                        <a href="layouts.html"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Announcements</span></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Graphs</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse" aria-expanded="false">
-                            <li><a href="graph_flot.html">Flot Charts</a></li>
-                            <li><a href="graph_morris.html">Morris.js Charts</a></li>
-                        </ul>
+                        <a href="layouts.html"><i class="fa fa-users"></i> <span class="nav-label">Users</span></a>
                     </li>
-                    <li>
-                        <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Mailbox </span><span class="label label-warning float-right">16/24</span></a>
-                        <ul class="nav nav-second-level collapse" aria-expanded="false">
-                            <li><a href="mailbox.html">Inbox</a></li>
-                            <li><a href="mail_detail.html">Email view</a></li>
-                            <li><a href="mail_compose.html">Compose email</a></li>
-                            <li><a href="email_template.html">Email templates</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="metrics.html"><i class="fa fa-pie-chart"></i> <span class="nav-label">Metrics</span>  </a>
-                    </li>
-                    <li>
-                        <a href="widgets.html"><i class="fa fa-flask"></i> <span class="nav-label">Widgets</span></a>
+                    <li class="landing_link">
+                        <a target="_blank" href="landing.html"><i class="fa fa-sign-out"></i> <span class="nav-label">Logout</span></a>
                     </li>
                 </ul>
             </div>
@@ -236,11 +219,6 @@
                         <li>
                             <a href="login.html">
                                 <i class="fa fa-sign-out"></i> Log out
-                            </a>
-                        </li>
-                        <li>
-                            <a class="right-sidebar-toggle">
-                                <i class="fa fa-tasks"></i>
                             </a>
                         </li>
                     </ul>
