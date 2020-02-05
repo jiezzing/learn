@@ -23,9 +23,10 @@ $(function () {
                 contentType: false,
                 data: data,
                 success: function(response) {
+                    alert(response);
                     if(response != 0){
                         if(response == 2){
-                            window.location.href = '../university/pages/index';
+                            window.location.href = '../university/home/index';
                         }
                     }
                     else{

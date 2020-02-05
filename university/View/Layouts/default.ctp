@@ -5,8 +5,7 @@
 	<title>
 		<?php echo $this->fetch('title'); ?>
 	</title>
-	<?php
-        echo $this->Html->meta('icon');
+	<?php echo $this->Html->meta('icon');
         
 		echo $this->Html->css([
             'bootstrap.min.css',
@@ -71,7 +70,7 @@
 	?>
 </head>
 <body>
-    <?php if($this->Session->read('user_id') && PAGE != 'login') : ?>
+    <?php if($this->Session->read('user_id') && $page != 'Login') : ?>
         <div class="pace  pace-inactive">
             <div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
               <div class="pace-progress-inner"></div>
@@ -88,7 +87,6 @@
                                     'alt' => 'image',
                                     'class' => array('rounded-circle') 
                                 )); ?>
-                                <!-- <img alt="image" class="rounded-circle" src="img/profile_small.jpg"> -->
                                 <a href="#">
                                     <span class="block m-t-xs font-bold">David Williams</span>
                                     <span class="text-muted text-xs block">School Admin </b></span>
@@ -99,13 +97,34 @@
                             </div>
                         </li>
                         <li>
-                            <a href="../home/index"><i class="fa fa-dashboard fa-lg"></i> <span class="nav-label">Dashboard</span></a>
+                            <?php echo $this->Html->link(
+                                    $this->Html->tag('i', false, array('class' => 'fa fa-dashboard fa-lg')) . '' . 
+                                    $this->Html->tag('span', 'Dashboard', array('class' => 'nav-label')), array(
+                                        'controller' => 'home', 
+                                        'action' => 'index'
+                                    ), array(
+                                        'escape' => false
+                                    )) ?>
                         </li>
                         <li>
-                            <a href="../announcements/index"><i class="fa fa-newspaper-o fa-sm"></i> <span class="nav-label">Announcements</span></a>
+                            <?php echo $this->Html->link(
+                                    $this->Html->tag('i', false, array('class' => 'fa fa-newspaper-o')) . '' . 
+                                    $this->Html->tag('span', 'Announcements', array('class' => 'nav-label')), array(
+                                        'controller' => 'announcements', 
+                                        'action' => 'index'
+                                    ), array(
+                                        'escape' => false
+                                    )) ?>
                         </li>
                         <li>
-                            <a href="../trivias/index"><i class="fa fa-puzzle-piece fa-lg"></i> <span class="nav-label">Trivia</span></a>
+                            <?php echo $this->Html->link(
+                                    $this->Html->tag('i', false, array('class' => 'fa fa-puzzle-piece fa-lg')) . '' . 
+                                    $this->Html->tag('span', 'Trivia', array('class' => 'nav-label')), array(
+                                        'controller' => 'trivias', 
+                                        'action' => 'index'
+                                    ), array(
+                                        'escape' => false
+                                    )) ?>
                         </li>
                         <li class="">
                             <a href="index.html" aria-expanded="false"><i class="fa fa-users"></i> <span class="nav-label">Users</span> <span class="fa arrow"></span></a>
@@ -173,9 +192,14 @@
 
 
                             <li>
-                                <?php echo $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-sign-out')).'Logout', array('controller' => 'shop', 'action' => 'cart'), array('escape' => false)) ?>
-                                    <!-- <i class="fa fa-sign-out"></i> Logout
-                                </a> -->
+                                <?php echo $this->Html->link($this->Html->tag('i', '', array(
+                                        'class' => 'fa fa-sign-out'
+                                    )).'Logout', array(
+                                        'controller' => 'login', 
+                                        'action' => 'logout'
+                                    ), array(
+                                        'escape' => false
+                                    )) ?>
                             </li>
                         </ul>
 

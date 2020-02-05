@@ -2,8 +2,6 @@
     var page = 'trivia';
 </script>
 
-<?php define('PAGE', 'trivia') ?>
-
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">

@@ -26,14 +26,16 @@
                     echo $data['User']['user_type'];
                 }
                 else{
-                    echo 0;
+                    echo AuthComponent::password($this->request->data['password']);
                 }
                 $this->render(false);
             }
         }
 
         public function index(){
-            $this->render('index');
+            $page = 'Login';
+            
+            $this->set(array('page' => $page));
         }
 
         public function logout() {

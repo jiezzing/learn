@@ -2,8 +2,6 @@
     var page = 'index';
 </script>
 
-<?php define('PAGE', 'index') ?>
-
 <div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-lg-3">

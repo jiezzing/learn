@@ -2,8 +2,6 @@
     var page = 'login';
 </script>
 
-<?php define('PAGE', 'login') ?>
-
 <div class="middle-box text-center loginscreen animated fadeInDown">
 	<div>
 		<p>Login in. To see it in action.</p>
