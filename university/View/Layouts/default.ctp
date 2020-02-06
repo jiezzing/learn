@@ -17,7 +17,14 @@
             // Toastr style
             'plugins/toastr/toastr.min.css',
             'animate.css',
-            'style.css'
+            'style.css',
+
+            // Datepicker
+            'plugins/datapicker/datepicker3.css',
+
+            // iCheck
+            'plugins/iCheck/custom.css',
+            'plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css'
         ]);
 
         echo $this->Html->script([
@@ -61,7 +68,13 @@
             'demo/sparkline-demo.js',
 
             // Toastr
-            'plugins/toastr/toastr.min.js'
+            'plugins/toastr/toastr.min.js',
+
+            // Datepicker 
+            'plugins/datapicker/bootstrap-datepicker.js',
+
+            // iCheck
+            'plugins/iCheck/icheck.min.js'
         ]);
 
 		echo $this->fetch('meta');
@@ -70,7 +83,7 @@
 	?>
 </head>
 <body>
-    <?php if($this->Session->read('user_id') && $page != 'Login') : ?>
+    <?php if($this->Session->read('user_id') && $data['page'] != 'Login') : ?>
         <div class="pace  pace-inactive">
             <div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
               <div class="pace-progress-inner"></div>
@@ -98,43 +111,55 @@
                         </li>
                         <li>
                             <?php echo $this->Html->link(
-                                    $this->Html->tag('i', false, array('class' => 'fa fa-dashboard fa-lg')) . '' . 
-                                    $this->Html->tag('span', 'Dashboard', array('class' => 'nav-label')), array(
-                                        'controller' => 'home', 
-                                        'action' => 'index'
-                                    ), array(
-                                        'escape' => false
-                                    )) ?>
+                                $this->Html->tag('i', false, array('class' => 'fa fa-dashboard fa-lg')) . '' . 
+                                $this->Html->tag('span', 'Dashboard', array('class' => 'nav-label')), array(
+                                    'controller' => 'home', 
+                                    'action' => 'index'
+                                ), array(
+                                    'escape' => false
+                                )) 
+                            ?>
                         </li>
                         <li>
                             <?php echo $this->Html->link(
-                                    $this->Html->tag('i', false, array('class' => 'fa fa-newspaper-o')) . '' . 
-                                    $this->Html->tag('span', 'Announcements', array('class' => 'nav-label')), array(
-                                        'controller' => 'announcements', 
-                                        'action' => 'index'
-                                    ), array(
-                                        'escape' => false
-                                    )) ?>
+                                $this->Html->tag('i', false, array('class' => 'fa fa-newspaper-o')) . '' . 
+                                $this->Html->tag('span', 'Announcements', array('class' => 'nav-label')), array(
+                                    'controller' => 'announcements', 
+                                    'action' => 'index'
+                                ), array(
+                                    'escape' => false
+                                )) 
+                            ?>
                         </li>
                         <li>
                             <?php echo $this->Html->link(
-                                    $this->Html->tag('i', false, array('class' => 'fa fa-puzzle-piece fa-lg')) . '' . 
-                                    $this->Html->tag('span', 'Trivia', array('class' => 'nav-label')), array(
-                                        'controller' => 'trivias', 
-                                        'action' => 'index'
-                                    ), array(
-                                        'escape' => false
-                                    )) ?>
+                                $this->Html->tag('i', false, array('class' => 'fa fa-puzzle-piece fa-lg')) . '' . 
+                                $this->Html->tag('span', 'Trivia', array('class' => 'nav-label')), array(
+                                    'controller' => 'trivias', 
+                                    'action' => 'index'
+                                ), array(
+                                    'escape' => false
+                                )) 
+                            ?>
                         </li>
                         <li class="">
                             <a href="index.html" aria-expanded="false"><i class="fa fa-users"></i> <span class="nav-label">Users</span> <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
-                                <li><a href="dashboard_2.html">Teachers</a></li>
-                                <li><a href="dashboard_3.html">Students</a></li>
+                                <li><?php echo $this->Html->link('Teachers', array('controller' => 'teachers', 'action' => 'index')) ?></a></li>
+                                <li><?php echo $this->Html->link('Students', array('controller' => 'students', 'action' => 'index')); ?></li>
+                                <li><?php echo $this->Html->link('New User', array('controller' => 'users', 'action' => 'index')); ?></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="layouts.html"><i class="fa fa-gears fa-lg"></i> <span class="nav-label">Profile Settings</span></a>
+                            <?php echo $this->Html->link(
+                                $this->Html->tag('i', false, array('class' => 'fa fa-gears fa-lg')) . '' . 
+                                $this->Html->tag('span', 'Profile Settings', array('class' => 'nav-label')), array(
+                                    'controller' => 'profile', 
+                                    'action' => 'index'
+                                ), array(
+                                    'escape' => false
+                                )) 
+                            ?>
                         </li>
                     </ul>
                 </div>
@@ -207,13 +232,13 @@
             </div>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2><?php echo $page; ?></h2>
+                    <h2><?php echo $data['page'] ?></h2>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a href="index.html">Home</a>
+                            <?php echo $this->Html->link('Home', array('controller' => 'home', 'action' => 'index')) ?>
                         </li>
                         <li class="breadcrumb-item active">
-                            <strong><?php echo $page; ?></strong>
+                            <strong><?php echo $data['page'] ?></strong>
                         </li>
                     </ol>
                 </div>
