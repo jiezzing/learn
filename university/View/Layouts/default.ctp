@@ -17,6 +17,9 @@
             // Toastr style
             'plugins/toastr/toastr.min.css',
             'animate.css',
+
+            // Summernote
+            'plugins/summernote/summernote-bs4.css',
             'style.css',
 
             // Datepicker
@@ -24,7 +27,10 @@
 
             // iCheck
             'plugins/iCheck/custom.css',
-            'plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css'
+            'plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css',
+
+            // Sweetalert
+            'plugins/sweetalert/sweetalert.css'
         ]);
 
         echo $this->Html->script([
@@ -51,8 +57,11 @@
             'inspinia.js',
             'plugins/pace/pace.min.js',
 
+            // Summernote
+            'plugins/summernote/summernote-bs4.js',
+
             // jQuery UI
-            'plugins/jquery-ui/jquery-ui.min.js',
+            // 'plugins/jquery-ui/jquery-ui.min.js',
 
             // GITTER
             'plugins/gritter/jquery.gritter.min.js',
@@ -74,7 +83,10 @@
             'plugins/datapicker/bootstrap-datepicker.js',
 
             // iCheck
-            'plugins/iCheck/icheck.min.js'
+            'plugins/iCheck/icheck.min.js',
+
+            // Sweetalert
+            'plugins/sweetalert/sweetalert.min.js'
         ]);
 
 		echo $this->fetch('meta');
@@ -111,8 +123,8 @@
                         </li>
                         <li>
                             <?php echo $this->Html->link(
-                                $this->Html->tag('i', false, array('class' => 'fa fa-dashboard fa-lg')) . '' . 
-                                $this->Html->tag('span', 'Dashboard', array('class' => 'nav-label')), array(
+                                $this->Html->tag('i', false, array('class' => 'fa fa-home fa-lg')) . '' . 
+                                $this->Html->tag('span', 'Home', array('class' => 'nav-label')), array(
                                     'controller' => 'home', 
                                     'action' => 'index'
                                 ), array(
@@ -142,13 +154,16 @@
                                 )) 
                             ?>
                         </li>
-                        <li class="">
-                            <a href="index.html" aria-expanded="false"><i class="fa fa-users"></i> <span class="nav-label">Users</span> <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
-                                <li><?php echo $this->Html->link('Teachers', array('controller' => 'teachers', 'action' => 'index')) ?></a></li>
-                                <li><?php echo $this->Html->link('Students', array('controller' => 'students', 'action' => 'index')); ?></li>
-                                <li><?php echo $this->Html->link('New User', array('controller' => 'users', 'action' => 'index')); ?></li>
-                            </ul>
+                        <li>
+                            <?php echo $this->Html->link(
+                                $this->Html->tag('i', false, array('class' => 'fa fa-users')) . '' . 
+                                $this->Html->tag('span', 'Users', array('class' => 'nav-label')), array(
+                                    'controller' => 'users', 
+                                    'action' => 'index'
+                                ), array(
+                                    'escape' => false
+                                )) 
+                            ?>
                         </li>
                         <li>
                             <?php echo $this->Html->link(
@@ -237,9 +252,33 @@
                         <li class="breadcrumb-item">
                             <?php echo $this->Html->link('Home', array('controller' => 'home', 'action' => 'index')) ?>
                         </li>
-                        <li class="breadcrumb-item active">
-                            <strong><?php echo $data['page'] ?></strong>
-                        </li>
+                        <?php if ($data['page'] == 'Users') : ?>
+                            <li class="breadcrumb-item active">
+                                <strong>
+                                    <?php echo $this->Html->link($data['page'], array('controller' => 'users', 'action' => 'index')) ?>
+                                </strong>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                <strong>
+                                    <?php echo $this->Html->link('Register', array('controller' => 'users', 'action' => 'register')) ?>
+                                </strong>
+                            </li>
+                        <?php elseif ($data['page'] == 'Announcements') : ?>
+                            <li class="breadcrumb-item active">
+                                <strong>
+                                    <?php echo $this->Html->link($data['page'], array('controller' => 'announcements', 'action' => 'index')) ?>
+                                </strong>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                <strong>
+                                    <?php echo $this->Html->link('Create announcement', array('controller' => 'announcements', 'action' => 'create')) ?>
+                                </strong>
+                            </li>
+                        <?php else :?>
+                            <li class="breadcrumb-item active">
+                                <strong><?php echo $data['page'] ?></strong>
+                            </li>
+                        <?php endif ?>
                     </ol>
                 </div>
                 <div class="col-lg-2">

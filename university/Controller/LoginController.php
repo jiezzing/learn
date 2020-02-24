@@ -33,9 +33,11 @@
         }
 
         public function index(){
-            $page = 'Login';
+            $data = array(
+                'page' => 'Login'
+            );
             
-            $this->set(array('page' => $page));
+            $this->set('data', $data);
         }
 
         public function logout() {

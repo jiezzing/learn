@@ -3,9 +3,11 @@
     class ProfileController extends AppController{
 
         public function index(){
-        	$page = 'Profile';
-        	
-            $this->set(array('page' => $page));
+        	$data = array(
+                'page' => 'User'
+            );
+            
+            $this->set('data', $data);
         }
         
     }

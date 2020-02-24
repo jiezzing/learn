@@ -3,9 +3,11 @@
     class TriviasController extends AppController{
 
         public function index(){
-        	$page = 'Trivia';
+        	$data = array(
+        		'page' => 'Trivia'
+        	);
         	
-            $this->set(array('page' => $page));
+            $this->set('data', $data);
         }
         
     }

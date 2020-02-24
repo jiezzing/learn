@@ -3,9 +3,11 @@
     class HomeController extends AppController{
 
         public function index(){
-        	$page = 'Dashboard';
+        	$data = array(
+        		'page' => 'Home'
+        	);
         	
-            $this->set(array('page' => $page));
+            $this->set('data', $data);
         }
         
     }
