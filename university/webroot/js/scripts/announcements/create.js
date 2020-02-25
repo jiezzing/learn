@@ -4,8 +4,10 @@ $(function () {
         var data = new FormData(form);
         var summernoteBody = $('.summernote').summernote('code');
         var title = $('input[name=title]').val();
+        var description = $('input[name=description]').val();
         var announcement = {
         	'title': title,
+        	'description': description,
         	'announcement': summernoteBody
         };
 

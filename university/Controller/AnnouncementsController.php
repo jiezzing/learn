@@ -14,12 +14,13 @@
 
     	// show announcements
         public function index(){
-        	$announcements = $this->Announcement->fetchAnnouncements();
+        	$announcements = $this->Announcement->announcements();
+
         	$data = array(
         		'page' => $this->page,
         		'announcements' => $announcements
         	);
-        	
+
             $this->set('data', $data);
         }
         
@@ -28,6 +29,7 @@
         	$data = array(
         		'page' => $this->page
         	);
+
         	
             $this->set('data', $data);
         }
@@ -61,6 +63,31 @@
         			}
         		}
         	}
+        }
+
+        public function delete() {
+            $this->autoRender = false;
+
+            if ($this->request->is('ajax')) {
+                $data = $this->request->data['id'];
+
+                $deleteAnnouncement = $this->Announcement->delete($data);
+
+                if ($deleteAnnouncement) {
+                    return $this->output(1, 'Succesfully deleted.');
+                }
+                else {
+                    return $this->output(0, 'An error occured upon deleting announcement. Please try again.');
+                }
+            }
+        }
+
+        public function edit($id = null) {
+            $data = array(
+                'page' => $this->page
+            );
+
+            $this->set('data', $data);
         }
 
         // validate fields if empty

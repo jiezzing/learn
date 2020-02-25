@@ -1,7 +1,3 @@
-<script>
-    var page = 'make_announcement';
-</script>
-
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
@@ -14,7 +10,6 @@
                                     echo $this->Form->input(false, array(
                                         'class' => 'form-control',
                                         'type' => 'text',
-                                        'placeholder' => 'Title here . . .',
                                         'label' => false,
                                         'name' => 'title'
                                     ));
@@ -27,7 +22,6 @@
                                     echo $this->Form->input(false, array(
                                         'class' => 'form-control',
                                         'type' => 'text',
-                                        'placeholder' => 'Description here . . .',
                                         'label' => false,
                                         'name' => 'description'
                                     ));
@@ -48,9 +42,3 @@
         </div>    
     </div>
 </div>
-
-<?php echo $this->Html->script(array(
-        'scripts/initialize.js',
-        'scripts/announcements/create.js'
-    )) 
-?>

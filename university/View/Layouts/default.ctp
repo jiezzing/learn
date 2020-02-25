@@ -30,7 +30,10 @@
             'plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css',
 
             // Sweetalert
-            'plugins/sweetalert/sweetalert.css'
+            'plugins/sweetalert/sweetalert.css',
+
+            // Custom css
+            'custom.css'
         ]);
 
         echo $this->Html->script([
