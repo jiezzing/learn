@@ -1,5 +1,5 @@
 $(function () {
-	$('#publish-btn').on('click', function () {
+	$('#update-btn').on('click', function () {
         var summernoteBody = $('.summernote').summernote('code');
         var title = $('input[name=title]').val();
         var description = $('input[name=description]').val();
@@ -17,7 +17,7 @@ $(function () {
         else {
 	        swal({
 	            title: "Confirmation",
-	            text: "Do you want to publish this announcement?",
+	            text: "Do you want to save its changes?",
 	            showCancelButton: true,
 	            confirmButtonColor: "#1AB394",
 	            confirmButtonText: "Yes",
@@ -26,9 +26,10 @@ $(function () {
 	        }, function () {
 		        $.ajax({
 		            type: "POST",
-		            url: '../../university/announcements/publish',
+		            url: '../../../university/announcements/update',
 		            cache: false,
 		            data: {
+		            	id: id,
 		            	announcement: announcement
 		            },
 		            success: function(response) {

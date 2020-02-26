@@ -3,7 +3,8 @@
     class AnnouncementsController extends AppController{
 
     	public $uses = array(
-    		'Announcement'
+    		'Announcement',
+            'UserType'
     	);
 
     	public $page = null;
@@ -26,8 +27,11 @@
         
         // create announcement
         public function create() {
+            $types = $this->UserType->fetchUserTypes();
+
         	$data = array(
-        		'page' => $this->page
+        		'page' => $this->page,
+                'types' => $types
         	);
 
         	
@@ -83,11 +87,45 @@
         }
 
         public function edit($id = null) {
+            $details = $this->Announcement->edit($id);
+            $types = $this->UserType->fetchUserTypes();
+
             $data = array(
-                'page' => $this->page
+                'page' => 'Editing announcement',
+                'details' => $details,
+                'types' => $types
             );
 
             $this->set('data', $data);
+        }
+
+        public function update() {
+            $this->autoRender = false;
+
+            if($this->request->is('ajax')) {
+
+                $announcement = array(
+                    'title' => $this->request->data['announcement']['title'],
+                    'description' => $this->request->data['announcement']['description'],
+                    'announcement' => $this->request->data['announcement']['announcement']
+                );
+
+                $data = array(
+                    'recipient' => $this->request->data['announcement']['recipient'],
+                    'announcement' => json_encode($announcement)
+                );
+
+                $this->Announcement->read(null, $this->request->data['id']);
+
+                $this->Announcement->set($data);
+
+                if ($this->Announcement->save()) {
+                    return $this->output(1, 'Announcement successfully updated.');
+                }
+                else {
+                    return $this->output(0, 'An error occured, please try again.');
+                }
+            }
         }
 
         // validate fields if empty

@@ -116,7 +116,7 @@
                                                         <?php if ($key == 0) : ?>
                                                             <input type="radio" checked value="<?php echo $dataItems['UserType']['id'] ?>" name="types"> <?php echo $dataItems['UserType']['type'] ?>
                                                         <?php else : ?>
-                                                            <input type="radio" ch  value="<?php echo $dataItems['UserType']['id'] ?>" name="types"> <?php echo $dataItems['UserType']['type'] ?>
+                                                            <input type="radio" value="<?php echo $dataItems['UserType']['id'] ?>" name="types"> <?php echo $dataItems['UserType']['type'] ?>
                                                         <?php endif ?>
                                                     </label>
                                                 </div>

@@ -8,6 +8,8 @@
 
         public function beforeFilter() {
             $this->page = 'Users';
+
+            // $this->Auth->allow('register');
         }
 
     	public $uses = array(

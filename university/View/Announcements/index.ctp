@@ -31,14 +31,12 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5><?php echo $details['title'] ?><small class="m-l-sm"><?php echo $details['description'] ?></small></h5>
+                    <h5><?php echo $details['title'] ?></h5>
                     <div class="ibox-tools">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="fa fa-gear"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <!-- <li><a href="#" value="<?php echo $announceItem['Announcement']['id'] ?>" class="dropdown-item edit"><i class="fa fa-pencil"></i> Edit</a>
-                            </li> -->
                             <li><?php echo $this->Html->link(
                                 $this->Html->tag('i', false, array('class' => 'fa fa-pencil')) . '' . 
                                 $this->Html->tag('span', ' Edit', array('class' => 'nav-label')), array(
@@ -63,7 +61,7 @@
                     <span class="float-right">
                     <?php echo CakeTime::niceShort($announceItem['Announcement']['created']) ?>
                     </span>
-                      <?php echo CakeTime::timeAgoInWords($announceItem['Announcement']['created']) ?>
+                      Recipient: <?php echo $announceItem['UserType']['type'] ?>
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2020 at 08:41 AM
+-- Generation Time: Feb 26, 2020 at 10:21 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -21,6 +21,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `learn`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `announcements`
+--
+
+CREATE TABLE `announcements` (
+  `id` int(11) NOT NULL,
+  `admin_id` int(11) NOT NULL,
+  `recipient` int(11) NOT NULL,
+  `announcement` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`announcement`)),
+  `created` datetime NOT NULL DEFAULT current_timestamp(),
+  `modified` datetime NOT NULL DEFAULT current_timestamp(),
+  `status_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `announcements`
+--
+
+INSERT INTO `announcements` (`id`, `admin_id`, `recipient`, `announcement`, `created`, `modified`, `status_id`) VALUES
+(1, 2, 4, '{\"title\":\"Web Development\",\"description\":\"Googlge Dev Conference\",\"announcement\":\"<p><span style=\\\"color: rgb(54, 54, 55); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 15px; letter-spacing: 0.3px;\\\">Featured above, this method saves array-formatted data. The second parameter allows you to sidestep validation, and the third allows you to supply a list of model fields to be saved. For added security, you can limit the saved fields to those listed in&nbsp;<\\/span><code class=\\\"docutils literal notranslate\\\" style=\\\"font-family: &quot;Roboto Mono&quot;, Consolas, Monaco, monospace; font-size: 15px; padding: 0px 2px; color: rgb(54, 54, 55); background-color: rgb(236, 236, 233); line-height: normal; letter-spacing: 0.3px; white-space: normal;\\\"><span class=\\\"pre\\\">$fieldList<\\/span><\\/code><span style=\\\"color: rgb(54, 54, 55); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 15px; letter-spacing: 0.3px;\\\">. When using a&nbsp;<\\/span><code class=\\\"docutils literal notranslate\\\" style=\\\"font-family: &quot;Roboto Mono&quot;, Consolas, Monaco, monospace; font-size: 15px; padding: 0px 2px; color: rgb(54, 54, 55); background-color: rgb(236, 236, 233); line-height: normal; letter-spacing: 0.3px; white-space: normal;\\\"><span class=\\\"pre\\\">fieldList<\\/span><\\/code><span style=\\\"color: rgb(54, 54, 55); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 15px; letter-spacing: 0.3px;\\\">&nbsp;the primary key will be included in the&nbsp;<\\/span><code class=\\\"docutils literal notranslate\\\" style=\\\"font-family: &quot;Roboto Mono&quot;, Consolas, Monaco, monospace; font-size: 15px; padding: 0px 2px; color: rgb(54, 54, 55); background-color: rgb(236, 236, 233); line-height: normal; letter-spacing: 0.3px; white-space: normal;\\\"><span class=\\\"pre\\\">fieldList<\\/span><\\/code><span style=\\\"color: rgb(54, 54, 55); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 15px; letter-spacing: 0.3px;\\\">&nbsp;automatically.<\\/span><br><\\/p>\"}', '2020-02-26 06:24:06', '2020-02-26 06:24:06', 1);
 
 -- --------------------------------------------------------
 
@@ -51,7 +74,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_type`, `firstname`, `lastname`, `middle_initial`, `id_no`, `email`, `password`, `gender`, `birthdate`, `address`, `age`, `created`, `modified`, `status_id`) VALUES
-(1, 2, 'Fritz Gerald', 'Dumdum', 'M', '', 'fritzgeralddumdum@yahoo.com', '55a11c3208ca5770ad21508dbd4ce9d42de2b9d9', NULL, NULL, NULL, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2);
+(1, 2, 'Fritz Gerald', 'Dumdum', 'M', '', 'fritzgeralddumdum@yahoo.com', '29f64013cb910f08b77cd576c5212c1824466b91', NULL, NULL, NULL, 0, '2020-02-20 10:51:01', '2020-02-20 10:51:01', 1),
+(2, 2, 'Relisa', 'Mongas', 'T', '', 'relis@gmail.com', '29f64013cb910f08b77cd576c5212c1824466b91', NULL, NULL, NULL, 0, '2020-02-20 11:00:16', '2020-02-20 11:00:16', 1),
+(3, 2, 'Franck ', 'Dumdum', 'M', '', 'jiezzing@gmail.com', '29f64013cb910f08b77cd576c5212c1824466b91', NULL, NULL, NULL, 0, '2020-02-21 02:41:13', '2020-02-21 02:41:13', 1),
+(4, 4, 'Midoriya', 'Shoto', 'A', '', 'midoriya@gmail.com', '29f64013cb910f08b77cd576c5212c1824466b91', NULL, NULL, NULL, 0, '2020-02-24 02:10:39', '2020-02-24 02:10:39', 1);
 
 -- --------------------------------------------------------
 
@@ -79,6 +105,12 @@ INSERT INTO `user_types` (`id`, `type`) VALUES
 --
 
 --
+-- Indexes for table `announcements`
+--
+ALTER TABLE `announcements`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -95,10 +127,16 @@ ALTER TABLE `user_types`
 --
 
 --
+-- AUTO_INCREMENT for table `announcements`
+--
+ALTER TABLE `announcements`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_types`

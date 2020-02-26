@@ -1,10 +1,5 @@
 $(function () {
 
-	// Check page
-    if(page == 'login') {
-        $('body').css({'background-color': '#F3F3F4'});
-    }
-
     // Login 
     $('#login-btn').on('click', function(event){
     	event.preventDefault();

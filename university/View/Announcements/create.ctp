@@ -34,6 +34,17 @@
                                 ?>
                             </div>
                         </div>
+                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Recipient</label>
+                            <div class="col-sm-12"></div>
+                            <div class="col-sm-6">
+                                <select class="form-control m-b" id="recipient">
+                                    <option value="select" selected>Select recipient</option>
+                                    <?php foreach($data['types'] as $key => $dataItems) : ?>
+                                        <option value="<?php echo $dataItems['UserType']['id'] ?>"><?php echo $dataItems['UserType']['type'] ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
                     <?php echo $this->Form->end() ?>
                     <div class="ibox-content no-padding">
                         <div class="summernote"></div>

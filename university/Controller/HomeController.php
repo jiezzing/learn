@@ -9,7 +9,10 @@
     	public $page = null;
 
     	public function beforeFilter() {
+            parent::beforeFilter();
     		$this->page = 'Home';
+            
+            $this->Auth->allow('index');
     	}
 
         public function index(){

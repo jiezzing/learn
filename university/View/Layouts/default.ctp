@@ -97,8 +97,8 @@
 		echo $this->fetch('script');
 	?>
 </head>
-<body>
-    <?php if($this->Session->read('user_id') && $data['page'] != 'Login') : ?>
+<?php if(AuthComponent::user('id')) : ?>
+    <body>
         <div class="pace  pace-inactive">
             <div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
               <div class="pace-progress-inner"></div>
@@ -277,6 +277,15 @@
                                     <?php echo $this->Html->link('Create announcement', array('controller' => 'announcements', 'action' => 'create')) ?>
                                 </strong>
                             </li>
+                        <?php elseif($data['page'] == 'Editing announcement') : ?>
+                            <li class="breadcrumb-item active">
+                                <strong>
+                                    <?php echo $this->Html->link('Announcements', array('controller' => 'announcements', 'action' => 'index')) ?>
+                                </strong>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                <strong>Edit</strong>
+                            </li>
                         <?php else :?>
                             <li class="breadcrumb-item active">
                                 <strong><?php echo $data['page'] ?></strong>
@@ -302,9 +311,10 @@
                 
             </div>
         </div>
-
-    <?php else : ?>
+    </body>
+<?php else : ?>
+    <body class="gray-bg">
         <?php echo $this->fetch('content'); ?>
-    <?php endif ?>
-</body>
+    </body>
+<?php endif ?>
 </html>

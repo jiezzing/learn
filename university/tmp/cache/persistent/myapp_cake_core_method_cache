@@ -1,2 +1,2 @@
-1582611324
-a:3:{i:0;b:0;s:4:"name";a:8:{s:32:"5353bc2016cbca3b908ef19a0c349b6f";s:7:"`learn`";s:32:"45a4d1a35b39beeba9968655c7644310";s:19:"`Announcement`.`id`";s:32:"75dd986a46bcf1e99dbb9ca6a15d0781";s:29:"`Announcement`.`announcement`";s:32:"6bbf932bbc187f88d9defbb35248ae3e";s:25:"`Announcement`.`admin_id`";s:32:"6ec4ea220318b95c4e4b7988c78b9b70";s:24:"`Announcement`.`created`";s:32:"6e9b867925e313af23a94a0bb402add8";s:15:"`announcements`";s:32:"b5e27a838d05558eb880b8aab35ba5f3";s:14:"`Announcement`";s:32:"d2c23d1b4feeec456d72cdc94cc44595";s:4:"`id`";}s:6:"fields";a:1:{s:32:"c7e0962450fc39dd1367f0449cef2213";a:4:{i:0;s:19:"`Announcement`.`id`";i:1;s:29:"`Announcement`.`announcement`";i:2;s:25:"`Announcement`.`admin_id`";i:3;s:24:"`Announcement`.`created`";}}}
+1669019899
+a:2:{i:0;b:0;s:4:"name";a:2:{s:32:"5353bc2016cbca3b908ef19a0c349b6f";s:7:"`learn`";s:32:"f94a437fb7858e092079378f93ef2c71";s:7:"`users`";}}
