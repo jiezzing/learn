@@ -1,20 +1,31 @@
 <?php
 
-    App::uses('User', 'Model');
     App::uses('AuthComponent', 'Controller/Component');
 
     class LoginController extends AppController{
 
+        public $uses = array(
+            'User'
+        );
+
         public function beforeFilter() {
             parent::beforeFilter();
-            
-            // $this->Auth->allow('index');
+        }
+
+        public function afterFilter() {
+            parent::afterFilter();
+
+            if(!empty($this->Session->read('logged_in'))){
+                return $this->redirect(array(
+                    'controller' => 'home',
+                    'action' => 'index'
+                ));
+            }
         }
 
         public function login(){
             $this->autoRender = false;
             if($this->request->is('ajax')){
-                $user = new User();
                 $condition = array(
                     'conditions' => array(
                         'User.email' => $this->request->data['email'],
@@ -26,18 +37,19 @@
                     )
                 );
 
-                $data = $user->find('first', $condition);
+                $data = $this->User->find('first', $condition);
 
                 if($data){
-                    $this->Session->write('user_id', $data['User']['id']);
-                    $this->Session->write('logged_in', true);
+                    $this->session($data['User']['id'], true);
+                    // $this->output($data['User']['user_type']);
                     echo $data['User']['user_type'];
+
                 }
                 else{
-                    echo AuthComponent::password($this->request->data['password']);
+                    $this->output(0);
                 }
-                $this->render(false);
             }
+
         }
 
         public function index(){
@@ -49,7 +61,26 @@
         }
 
         public function logout() {
-            $this->redirect('/login');
+            $this->Session->destroy();
+            $this->redirect(array(
+                'controller' => 'login',
+                'action' => 'index'
+            ));
+        }
+
+        private function output($type) {
+            $result = array(
+                'type' => $type
+            );
+
+            echo json_encode($result);
+        }
+
+        public function session($id, $logged_in) {
+            $this->Session->write(array(
+                'user_id' => $id,
+                'logged_in' => $logged_in
+            ));
         }
     }
 

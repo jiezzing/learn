@@ -97,7 +97,7 @@
 		echo $this->fetch('script');
 	?>
 </head>
-<?php if($this->Session->read('logged_in') && $data['page'] != 'Login') : ?>
+<?php if($this->Session->read('logged_in') && $this->Session->read('user_id')) : ?>
     <body>
         <div class="pace  pace-inactive">
             <div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
@@ -129,6 +129,17 @@
                                 $this->Html->tag('i', false, array('class' => 'fa fa-home fa-lg')) . '' . 
                                 $this->Html->tag('span', 'Home', array('class' => 'nav-label')), array(
                                     'controller' => 'home', 
+                                    'action' => 'index'
+                                ), array(
+                                    'escape' => false
+                                )) 
+                            ?>
+                        </li>
+                        <li>
+                            <?php echo $this->Html->link(
+                                $this->Html->tag('i', false, array('class' => 'fa fa-book fa-lg')) . '' . 
+                                $this->Html->tag('span', 'Modules', array('class' => 'nav-label')), array(
+                                    'controller' => 'modules', 
                                     'action' => 'index'
                                 ), array(
                                     'escape' => false
@@ -275,6 +286,17 @@
                             <li class="breadcrumb-item active">
                                 <strong>
                                     <?php echo $this->Html->link('Create announcement', array('controller' => 'announcements', 'action' => 'create')) ?>
+                                </strong>
+                            </li>
+                        <?php elseif ($data['page'] == 'Modules') : ?>
+                            <li class="breadcrumb-item active">
+                                <strong>
+                                    <?php echo $this->Html->link($data['page'], array('controller' => 'announcements', 'action' => 'index')) ?>
+                                </strong>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                <strong>
+                                    <a href="#" data-toggle="modal" data-target="#add-module-modal">Add module</a>
                                 </strong>
                             </li>
                         <?php elseif($data['page'] == 'Editing announcement') : ?>

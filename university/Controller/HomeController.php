@@ -12,7 +12,13 @@
             parent::beforeFilter();
     		$this->page = 'Home';
             
-            // $this->Auth->allow('index');
+            
+            if(empty($this->Session->read('logged_in'))){
+                $this->redirect(array(
+                    'controller' => 'login',
+                    'action' => 'index'
+                ));
+            }
     	}
 
         public function index(){
