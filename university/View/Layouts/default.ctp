@@ -135,16 +135,20 @@
                                 )) 
                             ?>
                         </li>
-                        <li>
-                            <?php echo $this->Html->link(
-                                $this->Html->tag('i', false, array('class' => 'fa fa-book fa-lg')) . '' . 
-                                $this->Html->tag('span', 'Modules', array('class' => 'nav-label')), array(
-                                    'controller' => 'modules', 
-                                    'action' => 'index'
-                                ), array(
-                                    'escape' => false
-                                )) 
-                            ?>
+                        <li class="">
+                            <a href="#" aria-expanded="false"><i class="fa fa-sitemap"></i> <span class="nav-label">Modules </span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                                <li>
+                                    <?php 
+                                        echo $this->Html->link('Modules', array(
+                                            'controller' => 'modules', 
+                                            'action' => 'index'
+                                        ));
+                                    ?>
+                                </li>
+                                <li><a href="#" aria-expanded="false" data-toggle="modal" data-target="#add-module-modal">Add Module</a></li>
+                                <li><a href="#" aria-expanded="false" data-toggle="modal" data-target="#add-submodule-modal">Add Submodule</a></li>
+                            </ul>
                         </li>
                         <li>
                             <?php echo $this->Html->link(
@@ -294,11 +298,6 @@
                                     <?php echo $this->Html->link($data['page'], array('controller' => 'announcements', 'action' => 'index')) ?>
                                 </strong>
                             </li>
-                            <li class="breadcrumb-item active">
-                                <strong>
-                                    <a href="#" data-toggle="modal" data-target="#add-module-modal">Add module</a>
-                                </strong>
-                            </li>
                         <?php elseif($data['page'] == 'Editing announcement') : ?>
                             <li class="breadcrumb-item active">
                                 <strong>
@@ -308,7 +307,7 @@
                             <li class="breadcrumb-item active">
                                 <strong>Edit</strong>
                             </li>
-                        <?php else :?>
+                        <?php else : ?>
                             <li class="breadcrumb-item active">
                                 <strong><?php echo $data['page'] ?></strong>
                             </li>
@@ -333,6 +332,10 @@
                 
             </div>
         </div>
+        <?php 
+            echo $this->element('add_module');
+            echo $this->element('add_submodule');
+        ?>
     </body>
 <?php else : ?>
     <body class="gray-bg">

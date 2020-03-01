@@ -129,9 +129,6 @@
 </div>
     
 <?php 
-    echo $this->element('add_module');
-    echo $this->element('add_submodule');
-
     echo $this->Html->script(array(
         'scripts/modules/add.js'
     )); 

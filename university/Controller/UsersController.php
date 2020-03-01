@@ -9,7 +9,12 @@
         public function beforeFilter() {
             $this->page = 'Users';
 
-            // $this->Auth->allow('register');
+            if(empty($this->Session->read('logged_in'))){
+                $this->redirect(array(
+                    'controller' => 'login',
+                    'action' => 'index'
+                ));
+            }
         }
 
     	public $uses = array(

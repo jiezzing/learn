@@ -12,7 +12,6 @@
             parent::beforeFilter();
     		$this->page = 'Home';
             
-            
             if(empty($this->Session->read('logged_in'))){
                 $this->redirect(array(
                     'controller' => 'login',

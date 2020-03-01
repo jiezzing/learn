@@ -15905,3 +15905,66 @@ Request URL: /learn/university/graph_flot.html
 Stack Trace:
 #0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
+2020-03-01 13:34:45 Error: [MissingControllerException] Controller class DebugKitController could not be found.
+Exception Attributes: array (
+  'class' => 'DebugKitController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/DebugKit/ToolbarAccess/sql_explain
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-03-01 13:36:14 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/popper.min.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-03-01 13:36:14 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/plugins/summernote/summernote-bs4.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-03-01 13:36:14 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/plugins/dataTables/pdfmake.min.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-03-01 13:47:13 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/popper.min.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-03-01 13:47:13 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/plugins/summernote/summernote-bs4.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-03-01 13:47:13 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/plugins/dataTables/pdfmake.min.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}

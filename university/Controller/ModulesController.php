@@ -12,6 +12,13 @@
             parent::beforeFilter();
     		$this->page = 'Modules';
     		$this->id = $this->Session->read('user_id');
+            
+            if(empty($this->Session->read('logged_in'))){
+                $this->redirect(array(
+                    'controller' => 'login',
+                    'action' => 'index'
+                ));
+            }
     	}
 
         public function index(){
