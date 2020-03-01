@@ -97,7 +97,7 @@
 		echo $this->fetch('script');
 	?>
 </head>
-<?php if(AuthComponent::user('id')) : ?>
+<?php if($this->Session->read('logged_in') && $data['page'] != 'Login') : ?>
     <body>
         <div class="pace  pace-inactive">
             <div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">

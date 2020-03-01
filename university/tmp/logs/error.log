@@ -79,3 +79,365 @@ Request URL: /learn/university/js/plugins/summernote/summernote-bs4.js.map
 Stack Trace:
 #0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
+2020-02-29 02:31:00 Error: [Error] Class 'AuthComponent' not found
+Request URL: /learn/university/login
+Stack Trace:
+#0 C:\xampp\htdocs\learn\lib\Cake\View\View.php(971): include()
+#1 C:\xampp\htdocs\learn\lib\Cake\View\View.php(933): View->_evaluate('C:\\xampp\\htdocs...', Array)
+#2 C:\xampp\htdocs\learn\lib\Cake\View\View.php(546): View->_render('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\learn\lib\Cake\View\View.php(481): View->renderLayout('<script>\n    va...', 'default')
+#4 C:\xampp\htdocs\learn\lib\Cake\Controller\Controller.php(968): View->render(NULL, 'default')
+#5 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(200): Controller->render()
+#6 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(LoginController), Object(CakeRequest))
+#7 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2020-02-29 02:31:55 Error: [ParseError] syntax error, unexpected end of file, expecting elseif (T_ELSEIF) or else (T_ELSE) or endif (T_ENDIF)
+Request URL: /learn/university/login
+Stack Trace:
+#0 C:\xampp\htdocs\learn\lib\Cake\View\View.php(933): View->_evaluate('C:\\xampp\\htdocs...', Array)
+#1 C:\xampp\htdocs\learn\lib\Cake\View\View.php(546): View->_render('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\learn\lib\Cake\View\View.php(481): View->renderLayout('<script>\n    va...', 'default')
+#3 C:\xampp\htdocs\learn\lib\Cake\Controller\Controller.php(968): View->render(NULL, 'default')
+#4 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(200): Controller->render()
+#5 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(LoginController), Object(CakeRequest))
+#6 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#7 {main}
+2020-02-29 02:43:44 Error: [Error] Class 'AuthComponent' not found
+Request URL: /learn/university/login/login
+Stack Trace:
+#0 [internal function]: LoginController->login()
+#1 C:\xampp\htdocs\learn\lib\Cake\Controller\Controller.php(499): ReflectionMethod->invokeArgs(Object(LoginController), Array)
+#2 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#3 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(LoginController), Object(CakeRequest))
+#4 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2020-02-29 02:43:48 Error: [Error] Class 'AuthComponent' not found
+Request URL: /learn/university/login/login
+Stack Trace:
+#0 [internal function]: LoginController->login()
+#1 C:\xampp\htdocs\learn\lib\Cake\Controller\Controller.php(499): ReflectionMethod->invokeArgs(Object(LoginController), Array)
+#2 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#3 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(LoginController), Object(CakeRequest))
+#4 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2020-02-29 02:43:49 Error: [Error] Class 'AuthComponent' not found
+Request URL: /learn/university/login/login
+Stack Trace:
+#0 [internal function]: LoginController->login()
+#1 C:\xampp\htdocs\learn\lib\Cake\Controller\Controller.php(499): ReflectionMethod->invokeArgs(Object(LoginController), Array)
+#2 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#3 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(LoginController), Object(CakeRequest))
+#4 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2020-02-29 02:43:50 Error: [Error] Class 'AuthComponent' not found
+Request URL: /learn/university/login/login
+Stack Trace:
+#0 [internal function]: LoginController->login()
+#1 C:\xampp\htdocs\learn\lib\Cake\Controller\Controller.php(499): ReflectionMethod->invokeArgs(Object(LoginController), Array)
+#2 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#3 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(LoginController), Object(CakeRequest))
+#4 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2020-02-29 02:43:50 Error: [Error] Class 'AuthComponent' not found
+Request URL: /learn/university/login/login
+Stack Trace:
+#0 [internal function]: LoginController->login()
+#1 C:\xampp\htdocs\learn\lib\Cake\Controller\Controller.php(499): ReflectionMethod->invokeArgs(Object(LoginController), Array)
+#2 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#3 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(LoginController), Object(CakeRequest))
+#4 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2020-02-29 02:43:51 Error: [Error] Class 'AuthComponent' not found
+Request URL: /learn/university/login/login
+Stack Trace:
+#0 [internal function]: LoginController->login()
+#1 C:\xampp\htdocs\learn\lib\Cake\Controller\Controller.php(499): ReflectionMethod->invokeArgs(Object(LoginController), Array)
+#2 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#3 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(LoginController), Object(CakeRequest))
+#4 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2020-02-29 02:43:52 Error: [Error] Class 'AuthComponent' not found
+Request URL: /learn/university/login/login
+Stack Trace:
+#0 [internal function]: LoginController->login()
+#1 C:\xampp\htdocs\learn\lib\Cake\Controller\Controller.php(499): ReflectionMethod->invokeArgs(Object(LoginController), Array)
+#2 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#3 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(LoginController), Object(CakeRequest))
+#4 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2020-02-29 02:43:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/popper.min.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-02-29 02:43:59 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/plugins/summernote/summernote-bs4.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-02-29 02:44:17 Error: [Error] Class 'AuthComponent' not found
+Request URL: /learn/university/login/login
+Stack Trace:
+#0 [internal function]: LoginController->login()
+#1 C:\xampp\htdocs\learn\lib\Cake\Controller\Controller.php(499): ReflectionMethod->invokeArgs(Object(LoginController), Array)
+#2 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#3 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(LoginController), Object(CakeRequest))
+#4 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2020-02-29 02:44:39 Error: [Error] Class 'AuthComponent' not found
+Request URL: /learn/university/login/login
+Stack Trace:
+#0 [internal function]: LoginController->login()
+#1 C:\xampp\htdocs\learn\lib\Cake\Controller\Controller.php(499): ReflectionMethod->invokeArgs(Object(LoginController), Array)
+#2 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#3 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(LoginController), Object(CakeRequest))
+#4 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2020-02-29 02:44:41 Error: [Error] Class 'AuthComponent' not found
+Request URL: /learn/university/login/login
+Stack Trace:
+#0 [internal function]: LoginController->login()
+#1 C:\xampp\htdocs\learn\lib\Cake\Controller\Controller.php(499): ReflectionMethod->invokeArgs(Object(LoginController), Array)
+#2 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#3 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(LoginController), Object(CakeRequest))
+#4 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2020-02-29 02:44:46 Error: [Error] Class 'AuthComponent' not found
+Request URL: /learn/university/login/login
+Stack Trace:
+#0 [internal function]: LoginController->login()
+#1 C:\xampp\htdocs\learn\lib\Cake\Controller\Controller.php(499): ReflectionMethod->invokeArgs(Object(LoginController), Array)
+#2 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#3 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(LoginController), Object(CakeRequest))
+#4 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2020-02-29 02:45:03 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/popper.min.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-02-29 02:45:03 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/plugins/summernote/summernote-bs4.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-02-29 02:45:03 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/plugins/dataTables/pdfmake.min.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-02-29 02:45:10 Error: [Error] Class 'AuthComponent' not found
+Request URL: /learn/university/login/login
+Stack Trace:
+#0 [internal function]: LoginController->login()
+#1 C:\xampp\htdocs\learn\lib\Cake\Controller\Controller.php(499): ReflectionMethod->invokeArgs(Object(LoginController), Array)
+#2 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(193): Controller->invokeAction(Object(CakeRequest))
+#3 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(LoginController), Object(CakeRequest))
+#4 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2020-02-29 02:46:31 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/popper.min.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-02-29 02:46:31 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/plugins/summernote/summernote-bs4.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-02-29 02:46:31 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/plugins/dataTables/pdfmake.min.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-02-29 02:46:39 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/popper.min.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-02-29 02:46:39 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/plugins/dataTables/pdfmake.min.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-02-29 02:46:39 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/plugins/summernote/summernote-bs4.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-02-29 02:48:19 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/popper.min.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-02-29 02:48:19 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/plugins/summernote/summernote-bs4.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-02-29 02:48:19 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/plugins/dataTables/pdfmake.min.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-02-29 02:48:33 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/popper.min.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-02-29 02:48:33 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/plugins/summernote/summernote-bs4.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-02-29 02:48:33 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/plugins/dataTables/pdfmake.min.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-02-29 02:48:43 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/plugins/dataTables/pdfmake.min.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-02-29 02:48:43 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/popper.min.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-02-29 02:48:43 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/plugins/summernote/summernote-bs4.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-02-29 10:36:10 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/plugins/summernote/summernote-bs4.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-02-29 10:36:10 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /learn/university/js/plugins/dataTables/pdfmake.min.js.map
+Stack Trace:
+#0 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2020-03-01 06:15:50 Error: [ParseError] syntax error, unexpected ':', expecting ',' or ';'
+Request URL: /learn/university/home/index
+Stack Trace:
+#0 C:\xampp\htdocs\learn\lib\Cake\View\View.php(933): View->_evaluate('C:\\xampp\\htdocs...', Array)
+#1 C:\xampp\htdocs\learn\lib\Cake\View\View.php(546): View->_render('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\learn\lib\Cake\View\View.php(481): View->renderLayout('<script>\n    va...', 'default')
+#3 C:\xampp\htdocs\learn\lib\Cake\Controller\Controller.php(968): View->render(NULL, 'default')
+#4 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(200): Controller->render()
+#5 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(HomeController), Object(CakeRequest))
+#6 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#7 {main}
+2020-03-01 06:15:58 Error: [ParseError] syntax error, unexpected ':', expecting ',' or ';'
+Request URL: /learn/university/home/index
+Stack Trace:
+#0 C:\xampp\htdocs\learn\lib\Cake\View\View.php(933): View->_evaluate('C:\\xampp\\htdocs...', Array)
+#1 C:\xampp\htdocs\learn\lib\Cake\View\View.php(546): View->_render('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\learn\lib\Cake\View\View.php(481): View->renderLayout('<script>\n    va...', 'default')
+#3 C:\xampp\htdocs\learn\lib\Cake\Controller\Controller.php(968): View->render(NULL, 'default')
+#4 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(200): Controller->render()
+#5 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(HomeController), Object(CakeRequest))
+#6 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#7 {main}
+2020-03-01 06:16:06 Error: [ParseError] syntax error, unexpected ':', expecting ',' or ';'
+Request URL: /learn/university/home/index
+Stack Trace:
+#0 C:\xampp\htdocs\learn\lib\Cake\View\View.php(933): View->_evaluate('C:\\xampp\\htdocs...', Array)
+#1 C:\xampp\htdocs\learn\lib\Cake\View\View.php(546): View->_render('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\learn\lib\Cake\View\View.php(481): View->renderLayout('<script>\n    va...', 'default')
+#3 C:\xampp\htdocs\learn\lib\Cake\Controller\Controller.php(968): View->render(NULL, 'default')
+#4 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(200): Controller->render()
+#5 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(HomeController), Object(CakeRequest))
+#6 C:\xampp\htdocs\learn\university\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#7 {main}
