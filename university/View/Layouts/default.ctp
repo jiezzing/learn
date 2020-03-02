@@ -33,7 +33,10 @@
             'plugins/sweetalert/sweetalert.css',
 
             // Custom css
-            'custom.css'
+            'custom.css',
+
+            // select2
+            'plugins/select2/select2.min.css'
         ]);
 
         echo $this->Html->script([
@@ -89,7 +92,10 @@
             'plugins/iCheck/icheck.min.js',
 
             // Sweetalert
-            'plugins/sweetalert/sweetalert.min.js'
+            'plugins/sweetalert/sweetalert.min.js',
+
+            // select2
+            'plugins/select2/select2.full.min.js'
         ]);
 
 		echo $this->fetch('meta');
@@ -334,7 +340,7 @@
         </div>
         <?php 
             echo $this->element('add_module');
-            echo $this->element('add_submodule');
+            // echo $this->element('add_submodule');
         ?>
     </body>
 <?php else : ?>

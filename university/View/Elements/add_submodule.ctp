@@ -21,6 +21,22 @@
                         ));
                     ?>
                 </div>
+                <div class="col-sm-12">
+                  <p>
+                      A placeholder value can be defined and will be displayed until a selection is made.
+                  </p>
+                  <select class="select2_demo_3 form-control">
+                      <option></option>
+                      <option value="Bahamas">Bahamas</option>
+                      <option value="Bahrain">Bahrain</option>
+                      <option value="Bangladesh">Bangladesh</option>
+                      <option value="Barbados">Barbados</option>
+                      <option value="Belarus">Belarus</option>
+                      <option value="Belgium">Belgium</option>
+                      <option value="Belize">Belize</option>
+                      <option value="Benin">Benin</option>
+                  </select>
+              </div>
             </div>
         <?php echo $this->Form->end() ?>
       </div>

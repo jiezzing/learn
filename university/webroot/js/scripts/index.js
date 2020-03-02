@@ -20,10 +20,7 @@ $(function () {
                 success: function(response) {
                     var response = $.parseJSON(response);
 
-                    if (response.type == 2) {
-                        window.location.href = '../university/home';
-                    }
-                    else {
+                    if (response.status == 0) {
                         toastr.error('Invalid email or password', 'Error');
                     }
                 },      

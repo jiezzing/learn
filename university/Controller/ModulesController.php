@@ -2,7 +2,8 @@
     class ModulesController extends AppController{
 
         public $uses = array(
-            'Module'
+            'Module',
+            'Submodule'
         );
 
     	public $page = null;
@@ -25,15 +26,16 @@
         	$modules = $this->Module->fetchModules($this->id);
         	$data = array(
         		'page' => $this->page,
-        		'modules' => $modules
+        		'modules' => $modules,
+                // 'submodules' => $submodules
         	);
 
-        	// debug($modules);
+        	debug($modules);
 
             $this->set('data', $data);
         }
 
-        public function create() {
+        public function addModule() {
         	$this->autoRender = false;
 
         	if($this->request->is('ajax')) {
@@ -50,6 +52,25 @@
         			$this->output(0, 'An error occured. Please try again.');
         		}
         	}
+        }
+
+        public function addSubmodule() {
+            $this->autoRender = false;
+
+            if($this->request->is('ajax')) {
+                $result = $this->Module->addSubmodule(
+                    $this->request->data['id'],
+                    $this->request->data['submodule'],
+                    2
+                );
+
+                if($result) {
+                    $this->output(1, $this->request->data['submodule'] . ' has been successfully added.');
+                }
+                else {
+                    $this->output(0, 'An error occured. Please try again.');
+                }
+            }
         }
 
         private function output($status, $message) {

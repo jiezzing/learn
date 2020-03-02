@@ -14,7 +14,7 @@
 
         public function afterFilter() {
             parent::afterFilter();
-
+            
             if(!empty($this->Session->read('logged_in'))){
                 return $this->redirect(array(
                     'controller' => 'home',
@@ -25,6 +25,7 @@
 
         public function login(){
             $this->autoRender = false;
+
             if($this->request->is('ajax')){
                 $condition = array(
                     'conditions' => array(
@@ -40,13 +41,16 @@
                 $data = $this->User->find('first', $condition);
 
                 if($data){
-                    $this->session($data['User']['id'], true);
-                    // $this->output($data['User']['user_type']);
-                    echo $data['User']['user_type'];
-
+                    if($data['User']['user_type'] == 2) {
+                        $this->session($data['User']['id'], true);
+                        return $this->redirect(array(
+                            'controller' => 'home', 
+                            'action' => 'index'
+                        ));
+                    }
                 }
                 else{
-                    $this->output(0);
+                    $this->output(0, null);
                 }
             }
 
@@ -68,8 +72,9 @@
             ));
         }
 
-        private function output($type) {
+        private function output($status = 0, $type = null) {
             $result = array(
+                'status' => $status,
                 'type' => $type
             );
 

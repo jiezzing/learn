@@ -13,12 +13,17 @@
     		$this->page = 'Home';
             
             if(empty($this->Session->read('logged_in'))){
+                $this->autoRender = false;
                 $this->redirect(array(
                     'controller' => 'login',
                     'action' => 'index'
                 ));
             }
     	}
+
+        public function afterFilter() {
+            parent::afterFilter();
+        }
 
         public function index(){
         	$announcements = $this->Announcement->announcements();

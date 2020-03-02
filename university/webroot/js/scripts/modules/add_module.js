@@ -19,7 +19,7 @@ $(function () {
 		        if(confirmed) {
 		        	$.ajax({
 			            type: "POST",
-			            url: '../university/modules/create',
+			            url: '../university/modules/addModule',
 			            cache: false,
 			            data: { name: name },
 			            success: function(response) {
