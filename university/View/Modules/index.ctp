@@ -22,6 +22,7 @@
                                         </ul>
                                     </div>
                                 </div>
+                                <?php if(count($data['submodules'][$moduleItem['Module']['id']])) : ?>
                                 <div class="ibox-content">
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -35,7 +36,6 @@
                                     </div>
                                     <div class="hr-line-dashed mt-3"></div>
                                     
-                                <?php if(count($data['submodules'][$moduleItem['Module']['id']])) : ?>
                                         <div class="scroll_content">
                                                 <?php foreach($data['submodules'][$moduleItem['Module']['id']] as $submodulesItem) : ?>
                                                     <div class="mt-4">
@@ -48,23 +48,25 @@
                                                 <div class="hr-line-dashed"></div>
                                                 <?php endforeach ?>
                                         </div>
-                                    </div>
-                                    <div class="ibox-footer">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control search-submodule-btn" placeholder="Search here . . .">
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                                    </div>
+                                </div>
+                                <div class="ibox-footer">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control search-submodule-btn" placeholder="Search here . . .">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
                                 <?php else : ?>
-                                    <div class="mt-4 text-center">
-                                        <h4>NO DATA</h4>
-                                    </div>
+                                <div class="ibox-content">
+                                        <div class="mt-4 text-center">
+                                            <h4>NO DATA</h4>
+                                        </div>
+                                </div>
                                 <?php endif ?>
                             </div>
                         </div>
@@ -77,8 +79,7 @@
     
 <?php 
     echo $this->Html->script(array(
-        'scripts/modules/add_module.js',
-        'scripts/modules/add_submodule.js',
+        'scripts/modules.js',
         'scripts/initialize.js'
     )); 
 ?>
