@@ -24,13 +24,16 @@
 
         public function index(){
         	$modules = $this->Module->fetchModules($this->id);
+
+            foreach ($modules as $modulesKey => $modulesItem) {
+                $submodules [$modulesItem['Module']['id']] = $this->Submodule->fetchSubmodules($modulesItem['Module']['id']);
+            }
+
         	$data = array(
         		'page' => $this->page,
         		'modules' => $modules,
-                // 'submodules' => $submodules
+                'submodules' => $submodules
         	);
-
-        	debug($modules);
 
             $this->set('data', $data);
         }
@@ -58,7 +61,7 @@
             $this->autoRender = false;
 
             if($this->request->is('ajax')) {
-                $result = $this->Module->addSubmodule(
+                $result = $this->Submodule->addSubmodule(
                     $this->request->data['id'],
                     $this->request->data['submodule'],
                     2

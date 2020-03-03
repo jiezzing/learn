@@ -8,24 +8,31 @@
 
         public function fetchSubmodules($id) {
             $submodules = $this->find('all', array(
-                // 'joins' => array(
-                //     array(
-                //         'alias' => 'Submodule',
-                //         'table' => 'submodules',
-                //         'type' => 'INNER',
-                //         'conditions' => array(
-                //             'Module.id = Submodule.module_id'
-                //         )
-                //     )
-                // ),
-                'conditions' => array(
-                    'admin_id' => $id
-                ),
-                'fields' => array('id', 'name'),
-                'order' => 'name'
+                'conditions' => array('module_id' => $id),
+                'fields' => array(
+                    'id', 
+                    'name',
+                    'created'
+                )
             ));
-            
+
             return $submodules;
+        }
+
+
+
+        public function addSubmodule($id, $name, $status) {
+            $this->create();
+
+            $data = array(
+                'module_id' => $id,
+                'name' => $name,
+                'status_id' => $status
+            );
+
+            $this->set($data);
+
+            return $this->save();
         }
 
     }

@@ -153,7 +153,6 @@
                                     ?>
                                 </li>
                                 <li><a href="#" aria-expanded="false" data-toggle="modal" data-target="#add-module-modal">Add Module</a></li>
-                                <li><a href="#" aria-expanded="false" data-toggle="modal" data-target="#add-submodule-modal">Add Submodule</a></li>
                             </ul>
                         </li>
                         <li>

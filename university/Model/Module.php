@@ -8,26 +8,10 @@
 
         public function fetchModules($id) {
             $modules = $this->find('all', array(
-                'joins' => array(
-                    array(
-                        'alias' => 'Submodule',
-                        'table' => 'submodules',
-                        'type' => 'INNER'
-                    )
-                ),
-                'conditions' => array(
-                    'admin_id' => $id,
-                            'Module.id = Submodule.module_id'
-                ),
-                'fields' => array(
-                    'Module.id', 
-                    'Module.name',
-                    'Submodule.name',
-                    'Submodule.id'
-                )
+                'conditions' => array('admin_id' => $id),
+                'fields' => array('id', 'name')
             ));
 
-            // SELECT COUNT(module_id), modules.id, modules.name  FROM modules, submodules WHERE modules.id=submodules.module_id
             return $modules;
         }
 
@@ -43,22 +27,6 @@
             $this->set($data);
 
             return $this->save();
-        }
-
-        public function addSubmodule($id, $name, $status) {
-            $Submodule = CLassRegistry::init('Submodule');
-
-            $Submodule->create();
-
-            $data = array(
-                'module_id' => $id,
-                'name' => $name,
-                'status_id' => $status
-            );
-
-            $Submodule->set($data);
-
-            return $Submodule->save();
         }
 
     }
