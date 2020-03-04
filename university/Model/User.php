@@ -34,4 +34,31 @@
         	return $users;
         }
 
+        public function profile($id){
+            $profile = $this->find('first', array(
+                'joins' => array(
+                    array(
+                        'alias' => 'UserType',
+                        'table' => 'user_types',
+                        'type' => 'INNER',
+                        'conditions' => array(
+                            'UserType.id = User.user_type'
+                        )
+                    )
+                ),
+                'conditions' => array(
+                    'User.id' => $id
+                ),
+                'fields' => array(
+                    'User.firstname',
+                    'User.lastname',
+                    'User.middle_initial',
+                    'UserType.type'
+                )
+
+            ));
+
+            return $profile;
+        }
+
     }

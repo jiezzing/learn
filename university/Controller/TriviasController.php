@@ -5,14 +5,8 @@
         public $page = null;
 
         public function beforeFilter() {
+            parent::beforeFilter();
             $this->page = 'Trivia';
-
-            if(empty($this->Session->read('logged_in'))){
-                $this->redirect(array(
-                    'controller' => 'login',
-                    'action' => 'index'
-                ));
-            }
         }
 
         public function index(){

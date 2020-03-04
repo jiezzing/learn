@@ -7,14 +7,8 @@
         public $page = null;
 
         public function beforeFilter() {
+            parent::beforeFilter();
             $this->page = 'Users';
-
-            if(empty($this->Session->read('logged_in'))){
-                $this->redirect(array(
-                    'controller' => 'login',
-                    'action' => 'index'
-                ));
-            }
         }
 
     	public $uses = array(

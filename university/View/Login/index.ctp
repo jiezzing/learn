@@ -41,6 +41,6 @@
     
 <?php 
     echo $this->Html->script(array(
-        'scripts/index.js'
+        'scripts/login.js'
     )); 
 ?>

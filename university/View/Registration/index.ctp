@@ -1,42 +1,90 @@
 <div class="middle-box text-center loginscreen animated fadeInDown">
 	<div>
 		<p>Login in. To see it in action.</p>
-		<?php echo $this->Form->create('User', array(
-			'class' => array('m-t'),
-			'id' => 'User')); 
-		?>
+		<form id="University">
 			<div class="form-group">
-				<?php echo $this->Form->input('email', [
+				<?php echo $this->Form->input('firstname', [
 					'class' => array('form-control'), 
-					'type' => 'email', 
-					'name' => 'email',
+					'type' => 'text', 
 					'required' => true,
 					'label' => false,
-					'placeholder' => 'Email']); 
+					'placeholder' => 'Firstname']); 
+				?>
+			</div>
+			<div class="form-group">
+				<?php echo $this->Form->input('lastname', [
+					'class' => array('form-control'), 
+					'type' => 'text', 
+					'required' => true,
+					'label' => false,
+					'placeholder' => 'Lastname']); 
+				?>
+			</div>
+			<div class="form-group">
+				<?php echo $this->Form->input('employee_code', [
+					'class' => array('form-control'), 
+					'type' => 'text', 
+					'required' => true,
+					'label' => false,
+					'placeholder' => 'Employee #']); 
 				?>
 			</div>
 			<div class="form-group">
 				<?php echo $this->Form->input('password', array(
 					'class' => array('form-control'), 
 					'type' => 'password', 
-					'name' => 'password',
 					'required' => true,
 					'label' => false,
 					'placeholder' => 'Password')); 
 				?>
 			</div>
-			<?php echo $this->Form->button('Login', array(
-				'class' => array('btn', 'btn-primary', 'block', 'full-width', 'm-b'),
-				'id' => 'login-btn')); 
+			<div class="form-group">
+				<?php echo $this->Form->input('confirm_password', [
+					'class' => array('form-control'), 
+					'type' => 'password', 
+					'required' => true,
+					'label' => false,
+					'placeholder' => 'Confirm password']); 
+				?>
+			</div>
+			<div class="form-group">
+				<?php echo $this->Form->input('email', [
+					'class' => array('form-control'), 
+					'type' => 'email', 
+					'required' => true,
+					'label' => false,
+					'placeholder' => 'Email']); 
+				?>
+			</div>
+			<div class="row m-b">
+	            <div class="col-md-12">
+	                <select class="universities form-control">
+	                    <option></option>
+	                    <?php foreach($data['universities'] as $value) : ?>
+	                    	<option value="<?php echo $value['University']['id'] ?>"><?php echo $value['University']['name'] ?></option>
+	                    <?php endforeach ?>
+	                </select>
+	            </div>
+	        </div>
+			<?php echo $this->Form->button('Register', array(
+					'class' => array(
+						'btn', 
+						'btn-primary', 
+						'block', 
+						'full-width', 
+						'm-b'
+					),
+					'id' => 'register-btn',
+					'type' => 'button')); 
 			?>
-		<?php echo $this->Form->end(); ?>
-		<p class="text-muted text-center"><small>Do not have an account?</small></p>
-		<a class="btn btn-sm btn-white btn-block" href="../university/registration">Create an account</a>
+		</form>
+		<p class="text-muted text-center"><small>Already have an account?</small></p>
+		<a class="btn btn-sm btn-white btn-block" href="../university/login">Go to login</a>
 	</div>
 </div>
     
 <?php 
     echo $this->Html->script(array(
-        'scripts/index.js'
+        'scripts/registration.js'
     )); 
 ?>

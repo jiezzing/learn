@@ -21,7 +21,10 @@ $(function () {
                     var response = $.parseJSON(response);
 
                     if (response.status == 0) {
-                        toastr.error('Invalid email or password', 'Error');
+                        toastr.error(response.message, 'Error');
+                    }
+                    else {
+                        toastr.success(response.message, 'Success');
                     }
                 },      
                 error: function (response, desc, exception) {

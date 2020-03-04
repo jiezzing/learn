@@ -3,7 +3,8 @@
     class HomeController extends AppController{
 
     	public $uses = array(
-    		'Announcement'
+    		'Announcement',
+            'User'
     	);
 
     	public $page = null;
@@ -11,14 +12,6 @@
     	public function beforeFilter() {
             parent::beforeFilter();
     		$this->page = 'Home';
-            
-            if(empty($this->Session->read('logged_in'))){
-                $this->autoRender = false;
-                $this->redirect(array(
-                    'controller' => 'login',
-                    'action' => 'index'
-                ));
-            }
     	}
 
         public function afterFilter() {

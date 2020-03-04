@@ -37,4 +37,13 @@ class AppController extends Controller {
         'RequestHandler',
         'Session'
     );
+
+    public function beforeFilter() {
+        parent::beforeFilter();
+    	$user = ClassRegistry::init('User');
+    	
+        $profile = $user->profile($this->Session->read('user_id'));
+
+        $this->set('profile', $profile);
+	}
 }

@@ -34,26 +34,29 @@
                     ),
                     'fields' => array(
                         'User.id',
-                        'User.user_type'
+                        'User.user_type',
+                        'User.firstname'
                     )
                 );
 
                 $data = $this->User->find('first', $condition);
 
                 if($data){
-                    if($data['User']['user_type'] == 2) {
-                        $this->session($data['User']['id'], true);
-                        return $this->redirect(array(
-                            'controller' => 'home', 
-                            'action' => 'index'
-                        ));
-                    }
+                    $status = 1;
+                    $type = $data['User']['user_type'];
+                    $message = 'Welcome, ' . $data['User']['firstname'] . '!';
+                    $id = $data['User']['id'];
+
+                    $this->session($id, true);
                 }
                 else{
-                    $this->output(0, null);
+                    $status = 0;
+                    $type = null;
+                    $message = 'Invalid email or password, please try again.';
                 }
             }
 
+            return $this->output($status, $type, $message);
         }
 
         public function index(){
@@ -72,10 +75,11 @@
             ));
         }
 
-        private function output($status = 0, $type = null) {
+        private function output($status = 0, $type = null, $message = '') {
             $result = array(
                 'status' => $status,
-                'type' => $type
+                'type' => $type,
+                'message' => $message
             );
 
             echo json_encode($result);
