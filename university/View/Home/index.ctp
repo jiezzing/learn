@@ -4,29 +4,40 @@
 
 <div class="wrapper wrapper-content">
     <div class="row">
-        <div class="col-lg-3">
+        <div class="col-lg-2">
             <div class="ibox ">
                 <div class="ibox-title">
                     <h5>Teachers</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins">40 886,200</h1>
+                    <h1 class="no-margins"><?php echo $data['stats']['totalTeachers'] ?></h1>
                     <small>Total # of teachers</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Students</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins"><?php echo $data['stats']['totalStudents'] ?></h1>
+                    <small>Total # of student</small>
                 </div>
             </div>
         </div>
         <div class="col-lg-3">
             <div class="ibox ">
                 <div class="ibox-title">
-                    <h5>Students</h5>
+                    <h5>Administrators</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins">275,800</h1>
-                    <small>Total # of student</small>
+                    <h1 class="no-margins"><?php echo $data['stats']['totalAdmin'] ?></h1>
+                    <small>Total # of announcements</small>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-2">
             <div class="ibox ">
                 <div class="ibox-title">
                     <h5>Announcements</h5>

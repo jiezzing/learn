@@ -112,6 +112,8 @@
                 );
 
                 $data = array(
+                    'admin_id' => $this->Session->read('user_id'),
+                    'univ_id' => 1,
                     'recipient' => $this->request->data['announcement']['recipient'],
                     'announcement' => json_encode($announcement)
                 );

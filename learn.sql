@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2020 at 12:01 PM
+-- Generation Time: Mar 05, 2020 at 11:02 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -31,6 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `announcements` (
   `id` int(11) NOT NULL,
   `admin_id` int(11) NOT NULL,
+  `univ_id` int(11) NOT NULL,
   `recipient` int(11) NOT NULL,
   `announcement` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`announcement`)),
   `created` datetime NOT NULL DEFAULT current_timestamp(),
@@ -42,9 +43,10 @@ CREATE TABLE `announcements` (
 -- Dumping data for table `announcements`
 --
 
-INSERT INTO `announcements` (`id`, `admin_id`, `recipient`, `announcement`, `created`, `modified`, `status_id`) VALUES
-(1, 2, 4, '{\"title\":\"Web Development\",\"description\":\"Googlge Dev Conference\",\"announcement\":\"<p><span style=\\\"color: rgb(54, 54, 55); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 15px; letter-spacing: 0.3px;\\\">Featured above, this method saves array-formatted data. The second parameter allows you to sidestep validation, and the third allows you to supply a list of model fields to be saved. For added security, you can limit the saved fields to those listed in&nbsp;<\\/span><code class=\\\"docutils literal notranslate\\\" style=\\\"font-family: &quot;Roboto Mono&quot;, Consolas, Monaco, monospace; font-size: 15px; padding: 0px 2px; color: rgb(54, 54, 55); background-color: rgb(236, 236, 233); line-height: normal; letter-spacing: 0.3px; white-space: normal;\\\"><span class=\\\"pre\\\">$fieldList<\\/span><\\/code><span style=\\\"color: rgb(54, 54, 55); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 15px; letter-spacing: 0.3px;\\\">. When using a&nbsp;<\\/span><code class=\\\"docutils literal notranslate\\\" style=\\\"font-family: &quot;Roboto Mono&quot;, Consolas, Monaco, monospace; font-size: 15px; padding: 0px 2px; color: rgb(54, 54, 55); background-color: rgb(236, 236, 233); line-height: normal; letter-spacing: 0.3px; white-space: normal;\\\"><span class=\\\"pre\\\">fieldList<\\/span><\\/code><span style=\\\"color: rgb(54, 54, 55); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 15px; letter-spacing: 0.3px;\\\">&nbsp;the primary key will be included in the&nbsp;<\\/span><code class=\\\"docutils literal notranslate\\\" style=\\\"font-family: &quot;Roboto Mono&quot;, Consolas, Monaco, monospace; font-size: 15px; padding: 0px 2px; color: rgb(54, 54, 55); background-color: rgb(236, 236, 233); line-height: normal; letter-spacing: 0.3px; white-space: normal;\\\"><span class=\\\"pre\\\">fieldList<\\/span><\\/code><span style=\\\"color: rgb(54, 54, 55); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 15px; letter-spacing: 0.3px;\\\">&nbsp;automatically.<\\/span><br><\\/p>\"}', '2020-02-26 06:24:06', '2020-02-26 06:24:06', 1),
-(2, 2, 2, '{\"title\":\"Test\",\"description\":\"Test\",\"announcement\":\"<p>Test<\\/p><p>Test<\\/p><p>Test<\\/p><p>Test<br><\\/p>\",\"recipient\":\"3\"}', '2020-03-01 11:19:55', '2020-03-01 11:19:55', 1);
+INSERT INTO `announcements` (`id`, `admin_id`, `univ_id`, `recipient`, `announcement`, `created`, `modified`, `status_id`) VALUES
+(1, 1, 1, 4, '{\"title\":\"Web Development\",\"description\":\"Googlge Dev Conference\",\"announcement\":\"<p><span style=\\\"color: rgb(54, 54, 55); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 15px; letter-spacing: 0.3px;\\\">Featured above, this method saves array-formatted data. The second parameter allows you to sidestep validation, and the third allows you to supply a list of model fields to be saved. For added security, you can limit the saved fields to those listed in&nbsp;<\\/span><code class=\\\"docutils literal notranslate\\\" style=\\\"font-family: &quot;Roboto Mono&quot;, Consolas, Monaco, monospace; font-size: 15px; padding: 0px 2px; color: rgb(54, 54, 55); background-color: rgb(236, 236, 233); line-height: normal; letter-spacing: 0.3px; white-space: normal;\\\"><span class=\\\"pre\\\">$fieldList<\\/span><\\/code><span style=\\\"color: rgb(54, 54, 55); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 15px; letter-spacing: 0.3px;\\\">. When using a&nbsp;<\\/span><code class=\\\"docutils literal notranslate\\\" style=\\\"font-family: &quot;Roboto Mono&quot;, Consolas, Monaco, monospace; font-size: 15px; padding: 0px 2px; color: rgb(54, 54, 55); background-color: rgb(236, 236, 233); line-height: normal; letter-spacing: 0.3px; white-space: normal;\\\"><span class=\\\"pre\\\">fieldList<\\/span><\\/code><span style=\\\"color: rgb(54, 54, 55); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 15px; letter-spacing: 0.3px;\\\">&nbsp;the primary key will be included in the&nbsp;<\\/span><code class=\\\"docutils literal notranslate\\\" style=\\\"font-family: &quot;Roboto Mono&quot;, Consolas, Monaco, monospace; font-size: 15px; padding: 0px 2px; color: rgb(54, 54, 55); background-color: rgb(236, 236, 233); line-height: normal; letter-spacing: 0.3px; white-space: normal;\\\"><span class=\\\"pre\\\">fieldList<\\/span><\\/code><span style=\\\"color: rgb(54, 54, 55); font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 15px; letter-spacing: 0.3px;\\\">&nbsp;automatically.<\\/span><br><\\/p>\"}', '2020-02-26 06:24:06', '2020-02-26 06:24:06', 1),
+(2, 1, 1, 2, '{\"title\":\"Test\",\"description\":\"Test\",\"announcement\":\"<p>Test<\\/p><p>Test<\\/p><p>Test<\\/p><p>Test<br><\\/p>\",\"recipient\":\"3\"}', '2020-03-01 11:19:55', '2020-03-01 11:19:55', 1),
+(3, 2, 1, 4, '{\"title\":\"Hephep\",\"description\":\"Hooray\",\"announcement\":\"<p><span style=\\\"background-color: rgb(255, 255, 0);\\\">asdsadasdasdasd<\\/span><\\/p>\",\"recipient\":\"2\"}', '2020-03-05 08:32:48', '2020-03-05 08:32:48', 1);
 
 -- --------------------------------------------------------
 
@@ -181,7 +183,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_type`, `univ_id`, `firstname`, `lastname`, `middle_initial`, `id_no`, `email`, `password`, `gender`, `birthdate`, `address`, `age`, `created`, `modified`, `status_id`) VALUES
-(1, 2, 1, 'Fritz Gerald', 'Dumdum', NULL, '', 'fritzgeralddumdum@yahoo.com', '8631c6d5fd74c273b7c7b438adf2bd95d3fef97f', NULL, NULL, NULL, 0, '2020-03-04 09:27:20', '2020-03-04 09:27:20', 1),
+(1, 2, 1, 'Fritz Gerald', 'Dumdum', NULL, '', 'fritzgeralddumdum@yahoo.com', '8631c6d5fd74c273b7c7b438adf2bd95d3fef97f', NULL, '2020-03-05', NULL, 0, '2020-03-04 09:27:20', '2020-03-04 09:27:20', 1),
 (2, 2, 2, 'Relisa', ' Mongas', NULL, '', 'mongasrelis@gmail.com', '8631c6d5fd74c273b7c7b438adf2bd95d3fef97f', NULL, NULL, NULL, 0, '2020-03-04 09:28:23', '2020-03-04 09:28:23', 1),
 (3, 2, 2, 'Ahmel', 'Amellano', NULL, '', 'ahmel@yahoo.com', '49c3379d89210151f777f5999da194c7dd355042', NULL, NULL, NULL, 0, '2020-03-04 10:43:17', '2020-03-04 10:43:17', 1);
 
@@ -260,7 +262,7 @@ ALTER TABLE `user_types`
 -- AUTO_INCREMENT for table `announcements`
 --
 ALTER TABLE `announcements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `modules`

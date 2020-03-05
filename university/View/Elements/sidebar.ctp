@@ -23,10 +23,15 @@
                         }
                     ?> 
                     
-                    <a href="#">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="block m-t-xs font-bold"><?php echo $name ?></span>
-                        <span class="text-muted text-xs block"><?php echo $profile['UserType']['type'] ?></b></span>
+                        <span class="text-muted text-xs block"><?php echo $profile['UserType']['type'] ?><b class="caret"></b></span>
                     </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#profile-modal">Profile</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="login.html">Logout</a></li>
+                    </ul>
                 </div>
                 <div class="logo-element">
                     IN+
@@ -84,17 +89,6 @@
                     $this->Html->tag('i', false, array('class' => 'fa fa-users')) . '' . 
                     $this->Html->tag('span', 'Users', array('class' => 'nav-label')), array(
                         'controller' => 'users', 
-                        'action' => 'index'
-                    ), array(
-                        'escape' => false
-                    )) 
-                ?>
-            </li>
-            <li>
-                <?php echo $this->Html->link(
-                    $this->Html->tag('i', false, array('class' => 'fa fa-gears fa-lg')) . '' . 
-                    $this->Html->tag('span', 'Profile Settings', array('class' => 'nav-label')), array(
-                        'controller' => 'profile', 
                         'action' => 'index'
                     ), array(
                         'escape' => false

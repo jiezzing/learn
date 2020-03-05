@@ -32,9 +32,21 @@
         	return $announcements;
         }
 
-        public function count() {
+        public function tallyAnnouncement($id) {
             $count = $this->find('count', array(
-                'conditions' => array('admin_id' => 2)
+                'joins' => array(
+                    array(
+                        'alias' => 'UserType',
+                        'table' => 'user_types',
+                        'type' => 'INNER',
+                        'conditions' => array(
+                            'UserType.id = Announcement.recipient'
+                        )
+                    )
+                ),
+                'conditions' => array(
+                    'admin_id' => $id
+                )
             ));
 
             return $count;

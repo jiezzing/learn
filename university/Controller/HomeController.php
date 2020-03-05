@@ -20,12 +20,14 @@
 
         public function index(){
         	$announcements = $this->Announcement->announcements();
-        	$totalAnnouncement = $this->Announcement->count();
+        	$totalAnnouncement = $this->Announcement->tallyAnnouncement($this->Session->read('user_id'));
+            $tally = $this->User->tally($this->Session->read('user_id'));
 
         	$data = array(
         		'page' => $this->page,
         		'announcements' => $announcements,
-        		'totalAnnouncement' => $totalAnnouncement
+        		'totalAnnouncement' => $totalAnnouncement,
+                'stats' => $tally
         	);
         	
             $this->set('data', $data);

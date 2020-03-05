@@ -5,6 +5,9 @@
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>
+                <span class="m-r-sm text-muted welcome-message"><?php echo $profile['University']['name'] ?></span>
+            </li>
+            <li>
                 <?php echo $this->Html->link($this->Html->tag('i', '', array(
                         'class' => 'fa fa-sign-out'
                     )).'Logout', array(

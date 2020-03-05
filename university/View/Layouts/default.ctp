@@ -113,7 +113,7 @@
         </div>
         <div id="wrapper">
 
-            <?php echo $this->element('sidebar', array('profile' => $profile)) ?>
+            <?php echo $this->element('sidebar') ?>
 
             <div id="page-wrapper" class="gray-bg dashbard-1" style="min-height: 937px;">
                 <?php echo $this->element('navbar') ?>
@@ -124,6 +124,7 @@
         </div>
         <?php 
             echo $this->element('add_module');
+            echo $this->element('profile');
         ?>
     </body>
 <?php else : ?>
