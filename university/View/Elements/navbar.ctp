@@ -15,7 +15,8 @@
                         'action' => 'logout'
                     ), array(
                         'escape' => false
-                    )) ?>
+                    )) 
+                ?>
             </li>
         </ul>
     </nav>

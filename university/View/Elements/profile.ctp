@@ -88,7 +88,7 @@
         <?php echo $this->Html->link(
             $this->Html->tag('button', 'Edit', array('class' => 'btn btn-primary')), array(
                 "controller" => "users",
-                "action" => "register"
+                "action" => "edit", $this->Session->read("user_id")
             ), array(
                 'escape' => false
             )) 

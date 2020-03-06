@@ -4,23 +4,21 @@
 
     class UsersController extends AppController{
 
-        public $page = null;
-
         public function beforeFilter() {
             parent::beforeFilter();
-            $this->page = 'Users';
         }
 
     	public $uses = array(
     		'User',
-    		'UserType'
+    		'UserType',
+            'Validator'
     	);
 
         public function index(){
         	$users = $this->User->fetchUsers();
 
         	$data = array(
-        		'page' => $this->page,
+        		'page' => 'Users',
         		'users' => $users
         	);
         	
@@ -32,7 +30,7 @@
         	$types = $this->UserType->fetchUserTypes();
 
         	$data = array(
-                'page' => $this->page,
+                'page' => 'Users',
                 'types' => $types
             );
 
@@ -79,6 +77,106 @@
         			}
         		}
         	}
+        }
+
+        public function edit($id) {
+            $profile = $this->User->profile($id);
+
+            $data = array(
+                'page' => 'Edit Profile',
+                'profile' => $profile
+            );
+            
+            $this->set('data', $data);
+        }
+
+        public function update() {
+            if($this->request->is('ajax')) {
+                $this->autoRender = false;
+                $isEmailExist = $this->User->emailExist(
+                    $this->Session->read('user_id'),
+                    $this->request->data['email']
+                );
+
+                if($isEmailExist) {
+                    $status = 0;
+                    $message = 'Email already exist!';
+                }
+                else {
+
+                    empty($middle_initial) ? 
+                        $middle_initial = NULL :  
+                        $middle_initial = $this->request->data['middle_initial'];
+
+                    empty($address) ? 
+                        $address = NULL :  
+                        $address = $this->request->data['address'];
+
+                    isset($age) ? 
+                        $age = NULL :  
+                        $age = $this->request->data['age'];
+
+                    isset($about) ? 
+                        $about = NULL :  
+                        $about = $this->request->data['about'];
+
+                    isset($birthdate) ? 
+                        $birthdate = NULL :  
+                        $birthdate = $this->request->data['birthdate'];
+
+                    if(empty($_FILES['file']['name'])) {
+                        $update = $this->User->updateProfile(
+                            $this->Session->read('user_id'),
+                            $this->request->data['firstname'],
+                            $this->request->data['lastname'],
+                            $middle_initial,
+                            $address,
+                            $age,
+                            $about,
+                            $birthdate,
+                            $this->request->data['email'],
+                            NULL
+                        );
+                    }
+                    else {
+                        $filepath = $_SERVER['DOCUMENT_ROOT'] . '/learn/university/webroot/img/' . $_FILES['file']['name'];
+                        $image = array(
+                            'name' => $_FILES['file']['name'],
+                            'size' => $_FILES['file']['size']
+                        );
+
+                        if(move_uploaded_file($_FILES['file']['tmp_name'], $filepath)){
+                            $update = $this->User->updateProfile(
+                                $this->Session->read('user_id'),
+                                $this->request->data['firstname'],
+                                $this->request->data['lastname'],
+                                $this->request->data['middle_initial'],
+                                $address,
+                                $age,
+                                $about,
+                                $birthdate,
+                                $this->request->data['email'],
+                                json_encode($image)
+                            );
+                        }
+                        else{
+                            $status = 0;
+                            $message = 'Unable to upload file, please try again.';
+                        }
+                    }
+
+                    if($update) {
+                        $status = 1;
+                        $message = 'Account successfully updated.';
+                    }
+                    else {
+                        $status = 0;
+                        $message = 'An error occured, please try again.';
+                    }
+                }
+
+                return $this->output($status, $message);
+            }
         }
 
         // validate fields if empty

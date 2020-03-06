@@ -6,7 +6,7 @@
 
         public $usesTable = 'user';
 
-        public function fetchUsers(){
+        public function fetchUsers() {
         	$users = $this->find('all', array(
         		'joins' => array(
         			array(
@@ -33,7 +33,7 @@
         	return $users;
         }
 
-        public function profile($id){
+        public function profile($id) {
             $profile = $this->find('first', array(
                 'joins' => array(
                     array(
@@ -64,6 +64,8 @@
                     'User.birthdate',
                     'User.address',
                     'User.age',
+                    'User.email',
+                    'User.about',
                     'UserType.type',
                     'University.name'
                 )
@@ -73,7 +75,7 @@
             return $profile;
         }
 
-        public function tally($id){
+        public function tally($id) {
             $univId = $this->find('first', array(
                 'conditions' => array('User.id' => $id),
                 'fields' => array('User.univ_id')
@@ -107,6 +109,39 @@
             );
 
             return $tally;
+        }
+
+        public function updateProfile($id, $firstname, $lastname, $middle_initial, $address, $age, $about, $birthdate, $email, $image) {
+            $data = array(
+                'firstname' => $firstname,
+                'lastname' => $lastname,
+                'middle_initial' => $middle_initial,
+                'address' => $address,
+                'age' => $age,
+                'about' => $about,
+                'birthdate' => $birthdate,
+                'email' => $email,
+                'image' => $image
+            );
+
+            $this->read(null, $id);
+            $this->set($data);
+
+            $result = $this->save();
+            
+            return $result;
+        }
+
+
+        public function emailExist($id, $email) {
+            $result = $this->find('first', array(
+                'conditions' => array(
+                    'User.id !=' => $id,
+                    'User.email' => $email
+                )
+            ));
+            
+            return $result;
         }
 
     }

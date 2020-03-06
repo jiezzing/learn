@@ -95,6 +95,20 @@
                     )) 
                 ?>
             </li>
+            <li>
+                <a href="#" data-toggle="modal" data-target="#profile-modal"><i class="fa fa-cogs"></i> <span class="nav-label">Profile</span>  </a>
+            </li>
+            <li class="special_link">
+                <?php echo $this->Html->link($this->Html->tag('i', '', array(
+                        'class' => 'fa fa-sign-out'
+                    )).'Logout', array(
+                        'controller' => 'login', 
+                        'action' => 'logout'
+                    ), array(
+                        'escape' => false
+                    )) 
+                ?>
+            </li>
         </ul>
     </div>
 </nav>

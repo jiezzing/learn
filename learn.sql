@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 05, 2020 at 11:02 AM
+-- Generation Time: Mar 06, 2020 at 11:07 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -166,13 +166,14 @@ CREATE TABLE `users` (
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
   `middle_initial` char(1) DEFAULT NULL,
-  `id_no` varchar(50) NOT NULL,
+  `about` text DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `image` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`image`)),
   `gender` char(1) DEFAULT NULL,
   `birthdate` date DEFAULT NULL,
   `address` text DEFAULT NULL,
-  `age` int(11) NOT NULL,
+  `age` int(11) DEFAULT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   `status_id` int(11) NOT NULL
@@ -182,10 +183,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `user_type`, `univ_id`, `firstname`, `lastname`, `middle_initial`, `id_no`, `email`, `password`, `gender`, `birthdate`, `address`, `age`, `created`, `modified`, `status_id`) VALUES
-(1, 2, 1, 'Fritz Gerald', 'Dumdum', NULL, '', 'fritzgeralddumdum@yahoo.com', '8631c6d5fd74c273b7c7b438adf2bd95d3fef97f', NULL, '2020-03-05', NULL, 0, '2020-03-04 09:27:20', '2020-03-04 09:27:20', 1),
-(2, 2, 2, 'Relisa', ' Mongas', NULL, '', 'mongasrelis@gmail.com', '8631c6d5fd74c273b7c7b438adf2bd95d3fef97f', NULL, NULL, NULL, 0, '2020-03-04 09:28:23', '2020-03-04 09:28:23', 1),
-(3, 2, 2, 'Ahmel', 'Amellano', NULL, '', 'ahmel@yahoo.com', '49c3379d89210151f777f5999da194c7dd355042', NULL, NULL, NULL, 0, '2020-03-04 10:43:17', '2020-03-04 10:43:17', 1);
+INSERT INTO `users` (`id`, `user_type`, `univ_id`, `firstname`, `lastname`, `middle_initial`, `about`, `email`, `password`, `image`, `gender`, `birthdate`, `address`, `age`, `created`, `modified`, `status_id`) VALUES
+(1, 2, 1, 'asdas', 'asdasd', '', 'asdasdasd', 'fritzgeralddumdum@yahoo.com', '8631c6d5fd74c273b7c7b438adf2bd95d3fef97f', '{\"name\":\"Chiaki_Hanazono.png\",\"size\":174202}', NULL, NULL, NULL, NULL, '2020-03-04 09:27:20', '2020-03-04 09:27:20', 1),
+(2, 2, 2, 'Relisa', ' Mongas', NULL, NULL, 'mongasrelis@gmail.com', '8631c6d5fd74c273b7c7b438adf2bd95d3fef97f', NULL, NULL, NULL, NULL, NULL, '2020-03-04 09:28:23', '2020-03-04 09:28:23', 1),
+(3, 2, 2, 'Ahmel', 'Amellano', NULL, NULL, 'ahmel@yahoo.com', '49c3379d89210151f777f5999da194c7dd355042', NULL, NULL, NULL, NULL, NULL, '2020-03-04 10:43:17', '2020-03-04 10:43:17', 1);
 
 -- --------------------------------------------------------
 

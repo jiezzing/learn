@@ -1,8 +1,4 @@
-<script>
-    var page = 'index';
-</script>
-
-<div class="wrapper wrapper-content">
+<div class="wrapper wrapper-content fadeInRight">
     <div class="row">
         <div class="col-lg-2">
             <div class="ibox ">
