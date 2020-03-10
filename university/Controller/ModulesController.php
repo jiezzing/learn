@@ -3,16 +3,15 @@
 
         public $uses = array(
             'Module',
-            'Submodule'
+            'Submodule',
+            'Content'
         );
 
     	public $page = null;
-    	public $id = null;
 
     	public function beforeFilter() {
             parent::beforeFilter();
     		$this->page = 'Modules';
-    		$this->id = $this->Session->read('user_id');
             
             if(empty($this->Session->read('logged_in'))){
                 $this->redirect(array(
@@ -23,17 +22,18 @@
     	}
 
         public function index(){
-        	$modules = $this->Module->fetchModules($this->id);
+        	$modules = $this->Module->fetchModules($this->Session->read('user_id'));
+            $submodules = array();
 
-            foreach ($modules as $modulesKey => $modulesItem) {
-                $submodules [$modulesItem['Module']['id']] = $this->Submodule->fetchSubmodules($modulesItem['Module']['id']);
+            foreach ($modules as $value) {
+                $submodules [$value['Module']['id']] = $this->Submodule->fetchSubmodules($value['Module']['id']);
             }
 
-        	$data = array(
-        		'page' => $this->page,
-        		'modules' => $modules,
+            $data = array(
+                'page' => $this->page,
+                'modules' => $modules,
                 'submodules' => $submodules
-        	);
+            );
 
             $this->set('data', $data);
         }
@@ -43,7 +43,7 @@
 
         	if($this->request->is('ajax')) {
         		$result = $this->Module->addModule(
-        			$this->id,
+        			$this->Session->read('user_id'),
 	                $this->request->data['name'],
 	                2
 	            );
@@ -74,6 +74,51 @@
                     $this->output(0, 'An error occured. Please try again.');
                 }
             }
+        }
+
+        public function addContents() {
+            $this->autoRender = false;
+
+            if($this->request->is('ajax')) {
+
+                foreach ($_FILES as $key => $file) {
+                    $filepath = $_SERVER['DOCUMENT_ROOT'] . '/learn/university/webroot/files/UNIV-1/' . $file['name'];
+
+                    if(move_uploaded_file($file['tmp_name'], $filepath)){
+                        $result = $this->Content->addContents(
+                            $this->request->data['id'],
+                            $file['name'],
+                            2
+                        );
+                    }
+                    else{
+                        $status = 0;
+                        $message = 'Unable to upload file, please try again.';
+                    }
+                   
+                }
+
+                // if($result) {
+                //     $this->output(1, $this->request->data['submodule'] . ' has been successfully added.');
+                // }
+                // else {
+                //     $this->output(0, 'An error occured. Please try again.');
+                // }
+            }
+        }
+
+        public function contents($id) {
+            $contents = $this->Content->fetchContents($id);
+            $submodule = $this->Submodule->fetchSubmoduleData($id);
+
+            $data = array(
+                'page' => 'Contents',
+                'contents' => $contents,
+                'submodule' => $submodule
+            );
+
+            $this->set('data', $data);
+            $this->render('contents');
         }
 
         private function output($status, $message) {

@@ -20,7 +20,7 @@ $(function () {
     });
     
     $('.scroll_content').slimscroll({
-        height: '200px'
+        height: '500'
     })
 
 })

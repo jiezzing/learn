@@ -21,15 +21,6 @@
 				?>
 			</div>
 			<div class="form-group">
-				<?php echo $this->Form->input('employee_code', [
-					'class' => array('form-control'), 
-					'type' => 'text', 
-					'required' => true,
-					'label' => false,
-					'placeholder' => 'Employee #']); 
-				?>
-			</div>
-			<div class="form-group">
 				<?php echo $this->Form->input('password', array(
 					'class' => array('form-control'), 
 					'type' => 'password', 
@@ -79,7 +70,16 @@
 			?>
 		</form>
 		<p class="text-muted text-center"><small>Already have an account?</small></p>
-		<a class="btn btn-sm btn-white btn-block" href="../university/login">Go to login</a>
+		<?php echo $this->Html->link(
+            $this->Html->tag('button', 'Go to login', array(
+            	'class' => 'btn btn-sm btn-white btn-block')
+        	), array(
+                "controller" => "login",
+                "action" => "index"
+            ), array(
+                'escape' => false
+            )) 
+        ?>
 	</div>
 </div>
     

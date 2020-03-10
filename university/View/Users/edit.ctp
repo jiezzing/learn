@@ -118,7 +118,18 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
-                                    <?php echo $this->Html->image('admin.png', array(
+
+                                    <?php 
+                                        if($profile['User']['image'] != null) {
+                                            $image = json_decode($profile['User']['image'], true);
+                                            $image = $image['name'];
+                                        }
+                                        else {
+                                            $image = 'default.png';
+                                        }
+                                    ?> 
+
+                                    <?php echo $this->Html->image($image, array(
                                             'alt' => 'image',
                                             'class' => 'img-fluid',
                                             'id' => 'image-viewer'

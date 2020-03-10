@@ -36,7 +36,19 @@
             'custom.css',
 
             // select2
-            'plugins/select2/select2.min.css'
+            'plugins/select2/select2.min.css',
+
+            // footable
+            'plugins/footable/footable.core.css',
+
+            // jsTree
+            'plugins/jsTree/style.min.css',
+
+            // loading buttons
+            'plugins/ladda/ladda-themeless.min.css',
+
+            // lightbox gallery
+            'plugins/blueimp/css/blueimp-gallery.min.css'
         ]);
 
         echo $this->Html->script([
@@ -95,7 +107,20 @@
             'plugins/sweetalert/sweetalert.min.js',
 
             // select2
-            'plugins/select2/select2.full.min.js'
+            'plugins/select2/select2.full.min.js',
+            // footable
+            'plugins/footable/footable.all.min.js',
+
+            // jsTree
+            'plugins/jsTree/jstree.min.js',
+
+            // loading buttons
+            'plugins/ladda/spin.min.js',
+            'plugins/ladda/ladda.min.js',
+            'plugins/ladda/ladda.jquery.min.js',
+
+            // lightbox gallery
+            'plugins/blueimp/jquery.blueimp-gallery.min.js'
         ]);
 
 		echo $this->fetch('meta');
@@ -125,6 +150,7 @@
         <?php 
             echo $this->element('add_module');
             echo $this->element('profile');
+            echo $this->element('add_content');
         ?>
     </body>
 <?php else : ?>

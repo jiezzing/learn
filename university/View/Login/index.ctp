@@ -35,7 +35,16 @@
 			?>
 		<?php echo $this->Form->end(); ?>
 		<p class="text-muted text-center"><small>Do not have an account?</small></p>
-		<a class="btn btn-sm btn-white btn-block" href="../university/registration">Create an account</a>
+		<?php echo $this->Html->link(
+            $this->Html->tag('button', 'Create an account', array(
+            	'class' => 'btn btn-sm btn-white btn-block')
+        	), array(
+                "controller" => "registration",
+                "action" => "index"
+            ), array(
+                'escape' => false
+            )) 
+        ?>
 	</div>
 </div>
     

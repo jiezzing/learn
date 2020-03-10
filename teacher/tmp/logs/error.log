@@ -11568,3 +11568,12 @@ Request URL: /learn/teacher/js/popper.min.js.map
 Stack Trace:
 #0 C:\xampp\htdocs\learn\teacher\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
+2020-03-09 03:39:17 Error: [Error] Call to a member function allow() on null
+Request URL: /learn/teacher/users/login
+Stack Trace:
+#0 C:\xampp\htdocs\learn\lib\Cake\Event\CakeEventManager.php(244): UsersController->beforeFilter(Object(CakeEvent))
+#1 C:\xampp\htdocs\learn\lib\Cake\Controller\Controller.php(682): CakeEventManager->dispatch(Object(CakeEvent))
+#2 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(189): Controller->startupProcess()
+#3 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest))
+#4 C:\xampp\htdocs\learn\teacher\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}

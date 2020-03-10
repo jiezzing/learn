@@ -66,6 +66,7 @@
                     'User.age',
                     'User.email',
                     'User.about',
+                    'User.image',
                     'UserType.type',
                     'University.name'
                 )

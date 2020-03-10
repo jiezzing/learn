@@ -1,6 +1,8 @@
 <?php
 
     App::uses('AuthComponent', 'Controller/Component');
+    App::uses('Folder', 'Utility');
+    App::uses('File', 'Utility');
 
     class RegistrationController extends AppController{
 
@@ -56,7 +58,13 @@
 
                     $this->User->set($data);
 
-                    if ($this->User->save()) {
+                    $result = $this->User->save();
+
+                    $path = WWW_ROOT . 'files/UNIV-' . $result['User']['univ_id'];
+                    $folder = new Folder();
+                    $folder->create($path); 
+
+                    if ($result) {
                         $status = 1;
                         $message = 'Account successfully created.';
                     }

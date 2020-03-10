@@ -4,10 +4,21 @@
             <li class="nav-header">
                 <div class="dropdown profile-element">
                     
-                    <?php echo $this->Html->image('default.png', array(
+                    <?php 
+                        if($profile['User']['image'] != null) {
+                            $image = json_decode($profile['User']['image'], true);
+                            $image = $image['name'];
+                        }
+                        else {
+                            $image = 'default.png';
+                        }
+                    ?> 
+                    
+                    <?php echo $this->Html->image($image, array(
                             'alt' => 'image',
                             'class' => array('rounded-circle'),
-                            'width' => 50 
+                            'width' => 50,
+                            'height' => 50
                         )); 
                     ?>
 
@@ -48,19 +59,16 @@
                     )) 
                 ?>
             </li>
-            <li class="">
-                <a href="#" aria-expanded="false"><i class="fa fa-sitemap"></i> <span class="nav-label">Modules </span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
-                    <li>
-                        <?php 
-                            echo $this->Html->link('Modules', array(
-                                'controller' => 'modules', 
-                                'action' => 'index'
-                            ));
-                        ?>
-                    </li>
-                    <li><a href="#" aria-expanded="false" data-toggle="modal" data-target="#add-module-modal">Add Module</a></li>
-                </ul>
+            <li>
+                <?php echo $this->Html->link(
+                    $this->Html->tag('i', false, array('class' => 'fa fa-book')) . '' . 
+                    $this->Html->tag('span', 'Modules', array('class' => 'nav-label')), array(
+                        'controller' => 'modules', 
+                        'action' => 'index'
+                    ), array(
+                        'escape' => false
+                    )) 
+                ?>
             </li>
             <li>
                 <?php echo $this->Html->link(

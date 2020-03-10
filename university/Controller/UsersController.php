@@ -11,7 +11,7 @@
     	public $uses = array(
     		'User',
     		'UserType',
-            'Validator'
+            'Common'
     	);
 
         public function index(){
@@ -116,7 +116,7 @@
                         $age = NULL :  
                         $age = $this->request->data['age'];
 
-                    isset($about) ? 
+                    empty($about) ? 
                         $about = NULL :  
                         $about = $this->request->data['about'];
 
