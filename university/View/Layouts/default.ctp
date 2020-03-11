@@ -48,7 +48,10 @@
             'plugins/ladda/ladda-themeless.min.css',
 
             // lightbox gallery
-            'plugins/blueimp/css/blueimp-gallery.min.css'
+            'plugins/blueimp/css/blueimp-gallery.min.css',
+
+            // jquery grid
+            'plugins/jqGrid/ui.jqgrid.css'
         ]);
 
         echo $this->Html->script([
@@ -108,6 +111,7 @@
 
             // select2
             'plugins/select2/select2.full.min.js',
+            
             // footable
             'plugins/footable/footable.all.min.js',
 
@@ -120,7 +124,10 @@
             'plugins/ladda/ladda.jquery.min.js',
 
             // lightbox gallery
-            'plugins/blueimp/jquery.blueimp-gallery.min.js'
+            'plugins/blueimp/jquery.blueimp-gallery.min.js',
+
+            // jquery grid
+            'plugins/jqGrid/jquery.jqGrid.min.js'
         ]);
 
 		echo $this->fetch('meta');
@@ -147,11 +154,7 @@
                 <?php echo $this->element('footer') ?>
             </div>
         </div>
-        <?php 
-            echo $this->element('add_module');
-            echo $this->element('profile');
-            echo $this->element('add_content');
-        ?>
+        <?php echo $this->element('profile') ?>
     </body>
 <?php else : ?>
     <body class="gray-bg">

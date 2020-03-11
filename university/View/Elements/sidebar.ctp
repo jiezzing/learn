@@ -60,19 +60,35 @@
                 ?>
             </li>
             <li>
-                <?php echo $this->Html->link(
-                    $this->Html->tag('i', false, array('class' => 'fa fa-book')) . '' . 
-                    $this->Html->tag('span', 'Modules', array('class' => 'nav-label')), array(
-                        'controller' => 'modules', 
-                        'action' => 'index'
-                    ), array(
-                        'escape' => false
-                    )) 
-                ?>
+                <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Academic</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li>
+                        <?php echo $this->Html->link(
+                            $this->Html->tag('i', false, array('class' => 'fa fa-file')) . '' . 
+                            $this->Html->tag('span', 'Modules', array('class' => 'nav-label')), array(
+                                'controller' => 'modules', 
+                                'action' => 'index'
+                            ), array(
+                                'escape' => false
+                            )) 
+                        ?>
+                    </li>
+                    <li>
+                        <?php echo $this->Html->link(
+                            $this->Html->tag('i', false, array('class' => 'fa fa-book')) . '' . 
+                            $this->Html->tag('span', 'Subjects', array('class' => 'nav-label')), array(
+                                'controller' => 'subjects', 
+                                'action' => 'index'
+                            ), array(
+                                'escape' => false
+                            )) 
+                        ?>
+                    </li>
+                </ul>
             </li>
             <li>
                 <?php echo $this->Html->link(
-                    $this->Html->tag('i', false, array('class' => 'fa fa-newspaper-o')) . '' . 
+                    $this->Html->tag('i', false, array('class' => 'fa fa-bell')) . '' . 
                     $this->Html->tag('span', 'Announcements', array('class' => 'nav-label')), array(
                         'controller' => 'announcements', 
                         'action' => 'index'
@@ -107,9 +123,9 @@
                 <a href="#" data-toggle="modal" data-target="#profile-modal"><i class="fa fa-cogs"></i> <span class="nav-label">Profile</span>  </a>
             </li>
             <li class="special_link">
-                <?php echo $this->Html->link($this->Html->tag('i', '', array(
-                        'class' => 'fa fa-sign-out'
-                    )).'Logout', array(
+                <?php echo $this->Html->link(
+                    $this->Html->tag('i', false, array('class' => 'fa fa-sign-out')) . '' . 
+                    $this->Html->tag('span', 'Logout', array('class' => 'nav-label')), array(
                         'controller' => 'login', 
                         'action' => 'logout'
                     ), array(

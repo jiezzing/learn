@@ -11,15 +11,25 @@
                 'conditions' => array('module_id' => $id),
                 'fields' => array(
                     'id', 
-                    'name',
-                    'created'
+                    'name'
                 )
             ));
 
             return $submodules;
         }
 
+        public function fetchSubmoduleData($id) {
+            $data = $this->find('all', array(
+                'conditions' => array(
+                    'Submodule.id' => $id
+                ),
+                'fields' => array(
+                    'Submodule.name'
+                )
+            ));
 
+            return $data[0];
+        }
 
         public function addSubmodule($id, $name, $status) {
             $this->create();

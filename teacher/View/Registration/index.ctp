@@ -21,15 +21,6 @@
 				?>
 			</div>
 			<div class="form-group">
-				<?php echo $this->Form->input('employee_code', [
-					'class' => array('form-control'), 
-					'type' => 'text', 
-					'required' => true,
-					'label' => false,
-					'placeholder' => 'Employee #']); 
-				?>
-			</div>
-			<div class="form-group">
 				<?php echo $this->Form->input('password', array(
 					'class' => array('form-control'), 
 					'type' => 'password', 

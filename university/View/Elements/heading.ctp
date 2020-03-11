@@ -62,6 +62,16 @@
                         <a href="#" aria-expanded="false" data-toggle="modal" data-target="#add-module-modal">Add Module</a>
                     </strong>
                 </li>
+            <?php elseif($data['page'] == 'Subjects') : ?>
+                <li class="breadcrumb-item active">
+                    <strong>
+                        <?php echo $this->Html->link('Subjects', array(
+                                'controller' => 'subjects', 
+                                'action' => 'index'
+                            )) 
+                        ?>
+                    </strong>
+                </li>
             <?php elseif($data['page'] == 'Contents') : ?>
                 <li class="breadcrumb-item active">
                     <strong>

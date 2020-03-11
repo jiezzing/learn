@@ -1,4 +1,9 @@
-<div class="wrapper wrapper-content">
+<?php 
+    echo $this->element('add_module');
+    echo $this->element('add_content');
+?>
+
+<div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <?php foreach($data['modules']  as $moduleItem) : ?>
             <div class="col-lg-12">

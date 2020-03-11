@@ -14,6 +14,13 @@
 
         public function afterFilter() {
             parent::afterFilter();
+            
+            if(!empty($this->Session->read('logged_in'))){
+                return $this->redirect(array(
+                    'controller' => 'home',
+                    'action' => 'index'
+                ));
+            }
         }
 
         public function login(){

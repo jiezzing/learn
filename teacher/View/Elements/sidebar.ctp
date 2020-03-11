@@ -3,7 +3,7 @@
         <ul class="nav metismenu" id="side-menu" style="">
             <li class="nav-header">
                 <div class="dropdown profile-element">
-
+                    
                     <?php 
                         if($profile['User']['image'] != null) {
                             $image = json_decode($profile['User']['image'], true);
@@ -59,19 +59,16 @@
                     )) 
                 ?>
             </li>
-            <li class="">
-                <a href="#" aria-expanded="false"><i class="fa fa-sitemap"></i> <span class="nav-label">Modules </span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
-                    <li>
-                        <?php 
-                            echo $this->Html->link('Modules', array(
-                                'controller' => 'modules', 
-                                'action' => 'index'
-                            ));
-                        ?>
-                    </li>
-                    <li><a href="#" aria-expanded="false" data-toggle="modal" data-target="#add-module-modal">Add Module</a></li>
-                </ul>
+            <li>
+                <?php echo $this->Html->link(
+                    $this->Html->tag('i', false, array('class' => 'fa fa-file')) . '' . 
+                    $this->Html->tag('span', 'Modules', array('class' => 'nav-label')), array(
+                        'controller' => 'modules', 
+                        'action' => 'index'
+                    ), array(
+                        'escape' => false
+                    )) 
+                ?>
             </li>
             <li>
                 <?php echo $this->Html->link(
@@ -98,8 +95,8 @@
             <li>
                 <?php echo $this->Html->link(
                     $this->Html->tag('i', false, array('class' => 'fa fa-users')) . '' . 
-                    $this->Html->tag('span', 'Users', array('class' => 'nav-label')), array(
-                        'controller' => 'users', 
+                    $this->Html->tag('span', 'Students', array('class' => 'nav-label')), array(
+                        'controller' => 'students', 
                         'action' => 'index'
                     ), array(
                         'escape' => false
@@ -110,9 +107,9 @@
                 <a href="#" data-toggle="modal" data-target="#profile-modal"><i class="fa fa-cogs"></i> <span class="nav-label">Profile</span>  </a>
             </li>
             <li class="special_link">
-                <?php echo $this->Html->link($this->Html->tag('i', '', array(
-                        'class' => 'fa fa-sign-out'
-                    )).'Logout', array(
+                <?php echo $this->Html->link(
+                    $this->Html->tag('i', false, array('class' => 'fa fa-sign-out')) . '' . 
+                    $this->Html->tag('span', 'Logout', array('class' => 'nav-label')), array(
                         'controller' => 'login', 
                         'action' => 'logout'
                     ), array(

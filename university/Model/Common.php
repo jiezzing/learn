@@ -14,4 +14,8 @@
             return $result;
         }
 
+        public function response($data) {
+            return json_encode($data);
+        }
+
     }

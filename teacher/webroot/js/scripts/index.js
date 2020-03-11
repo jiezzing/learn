@@ -1,19 +1,19 @@
 $(function () {
 
-	// Check page
+    // Check page
     if(page != 'login' && page != 'register') {
         $('body').css({'background-color': '#2f4050'});
     }
 
     // Login 
     $('#login-btn').on('click', function(event){
-    	event.preventDefault();
-    	var form = $('#User')[0];
-    	var data = new FormData(form);
+        event.preventDefault();
+        var form = $('#User')[0];
+        var data = new FormData(form);
 
-    	if(!data.get('email') || !data.get('password')){
-    		toastr.error('Invalid email or password', 'Error');
-    	}
+        if(!data.get('email') || !data.get('password')){
+            toastr.error('Invalid email or password', 'Error');
+        }
         else{
             $.ajax({
                 type: "POST",

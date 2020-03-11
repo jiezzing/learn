@@ -1,5 +1,5 @@
 <div class="footer">
     <div>
-        <strong><?php echo $profile['University']['name'] ?></strong> © 2020-2021
+        <strong><?php echo $profile['University']['name'] ?></strong> © <?php echo date('Y') . ' - ' . date('Y', strtotime('+1 year'))?>
     </div>
 </div>
