@@ -1,6 +1,6 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2><?php echo $data['page'] ?></h2>
+        <h2><?php echo $page ?></h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
                 <?php echo $this->Html->link('Home', array(
@@ -9,10 +9,10 @@
                     )) 
                 ?>
             </li>
-            <?php if ($data['page'] == 'Users') : ?>
+            <?php if ($page == 'Users') : ?>
                 <li class="breadcrumb-item active">
                     <strong>
-                        <?php echo $this->Html->link($data['page'], array(
+                        <?php echo $this->Html->link($page, array(
                                 'controller' => 'users', 
                                 'action' => 'index'
                             )) 
@@ -28,41 +28,27 @@
                         ?>
                     </strong>
                 </li>
-            <?php elseif ($data['page'] == 'Announcements') : ?>
+            <?php elseif ($page == 'Announcements') : ?>
                 <li class="breadcrumb-item active">
                     <strong>
-                        <?php echo $this->Html->link($data['page'], array(
+                        <?php echo $this->Html->link($page, array(
                                 'controller' => 'announcements', 
                                 'action' => 'index'
                             )) 
                         ?>
                     </strong>
                 </li>
+            <?php elseif ($page == 'Modules') : ?>
                 <li class="breadcrumb-item active">
                     <strong>
-                        <?php echo $this->Html->link('Create announcement', array(
-                                'controller' => 'announcements', 
-                                'action' => 'create'
-                            )) 
-                        ?>
-                    </strong>
-                </li>
-            <?php elseif ($data['page'] == 'Modules') : ?>
-                <li class="breadcrumb-item active">
-                    <strong>
-                        <?php echo $this->Html->link($data['page'], array(
+                        <?php echo $this->Html->link($page, array(
                                 'controller' => 'modules', 
                                 'action' => 'index'
                             )) 
                         ?>
                     </strong>
                 </li>
-                <li class="breadcrumb-item">
-                    <strong>
-                        <a href="#" aria-expanded="false" data-toggle="modal" data-target="#add-module-modal">Add Module</a>
-                    </strong>
-                </li>
-            <?php elseif($data['page'] == 'Subjects') : ?>
+            <?php elseif($page == 'Subjects') : ?>
                 <li class="breadcrumb-item active">
                     <strong>
                         <?php echo $this->Html->link('Subjects', array(
@@ -72,7 +58,7 @@
                         ?>
                     </strong>
                 </li>
-            <?php elseif($data['page'] == 'Contents') : ?>
+            <?php elseif($page == 'Contents') : ?>
                 <li class="breadcrumb-item active">
                     <strong>
                         <?php echo $this->Html->link('Modules', array(
@@ -84,10 +70,10 @@
                 </li>
                 <li class="breadcrumb-item">
                     <strong>
-                        <a href="#" aria-expanded="false"><?php echo $data['submodule']['Submodule']['name'] ?></a>
+                        <a href="#" aria-expanded="false"><?php echo $submodule['Submodule']['name'] ?></a>
                     </strong>
                 </li>
-            <?php elseif($data['page'] == 'Editing announcement') : ?>
+            <?php elseif($page == 'Editing announcement') : ?>
                 <li class="breadcrumb-item active">
                     <strong>
                         <?php echo $this->Html->link('Announcements', array(
@@ -100,9 +86,19 @@
                 <li class="breadcrumb-item active">
                     <strong>Edit</strong>
                 </li>
+            <?php elseif($page == 'Sections') : ?>
+                <li class="breadcrumb-item active">
+                    <strong>
+                        <?php echo $this->Html->link('Sections', array(
+                                'controller' => 'announcements', 
+                                'action' => 'index'
+                            )) 
+                        ?>
+                    </strong>
+                </li>
             <?php else : ?>
                 <li class="breadcrumb-item active">
-                    <strong><?php echo $data['page'] ?></strong>
+                    <strong><?php echo $page ?></strong>
                 </li>
             <?php endif ?>
         </ol>

@@ -63,24 +63,23 @@
                 <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Academic</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
                     <li>
-                        <?php echo $this->Html->link(
-                            $this->Html->tag('i', false, array('class' => 'fa fa-file')) . '' . 
-                            $this->Html->tag('span', 'Modules', array('class' => 'nav-label')), array(
+                        <?php echo $this->Html->link('Modules', array(
                                 'controller' => 'modules', 
                                 'action' => 'index'
-                            ), array(
-                                'escape' => false
                             )) 
                         ?>
                     </li>
                     <li>
-                        <?php echo $this->Html->link(
-                            $this->Html->tag('i', false, array('class' => 'fa fa-book')) . '' . 
-                            $this->Html->tag('span', 'Subjects', array('class' => 'nav-label')), array(
+                        <?php echo $this->Html->link('Subjects', array(
                                 'controller' => 'subjects', 
                                 'action' => 'index'
-                            ), array(
-                                'escape' => false
+                            )) 
+                        ?>
+                    </li>
+                    <li>
+                        <?php echo $this->Html->link('Sections', array(
+                                'controller' => 'sections', 
+                                'action' => 'index'
                             )) 
                         ?>
                     </li>
@@ -91,17 +90,6 @@
                     $this->Html->tag('i', false, array('class' => 'fa fa-bell')) . '' . 
                     $this->Html->tag('span', 'Announcements', array('class' => 'nav-label')), array(
                         'controller' => 'announcements', 
-                        'action' => 'index'
-                    ), array(
-                        'escape' => false
-                    )) 
-                ?>
-            </li>
-            <li>
-                <?php echo $this->Html->link(
-                    $this->Html->tag('i', false, array('class' => 'fa fa-puzzle-piece fa-lg')) . '' . 
-                    $this->Html->tag('span', 'Trivia', array('class' => 'nav-label')), array(
-                        'controller' => 'trivias', 
                         'action' => 'index'
                     ), array(
                         'escape' => false

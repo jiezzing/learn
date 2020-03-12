@@ -16,13 +16,9 @@
 
         public function index(){
         	$users = $this->User->fetchUsers();
-
-        	$data = array(
-        		'page' => 'Users',
-        		'users' => $users
-        	);
         	
-            $this->set('data', $data);
+            $this->set('page', 'Users');
+            $this->set('user', $users);
         }
 
         // register new user
@@ -81,13 +77,9 @@
 
         public function edit($id) {
             $profile = $this->User->profile($id);
-
-            $data = array(
-                'page' => 'Edit Profile',
-                'profile' => $profile
-            );
             
-            $this->set('data', $data);
+            $this->set('page', 'Edit Profile');
+            $this->set('profile', $profile);
         }
 
         public function update() {

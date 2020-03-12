@@ -17,26 +17,11 @@
     	// show announcements
         public function index(){
         	$announcements = $this->Announcement->announcements();
-
-        	$data = array(
-        		'page' => $this->page,
-        		'announcements' => $announcements
-        	);
-
-            $this->set('data', $data);
-        }
-        
-        // create announcement
-        public function create() {
             $types = $this->UserType->fetchUserTypes();
 
-        	$data = array(
-        		'page' => $this->page,
-                'types' => $types
-        	);
-
-        	
-            $this->set('data', $data);
+            $this->set('page', 'Announcements');
+            $this->set('announcement', $announcements);
+            $this->set('type', $types);
         }
         
         // publish created announcement

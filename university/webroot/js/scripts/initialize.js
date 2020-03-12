@@ -1,8 +1,6 @@
 $(function () {
 
-    $(".levels").select2({
-        placeholder: "Select level"
-    });
+    $(".select2").select2();
 
     // summernote initialization
     $('.summernote').summernote({

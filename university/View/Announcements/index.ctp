@@ -1,5 +1,5 @@
 <div class="wrapper wrapper-content animated fadeInRight">
-    <?php if (count($data['announcements']) == 0) : ?>
+    <?php if (count($announcement) == 0) : ?>
         <div class="row">
             <div class="col-lg-8">
                 <div class="ibox ">
@@ -18,7 +18,7 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-6">
-                    <?php foreach ($data['announcements'] as $announceItem) : ?>
+                    <?php foreach ($announcement as $announceItem) : ?>
                     <?php $details = json_decode($announceItem['Announcement']['announcement'], true) ?>
                     <div class="row">
                         <div class="col-lg-12">
@@ -65,27 +65,10 @@
                     <div class="ibox ">
                         <div class="ibox-title">
                             <h5>Make announcement</h5>
-                            <div class="ibox-tools">
-                                <a class="collapse-link">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <i class="fa fa-wrench"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-user">
-                                    <li><a href="#" class="dropdown-item">Config option 1</a>
-                                    </li>
-                                    <li><a href="#" class="dropdown-item">Config option 2</a>
-                                    </li>
-                                </ul>
-                                <a class="close-link">
-                                    <i class="fa fa-times"></i>
-                                </a>
-                            </div>
                         </div>
                         <div class="ibox-content">
                             <?php echo $this->Form->create(false, array('id' => 'announcement')) ?>
-                                <div class="form-group  row"><label class="col-sm-2 col-form-label">Announcement Title</label>
+                                <div class="form-group  row"><label class="col-sm-12 col-form-label">Announcement Title</label>
                                     <div class="col-sm-12">
                                         <?php
                                             echo $this->Form->input(false, array(
@@ -98,7 +81,7 @@
                                         ?>
                                     </div>
                                 </div>
-                                <div class="form-group  row"><label class="col-sm-2 col-form-label">Short Description</label>
+                                <div class="form-group  row"><label class="col-sm-12 col-form-label">Short Description</label>
                                     <div class="col-sm-12">
                                         <?php
                                             echo $this->Form->input(false, array(
@@ -111,14 +94,13 @@
                                         ?>
                                     </div>
                                 </div>
-                                <div class="form-group  row"><label class="col-sm-2 col-form-label">Recipient</label>
-                                    <div class="col-sm-12"></div>
-                                    <div class="col-sm-6">
-                                        <select class="form-control m-b" id="recipient">
-                                            <option value="select" selected>Select recipient</option>
-                                            <?php foreach($data['types'] as $key => $dataItems) : ?>
-                                                <option value="<?php echo $dataItems['UserType']['id'] ?>"><?php echo $dataItems['UserType']['type'] ?></option>
+                                <div class="form-group  row"><label class="col-sm-12 col-form-label">Recipient</label>
+                                    <div class="col-sm-12">
+                                        <select class="select2 form-control" id="levels" multiple="multiple">
+                                            <?php foreach($type as $value) : ?>
+                                                <option value="<?php echo $value['UserType']['id'] ?>"><?php echo $value['UserType']['type'] ?></option>
                                             <?php endforeach ?>
+                                            
                                         </select>
                                     </div>
                                 </div>
@@ -126,9 +108,13 @@
                             <div class="ibox-content no-padding border">
                                 <div class="summernote"></div>
                             </div>
-                            <div class="form-group row mt-4">
-                                <div class="col-sm-12 col-sm-offset-2">
-                                    <button class="btn btn-primary btn-sm float-right" type="button" id="publish-btn">Publish announcement</button>
+                        </div>
+                        <div class="ibox-footer">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="input-group">
+                                        <button class="btn btn-primary btn-sm float-right" type="button" id="publish-btn">Publish announcement</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -137,123 +123,6 @@
             </div>
         </div>
     </div>
-
-    <!-- <div class="row">
-        <?php foreach ($data['announcements'] as $announceItem) : ?>
-        <?php $details = json_decode($announceItem['Announcement']['announcement'], true) ?>
-        <div class="col-lg-7">
-            <div class="ibox">
-                <div class="ibox-title">
-                    <h5><?php echo $details['title'] ?></h5>
-                    <div class="ibox-tools">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-gear"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><?php echo $this->Html->link(
-                                $this->Html->tag('i', false, array('class' => 'fa fa-pencil')) . '' . 
-                                $this->Html->tag('span', ' Edit', array('class' => 'nav-label')), array(
-                                    'controller' => 'announcements', 
-                                    'action' => 'edit', $announceItem['Announcement']['id']
-                                ), array(
-                                    'escape' => false
-                                ))  ?>
-                            </li>
-                            <li><a href="#" value="<?php echo $announceItem['Announcement']['id'] ?>" class="dropdown-item delete"><i class="fa fa-trash"></i> Delete</a>
-                            </li>
-                        </ul>
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-down"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="ibox-content">
-                    <p class="ellipsis"><?php echo $details['announcement'] ?></p>
-                </div>
-                <div class="ibox-footer">
-                    <span class="float-right">
-                    <?php echo CakeTime::niceShort($announceItem['Announcement']['created']) ?>
-                    </span>
-                      Recipient: <?php echo $announceItem['UserType']['type'] ?>
-                </div>
-            </div>
-        </div>
-        <?php endforeach ?>
-
-        <div class="col-lg-5">
-            <div class="ibox ">
-                <div class="ibox-title">
-                    <h5>Make announcement</h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-wrench"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#" class="dropdown-item">Config option 1</a>
-                            </li>
-                            <li><a href="#" class="dropdown-item">Config option 2</a>
-                            </li>
-                        </ul>
-                        <a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="ibox-content">
-                    <?php echo $this->Form->create(false, array('id' => 'announcement')) ?>
-                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Announcement Title</label>
-                            <div class="col-sm-12">
-                                <?php
-                                    echo $this->Form->input(false, array(
-                                        'class' => 'form-control',
-                                        'type' => 'text',
-                                        'placeholder' => 'Title here . . .',
-                                        'label' => false,
-                                        'name' => 'title'
-                                    ));
-                                ?>
-                            </div>
-                        </div>
-                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Short Description</label>
-                            <div class="col-sm-12">
-                                <?php
-                                    echo $this->Form->input(false, array(
-                                        'class' => 'form-control',
-                                        'type' => 'text',
-                                        'placeholder' => 'Description here . . .',
-                                        'label' => false,
-                                        'name' => 'description'
-                                    ));
-                                ?>
-                            </div>
-                        </div>
-                        <div class="form-group  row"><label class="col-sm-2 col-form-label">Recipient</label>
-                            <div class="col-sm-12"></div>
-                            <div class="col-sm-6">
-                                <select class="form-control m-b" id="recipient">
-                                    <option value="select" selected>Select recipient</option>
-                                    <?php foreach($data['types'] as $key => $dataItems) : ?>
-                                        <option value="<?php echo $dataItems['UserType']['id'] ?>"><?php echo $dataItems['UserType']['type'] ?></option>
-                                    <?php endforeach ?>
-                                </select>
-                            </div>
-                        </div>
-                    <?php echo $this->Form->end() ?>
-                    <div class="ibox-content no-padding border">
-                        <div class="summernote"></div>
-                    </div>
-                    <div class="form-group row mt-4">
-                        <div class="col-sm-12 col-sm-offset-2">
-                            <button class="btn btn-primary btn-sm float-right" type="button" id="publish-btn">Publish announcement</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
 </div>
 
 <?php 

@@ -21,15 +21,11 @@
             }
 
             $badge = $this->badge($levelID);
-
-        	$data = array(
-        		'page' => 'Subjects',
-                'level' => $levels,
-                'subject' => $subjects,
-                'badge' => $badge
-        	);
         	
-            $this->set('data', $data);
+            $this->set('page',  'Subjects');
+            $this->set('level', $levels);
+            $this->set('subject', $subjects);
+            $this->set('badge', $badge);
         }
 
         public function create() {

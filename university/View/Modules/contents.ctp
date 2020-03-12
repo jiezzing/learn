@@ -1,6 +1,6 @@
 <div class="wrapper wrapper-content fadeInRight">
     <div class="row">
-        <?php foreach($data['contents'] as $value) : ?>
+        <?php foreach($content as $value) : ?>
         <div class="col-md-3">
             <div class="ibox">
                 <div class="ibox-content product-box">

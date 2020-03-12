@@ -22,15 +22,15 @@
         	$announcements = $this->Announcement->announcements();
         	$totalAnnouncement = $this->Announcement->tallyAnnouncement($this->Session->read('user_id'));
             $tally = $this->User->tally($this->Session->read('user_id'));
+            
+            $this->set('page', 'Home');
+            $this->set('announcement', $announcements);
+            $this->set('totalAnnouncement', $totalAnnouncement);
+            $this->set('stats', $tally);
+        }
 
-        	$data = array(
-        		'page' => $this->page,
-        		'announcements' => $announcements,
-        		'totalAnnouncement' => $totalAnnouncement,
-                'stats' => $tally
-        	);
-        	
-            $this->set('data', $data);
+        public function sample() {
+            echo "Sample";
         }
         
     }

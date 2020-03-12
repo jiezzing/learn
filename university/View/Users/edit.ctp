@@ -12,7 +12,7 @@
                                                 echo $this->Form->input('firstname', array(
                                                     'class' => 'form-control',
                                                     'type' => 'text',
-                                                    'value' => $data["profile"]["User"]["firstname"],
+                                                    'value' => $profile['User']['firstname'],
                                                     'placeholder' => 'Firstname',
                                                     'label' => false,
                                                     'name' => 'firstname'
@@ -24,7 +24,7 @@
                                                 echo $this->Form->input('lastname', array(
                                                     'class' => 'form-control',
                                                     'type' => 'text',
-                                                    'value' => $data["profile"]["User"]["lastname"],
+                                                    'value' => $profile['User']['lastname'],
                                                     'placeholder' => 'Lastname',
                                                     'label' => false,
                                                     'name' => 'lastname'
@@ -33,19 +33,10 @@
                                         </div>
                                         <div class="col-sm-2">
                                             <?php
-                                                if($data["profile"]["User"]["middle_initial"] != null) {
-                                                    $attribute = 'value';
-                                                    $value = $data["profile"]["User"]["middle_initial"];
-                                                }
-                                                else {
-                                                    $attribute = 'placeholder';
-                                                    $value = 'Middle Initial (optional)';
-                                                }
-
                                                 echo $this->Form->input('middle_initial', array(
                                                     'class' => 'form-control',
                                                     'type' => 'text',
-                                                    'value' => $data["profile"]["User"]["middle_initial"],
+                                                    'value' => $profile['User']['middle_initial'],
                                                     'placeholder' => 'Middle Initial (optional)',
                                                     'label' => false,
                                                     'name' => 'middle_initial',
@@ -60,7 +51,7 @@
                                                 echo $this->Form->input('address', array(
                                                     'class' => 'form-control',
                                                     'type' => 'text',
-                                                    'value' => $data["profile"]["User"]["address"],
+                                                    'value' => $profile['User']['address'],
                                                     'placeholder' => 'Address (optional)',
                                                     'label' => false,
                                                     'name' => 'address'
@@ -72,7 +63,7 @@
                                                 echo $this->Form->input('age', array(
                                                     'class' => 'form-control',
                                                     'type' => 'number',
-                                                    'value' => $data["profile"]["User"]["age"],
+                                                    'value' => $profile['User']['age'],
                                                     'placeholder' => 'Age (optional)',
                                                     'label' => false,
                                                     'name' => 'age'
@@ -84,14 +75,14 @@
                                         <div class="col-sm-8">
                                             <div class="form-group" id="data_1">
                                                 <label class="font-normal">About yourself: </label>
-                                                <textarea name="about" class="form-control" placeholder="Type here . . ." rows="6" id="about"><?php echo $data["profile"]["User"]["about"]?></textarea>
+                                                <textarea name="about" class="form-control" placeholder="Type here . . ." rows="6" id="about"><?php echo $profile['User']['about'] ?></textarea>
                                             </div>
                                         </div>
                                         <div class="col-sm-2">
                                             <div class="form-group" id="data_1">
                                                 <label class="font-normal">Birthdate</label>
                                                 <div class="input-group date">
-                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input name="birthdate" type="text" class="form-control" value="<?php echo $data["profile"]["User"]["birthdate"] ?>">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input name="birthdate" type="text" class="form-control" value="<?php echo $profile['User']['birthdate'] ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -103,7 +94,7 @@
                                                 echo $this->Form->input('email', array(
                                                     'class' => 'form-control',
                                                     'type' => 'email',
-                                                    'value' => $data["profile"]["User"]["email"],
+                                                    'value' => $profile['User']['email'],
                                                     'label' => false,
                                                     'name' => 'email'
                                                 ));
