@@ -6,7 +6,7 @@
                     <h5>Teachers</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins"><?php echo $data['stats']['totalTeachers'] ?></h1>
+                    <h1 class="no-margins"><?php echo $stats['totalTeachers'] ?></h1>
                     <small>Total # of teachers</small>
                 </div>
             </div>
@@ -17,7 +17,7 @@
                     <h5>Students</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins"><?php echo $data['stats']['totalStudents'] ?></h1>
+                    <h1 class="no-margins"><?php echo $stats['totalStudents'] ?></h1>
                     <small>Total # of student</small>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                     <h5>Administrators</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins"><?php echo $data['stats']['totalAdmin'] ?></h1>
+                    <h1 class="no-margins"><?php echo $stats['totalAdmin'] ?></h1>
                     <small>Total # of announcements</small>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                     <h5>Announcements</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins"><?php echo $data['totalAnnouncement'] ?></h1>
+                    <h1 class="no-margins"><?php echo $totalAnnouncement ?></h1>
                     <small>Total # of announcements</small>
                 </div>
             </div>
@@ -68,14 +68,14 @@
                         </a>
                     </div>
                 </div>
-                <?php if (count($data['announcements']) > 0) : ?>
+                <?php if (count($announcement) > 0) : ?>
                     <div class="ibox-content ibox-heading">
                         <h3><i class="fa fa-newspaper-o"></i> Annoucements</h3>
-                        <small><i class="fa fa-tim"></i> You have a total of <?php echo $data['totalAnnouncement'] ?> announcements.</small>
+                        <small><i class="fa fa-tim"></i> You have a total of <?php echo $totalAnnouncement ?> announcements.</small>
                     </div>
-                    <div class="ibox-content scroll_content">
+                    <div class="ibox-content">
                     <div class="feed-activity-list">
-                        <?php foreach ($data['announcements'] as $announceKey => $announceItem) : ?>
+                        <?php foreach ($announcement as $announceKey => $announceItem) : ?>
                         <?php $details = json_decode($announceItem['Announcement']['announcement'], true) ?>
                         <div class="feed-element">
                             <div>

@@ -1,24 +1,19 @@
 $(function () {
+    $('#register-btn').on('click', function(event) {
+        event.preventDefault();
 
-    $(".universities").select2({
-        placeholder: "Select a university",
-        allowClear: true
-    });
+        var firstname = $('#firstname').val().trim();
+        var lastname = $('#lastname').val().trim();
+        var password = $('#password').val().trim();
+        var confirmPassword = $('#confirm_password').val().trim();
+        var email = $('#email').val().trim();
+        var university = $('#university').val();
 
-    $('#register-btn').on('click', function() {
-        var firstname = $('#firstname').val();
-        var lastname = $('#lastname').val();
-        var code = $('#employee_code').val();
-        var password = $('#password').val();
-        var confirmPassword = $('#confirm_password').val();
-        var email = $('#email').val();
-        var university = $('.universities').val();
-
-        if(firstname == "" || lastname == "" || code == "" || password == "" || confirmPassword == "" || email == "" || university == "") {
-            return toastr.error("Some fields are missing.", 'Error');
+        if(!firstname || !lastname || !password || !confirmPassword || !email) {
+            return toastr.error('Some fields are missing.', 'Error');
         }
         else if(password != confirmPassword) {
-            return toastr.error("Password does not match.", 'Error');
+            return toastr.error('Password does not match.', 'Error');
         }
         else {
             $.ajax({
@@ -28,7 +23,6 @@ $(function () {
                 data: { 
                     firstname: firstname,
                     lastname: lastname,
-                    code: code,
                     password: password,
                     email: email,
                     university: university
@@ -37,7 +31,6 @@ $(function () {
                     var response = $.parseJSON(response);
                     
                     if(response.status) {
-                        $('#University')[0].reset();
                         toastr.success(response.message, 'Success');
                     }
                     else {

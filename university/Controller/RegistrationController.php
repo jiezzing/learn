@@ -2,91 +2,76 @@
 
     App::uses('AuthComponent', 'Controller/Component');
     App::uses('Folder', 'Utility');
-    App::uses('File', 'Utility');
 
     class RegistrationController extends AppController{
 
         public $uses = array(
             'University',
             'User',
-            'Validator'
+            'Common'
         );
 
-        public $page = null;
         public $typeId = null;
 
         public function beforeFilter() {
-            $this->page = 'Registration';
-            $this->typeId = 2;
+            parent::beforeFilter();
         }
 
-        public function index(){
-            $universities = $this->University->find('all', array(
-                'fields' => array('id', 'name')
-            ));
+        public function index() {
+            $universities = $this->University->fetchUniversities();
 
-        	$data = array(
-                'page' => $this->page,
-                'universities' => $universities
-            );
-            
-            $this->set('data', $data);
+            $this->set('university', $universities);
         }
 
-        public function register(){
+        public function register() {
             $this->autoRender = false;
 
             if($this->request->is('ajax')) {
-                $this->User->create();
-
-                $isEmailExist = $this->Validator->checkEmail($this->request->data['email']);
+                $isEmailExist = $this->Common->checkEmail($this->request->data['email']);
 
                 if($isEmailExist) {
                     $status = 0;
                     $message = 'Email already exist!';
                 }
                 else {
-                    $data = array(
-                        'user_type' => $this->typeId,
-                        'univ_id' => $this->request->data['university'],
-                        'firstname' => $this->request->data['firstname'],
-                        'lastname' => $this->request->data['lastname'],
-                        'email' => $this->request->data['email'],
-                        'password' => AuthComponent::password($this->request->data['password']),
-                        'status_id' => 1,
+                    $folder = new Folder();
+                    $userType = 2;
+                    $status = 1;
+                    $dir = WWW_ROOT . 'files/UNIV-' . $univId;
+
+                    $result = $this->User->registration(
+                        $userType, 
+                        $this->request->data['university'], 
+                        $this->request->data['firstname'], 
+                        $this->request->data['lastname'], 
+                        $this->request->data['email'], 
+                        AuthComponent::password($this->request->data['password']), 
+                        $status
                     );
 
-                    $this->User->set($data);
-
-                    $result = $this->User->save();
-
-                    $path = WWW_ROOT . 'files/UNIV-' . $result['User']['univ_id'];
-                    $folder = new Folder();
-                    $folder->create($path); 
-
-                    if ($result) {
-                        $status = 1;
-                        $message = 'Account successfully created.';
+                    if($result) {
+                        if(!$folder->inPath($dir)) {
+                            $folder->create($dir); 
+                        }
+                            
+                        $response = array(
+                            'status' => 1,
+                            'message' => 'Account has been successfully created.',
+                            'type' => 'Success'
+                        );
                     }
                     else {
-                        $status = 0;
-                        $message = 'Registration failed, please try again.';
+                        $response = array(
+                            'status' => 0,
+                            'message' => 'An error occured upon processing your request. Please try again.',
+                            'type' => 'Error'
+                        );
                     }
                 }
-
-                return $this->response($status, $message);
             }
-        }
 
-        private function response($status, $message) {
-            $result = array(
-                'status' => $status,
-                'message' => $message
-            );
-
-            echo json_encode($result);
+            return $this->Common->response($response);
         }
         
     }
 
-?>

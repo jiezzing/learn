@@ -49,9 +49,8 @@
 			</div>
 			<div class="row m-b">
 	            <div class="col-md-12">
-	                <select class="universities form-control">
-	                    <option></option>
-	                    <?php foreach($data['universities'] as $value) : ?>
+	                <select class="chosen-select form-control">
+	                    <?php foreach($university as $value) : ?>
 	                    	<option value="<?php echo $value['University']['id'] ?>"><?php echo $value['University']['name'] ?></option>
 	                    <?php endforeach ?>
 	                </select>
@@ -85,6 +84,7 @@
     
 <?php 
     echo $this->Html->script(array(
-        'scripts/registration.js'
+        'scripts/registration.js',
+        'scripts/initialize.js'
     )); 
 ?>

@@ -5,7 +5,8 @@
     class LoginController extends AppController{
 
         public $uses = array(
-            'User'
+            'User',
+            'Common'
         );
 
         public function beforeFilter() {
@@ -27,36 +28,40 @@
             $this->autoRender = false;
 
             if($this->request->is('ajax')){
-                $condition = array(
+                $result = $this->User->find('first', array(
                     'conditions' => array(
                         'User.email' => $this->request->data['email'],
                         'User.password' => AuthComponent::password($this->request->data['password'])
                     ),
                     'fields' => array(
                         'User.id',
+                        'User.univ_id',
                         'User.user_type',
                         'User.firstname'
                     )
-                );
+                ));
 
-                $data = $this->User->find('first', $condition);
+                if($result){
+                    $response = array(
+                        'status' => 1,
+                        'type' => $result['User']['user_type'],
+                        'message' => 'Welcome, ' . $result['User']['firstname'] . '!'
+                    );
 
-                if($data){
-                    $status = 1;
-                    $type = $data['User']['user_type'];
-                    $message = 'Welcome, ' . $data['User']['firstname'] . '!';
-                    $id = $data['User']['id'];
-
-                    $this->session($id, true);
+                    $this->Session->write('user_id', $result['User']['id']);
+                    $this->Session->write('logged_in', true);
+                    $this->Session->write('univ_id', $result['User']['univ_id']);
                 }
                 else{
-                    $status = 0;
-                    $type = null;
-                    $message = 'Invalid email or password, please try again.';
+                    $response = array(
+                        'status' => 0,
+                        'type' => null,
+                        'message' => 'Invalid email or password, please try again.'
+                    );
                 }
-            }
 
-            return $this->output($status, $type, $message);
+                return $this->Common->response($response);
+            }
         }
 
         public function index(){
@@ -83,13 +88,6 @@
             );
 
             echo json_encode($result);
-        }
-
-        public function session($id, $logged_in) {
-            $this->Session->write(array(
-                'user_id' => $id,
-                'logged_in' => $logged_in
-            ));
         }
     }
 

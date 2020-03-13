@@ -4,44 +4,46 @@
 
     class StudentsController extends AppController{
 
+        public $uses = array(
+            'User',
+            'UserType',
+            'Common',
+            'Section'
+        );
+
+        public $page = null;
+        public $userID = null;
+        public $univID = null;
+
         public function beforeFilter() {
             parent::beforeFilter();
-        }
 
-    	public $uses = array(
-    		'User',
-    		'UserType',
-            'Common'
-    	);
+            $this->page = 'Students';
+            $this->userID = $this->Session->read('user_id');
+            $this->univID = $this->Session->read('univ_id');
+        }
 
         public function index(){
         	$users = $this->User->fetchUsers();
-
-        	$data = array(
-        		'page' => 'Users',
-        		'users' => $users
-        	);
         	
-            $this->set('data', $data);
+            $this->set('page', $this->page);
+            $this->set('user', $users);
         }
 
-        // register new user
         public function register() {
         	$types = $this->UserType->fetchUserTypes();
+            $sections = $this->Section->fetchSections($this->univID);
 
-        	$data = array(
-                'page' => 'Users',
-                'types' => $types
-            );
-
-            $this->set('data', $data);
+            $this->set('page', $this->page);
+            $this->set('type', $types);
+            $this->set('section', $sections);
         }
 
         // create user
         public function create() {
         	$this->autoRender = false;
 
-        	if ($this->request->is('ajax')) {
+        	if($this->request->is('ajax')) {
         		$checkFields = $this->emptyFieldsChecker($_POST); 
 
         		if ($checkFields) {

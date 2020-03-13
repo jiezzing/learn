@@ -1,6 +1,8 @@
 $(function () {
 
-    $(".select2").select2();
+    $('.chosen-select').chosen({
+        width: "100%"
+    });
 
     // summernote initialization
     $('.summernote').summernote({

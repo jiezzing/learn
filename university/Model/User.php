@@ -6,6 +6,41 @@
 
         public $usesTable = 'user';
 
+        public function login($email, $password) {
+            $result = $this->find('first', array(
+                'conditions' => array(
+                    'User.email' => $email,
+                    'User.password' => $password
+                ),
+                'fields' => array(
+                    'User.id',
+                    'User.user_type',
+                    'User.univ_id',
+                    'User.firstname'
+                )
+            ));
+
+            return $result;
+        }
+
+        public function registration($userType, $univId, $firstname, $lastname, $email, $password, $status) {
+            $this->create();
+
+            $data['user_type'] = $userType;
+            $data['univ_id'] = $univId;
+            $data['firstname'] = $firstname;
+            $data['lastname'] = $lastname;
+            $data['email'] = $email;
+            $data['password'] = $password;
+            $data['status_id'] = $status;
+
+            $this->set($data);
+
+            $result = $this->save();
+            
+            return $result;
+        }
+
         public function fetchUsers() {
         	$users = $this->find('all', array(
         		'joins' => array(

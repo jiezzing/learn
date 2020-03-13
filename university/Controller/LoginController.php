@@ -5,7 +5,8 @@
     class LoginController extends AppController{
 
         public $uses = array(
-            'User'
+            'User',
+            'Common'
         );
 
         public function beforeFilter() {
@@ -14,7 +15,7 @@
 
         public function afterFilter() {
             parent::afterFilter();
-            
+
             if(!empty($this->Session->read('logged_in'))){
                 return $this->redirect(array(
                     'controller' => 'home',
@@ -27,44 +28,36 @@
             $this->autoRender = false;
 
             if($this->request->is('ajax')){
-                $condition = array(
-                    'conditions' => array(
-                        'User.email' => $this->request->data['email'],
-                        'User.password' => AuthComponent::password($this->request->data['password'])
-                    ),
-                    'fields' => array(
-                        'User.id',
-                        'User.user_type',
-                        'User.firstname'
-                    )
-                );
+                $email = $this->request->data['email'];
+                $password = AuthComponent::password($this->request->data['password']);
 
-                $data = $this->User->find('first', $condition);
+                $result = $this->User->login($email, $password);
 
-                if($data){
-                    $status = 1;
-                    $type = $data['User']['user_type'];
-                    $message = 'Welcome, ' . $data['User']['firstname'] . '!';
-                    $id = $data['User']['id'];
+                if($result){
+                    $response = array(
+                        'status' => 1,
+                        'type' => $result['User']['user_type'],
+                        'message' => 'Welcome, ' . $result['User']['firstname'] . '!'
+                    );
 
-                    $this->session($id, true);
+                    $this->Session->write('user_id', $result['User']['id']);
+                    $this->Session->write('univ_id', $result['User']['univ_id']);
+                    $this->Session->write('logged_in', true);
                 }
                 else{
-                    $status = 0;
-                    $type = null;
-                    $message = 'Invalid email or password, please try again.';
+                    $response = array(
+                        'status' => 0,
+                        'type' => null,
+                        'message' => 'Invalid email or password, please try again.'
+                    );
                 }
             }
 
-            return $this->output($status, $type, $message);
+            return $this->Common->response($response);
         }
 
         public function index(){
-            $data = array(
-                'page' => 'Login'
-            );
-            
-            $this->set('data', $data);
+            $this->render('index');
         }
 
         public function logout() {
@@ -74,23 +67,5 @@
                 'action' => 'index'
             ));
         }
-
-        private function output($status = 0, $type = null, $message = '') {
-            $result = array(
-                'status' => $status,
-                'type' => $type,
-                'message' => $message
-            );
-
-            echo json_encode($result);
-        }
-
-        public function session($id, $logged_in) {
-            $this->Session->write(array(
-                'user_id' => $id,
-                'logged_in' => $logged_in
-            ));
-        }
     }
 
-?>

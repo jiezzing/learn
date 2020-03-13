@@ -12,7 +12,7 @@ $(function () {
         else{
             $.ajax({
                 type: "POST",
-                url: '../university/login/login',
+                url: '../teacher/login/login',
                 cache: false,
                 processData: false,
                 contentType: false,

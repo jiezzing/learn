@@ -1,7 +1,7 @@
 $(function () {
 
-    $(".levels").select2({
-        placeholder: "Select level"
+    $('.chosen-select').chosen({
+        width: "100%"
     });
 
     // summernote initialization

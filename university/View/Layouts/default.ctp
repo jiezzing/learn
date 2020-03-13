@@ -51,7 +51,10 @@
             'plugins/blueimp/css/blueimp-gallery.min.css',
 
             // jquery grid
-            'plugins/jqGrid/ui.jqgrid.css'
+            'plugins/jqGrid/ui.jqgrid.css',
+
+            // chosen
+            'plugins/chosen/bootstrap-chosen.css'
         ]);
 
         echo $this->Html->script([
@@ -127,7 +130,10 @@
             'plugins/blueimp/jquery.blueimp-gallery.min.js',
 
             // jquery grid
-            'plugins/jqGrid/jquery.jqGrid.min.js'
+            'plugins/jqGrid/jquery.jqGrid.min.js',
+
+            // chosen
+            'plugins/chosen/chosen.jquery.js'
         ]);
 
 		echo $this->fetch('meta');

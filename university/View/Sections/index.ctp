@@ -65,7 +65,7 @@
                                     <p>
                                         Select level that can have this section
                                     </p>
-                                    <select class="select2 form-control" id="levels">
+                                    <select class="chosen-select form-control" id="levels">
                                         <?php foreach($level as $level) : ?>
                                             <option value="<?php echo $level['Level']['id'] ?>"><?php echo $level['Level']['name'] ?></option>
                                         <?php endforeach ?>

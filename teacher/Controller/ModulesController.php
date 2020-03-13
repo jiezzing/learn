@@ -29,13 +29,9 @@
                 $submodules [$value['Module']['id']] = $this->Submodule->fetchSubmodules($value['Module']['id']);
             }
 
-            $data = array(
-                'page' => $this->page,
-                'modules' => $modules,
-                'submodules' => $submodules
-            );
-
-            $this->set('data', $data);
+            $this->set('page', 'Modules');
+            $this->set('module', $modules);
+            $this->set('submodule', $submodules);
         }
 
         public function addModule() {
@@ -111,14 +107,9 @@
             $contents = $this->Content->fetchContents($id);
             $submodule = $this->Submodule->fetchSubmoduleData($id);
 
-            $data = array(
-                'page' => 'Contents',
-                'contents' => $contents,
-                'submodule' => $submodule
-            );
-
-            $this->set('data', $data);
-            $this->render('contents');
+            $this->set('page', 'Contents');
+            $this->set('content', $contents);
+            $this->set('submodule', $submodule);
         }
 
         private function output($status, $message) {

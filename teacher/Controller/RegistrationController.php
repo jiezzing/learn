@@ -9,7 +9,7 @@
         public $uses = array(
             'University',
             'User',
-            'Validator'
+            'Common'
         );
 
         public $page = null;
@@ -26,11 +26,11 @@
             ));
 
         	$data = array(
-                'page' => $this->page,
+                'page' => 'Registration',
                 'universities' => $universities
             );
-            
-            $this->set('data', $data);
+
+            $this->set('university', $universities);
         }
 
         public function register(){
@@ -39,7 +39,7 @@
             if($this->request->is('ajax')) {
                 $this->User->create();
 
-                $isEmailExist = $this->Validator->checkEmail($this->request->data['email']);
+                $isEmailExist = $this->Common->checkEmail($this->request->data['email']);
 
                 if($isEmailExist) {
                     $status = 0;

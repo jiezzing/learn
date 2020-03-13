@@ -19,11 +19,16 @@
         			)
         		),
 				'fields' => array(
+                    'User.id',
 					'User.firstname',
 					'User.lastname',
 					'User.middle_initial',
 					'User.email',
 					'User.password',
+                    'User.about',
+                    'User.gender',
+                    'User.birthdate',
+                    'User.address',
 					'User.status_id',
 					'UserType.type'
 				)

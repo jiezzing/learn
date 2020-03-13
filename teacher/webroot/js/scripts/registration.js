@@ -1,10 +1,5 @@
 $(function () {
 
-    $(".universities").select2({
-        placeholder: "Select a university",
-        allowClear: true
-    });
-
     $('#register-btn').on('click', function() {
         var firstname = $('#firstname').val();
         var lastname = $('#lastname').val();
@@ -23,7 +18,7 @@ $(function () {
         else {
             $.ajax({
                 type: "POST",
-                url: '../university/registration/register',
+                url: '../teacher/registration/register',
                 cache: false,
                 data: { 
                     firstname: firstname,

@@ -36,13 +36,8 @@
                     
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="block m-t-xs font-bold"><?php echo $name ?></span>
-                        <span class="text-muted text-xs block"><?php echo $profile['UserType']['type'] ?><b class="caret"></b></span>
+                        <span class="text-muted text-xs block"><?php echo $profile['UserType']['type'] ?></span>
                     </a>
-                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#profile-modal">Profile</a></li>
-                        <li class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="login.html">Logout</a></li>
-                    </ul>
                 </div>
                 <div class="logo-element">
                     IN+
@@ -72,7 +67,7 @@
             </li>
             <li>
                 <?php echo $this->Html->link(
-                    $this->Html->tag('i', false, array('class' => 'fa fa-newspaper-o')) . '' . 
+                    $this->Html->tag('i', false, array('class' => 'fa fa-bell')) . '' . 
                     $this->Html->tag('span', 'Announcements', array('class' => 'nav-label')), array(
                         'controller' => 'announcements', 
                         'action' => 'index'

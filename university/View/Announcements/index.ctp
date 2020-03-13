@@ -1,23 +1,20 @@
 <div class="wrapper wrapper-content animated fadeInRight">
-    <?php if (count($announcement) == 0) : ?>
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="ibox ">
-                    <div class="ibox-title">
-                        <h5>School Announcements</h5>
-                    </div>
-                    <div class="ibox-content ibox-heading text-center">
-                        <h3>Currently no announcements were published.</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php endif ?>
 
     <div class="row">
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-6">
+                    <?php if (count($announcement) == 0) : ?>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="panel panel-danger">
+                                    <div class="panel-body text-center">
+                                        <h4>Currently no announcements published.</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif ?>
                     <?php foreach ($announcement as $announceItem) : ?>
                     <?php $details = json_decode($announceItem['Announcement']['announcement'], true) ?>
                     <div class="row">

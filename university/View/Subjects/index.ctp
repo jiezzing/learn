@@ -78,11 +78,10 @@
                                     <p>
                                         Select levels that can have this subject
                                     </p>
-                                    <select class="select2 form-control" id="levels" multiple="multiple">
+                                    <select class="chosen-select form-control" data-placeholder="Choose level..." id="levels" multiple tabindex="4">
                                         <?php foreach($level as $level) : ?>
                                             <option value="<?php echo $level['Level']['id'] ?>"><?php echo $level['Level']['name'] ?></option>
                                         <?php endforeach ?>
-                                        
                                     </select>
 
                                 </div>
