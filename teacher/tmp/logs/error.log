@@ -7112,3 +7112,21 @@ Request URL: /learn/teacher/js/plugins/dataTables/pdfmake.min.js.map
 Stack Trace:
 #0 C:\xampp\htdocs\learn\teacher\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
+2020-03-18 06:55:26 Error: [PDOException] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'learn.universities' doesn't exist
+Request URL: /learn/teacher/login
+Stack Trace:
+#0 C:\xampp\htdocs\learn\lib\Cake\Model\Datasource\DboSource.php(502): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\learn\lib\Cake\Model\Datasource\DboSource.php(468): DboSource->_execute('SELECT `User`.`...', Array)
+#2 C:\xampp\htdocs\learn\lib\Cake\Model\Datasource\DboSource.php(715): DboSource->execute('SELECT `User`.`...', Array, Array)
+#3 C:\xampp\htdocs\learn\lib\Cake\Model\Datasource\DboSource.php(1226): DboSource->fetchAll('SELECT `User`.`...', Array)
+#4 C:\xampp\htdocs\learn\lib\Cake\Model\Model.php(3053): DboSource->read(Object(User), Array)
+#5 C:\xampp\htdocs\learn\lib\Cake\Model\Model.php(3025): Model->_readDataSource('first', Array)
+#6 C:\xampp\htdocs\learn\teacher\Model\User.php(45): Model->find('first', Array)
+#7 C:\xampp\htdocs\learn\teacher\Controller\AppController.php(45): User->profile(NULL)
+#8 C:\xampp\htdocs\learn\teacher\Controller\LoginController.php(13): AppController->beforeFilter()
+#9 C:\xampp\htdocs\learn\lib\Cake\Event\CakeEventManager.php(244): LoginController->beforeFilter(Object(CakeEvent))
+#10 C:\xampp\htdocs\learn\lib\Cake\Controller\Controller.php(682): CakeEventManager->dispatch(Object(CakeEvent))
+#11 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(189): Controller->startupProcess()
+#12 C:\xampp\htdocs\learn\lib\Cake\Routing\Dispatcher.php(167): Dispatcher->_invoke(Object(LoginController), Object(CakeRequest))
+#13 C:\xampp\htdocs\learn\teacher\webroot\index.php(117): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
