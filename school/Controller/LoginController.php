@@ -11,43 +11,32 @@
 
         public function beforeFilter() {
             parent::beforeFilter();
-        }
 
-        public function afterFilter() {
-            parent::afterFilter();
-
-            if(!empty($this->Session->read('logged_in'))){
-                return $this->redirect(array(
-                    'controller' => 'home',
-                    'action' => 'index'
-                ));
-            }
+            $this->Auth->allow(array('login'));
         }
 
         public function login(){
             $this->autoRender = false;
 
-            if($this->request->is('ajax')){
+            if($this->request->is('post')){
                 $email = $this->request->data['email'];
-                $password = AuthComponent::password($this->request->data['password']);
+                $password = $this->request->data['password'];
 
-                $result = $this->User->login($email, $password);
+                $result = $this->User->findByEmail($email);
 
-                if($result){
-                    $message = $this->Output->message('successLogin');
-                    $response = $this->Output->success($message);
-
-                    $this->Session->write('user_id', $result['User']['id']);
-                    $this->Session->write('school_id', $result['User']['school_id']);
-                    $this->Session->write('logged_in', true);
+                if(!empty($result) && $result['User']['password'] == AuthComponent::password($password)) {
+                    $this->Auth->login($result);
+                    
+                    $message = Output::message('successLogin');
+                    $response = Output::success($message);
                 }
-                else{
-                    $message = $this->Output->message('errorLogin');
-                    $response = $this->Output->error($message);
+                else {
+                    $message = Output::message('errorLogin');
+                    $response = Output::error($message);
                 }
             }
 
-            return $this->Output->response($response);
+            return Output::response($response);
         }
 
         public function index(){

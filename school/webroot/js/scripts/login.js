@@ -18,9 +18,8 @@ $(function () {
                     email: email,
                     password: password
                 },
+                dataType: 'json',
                 success: function(response) {
-                    var response = $.parseJSON(response);
-
                     if (response.status == 0) {
                         return toastr.error(response.message, 'Error');
                     }

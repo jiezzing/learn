@@ -35,11 +35,37 @@ class AppController extends Controller {
     public $components = array(
         'DebugKit.Toolbar',
         'RequestHandler',
-        'Session'
+        'Session',
+        'Auth' => array(
+            'loginRedirect' => array(
+                'controller' => 'home',
+                'action' => 'index'
+            ),
+            'authenticate' => array(
+                'Form' => array(
+                    'userModel' => 'User',
+                    'fields' => array(
+                        'username' => 'email',
+                        'password' => 'password'
+                    )
+                )
+            ),
+            'loginAction' => array(
+                'controller' => 'login',
+                'action' => 'index'
+            )
+        ) 
     );
 
     public function beforeFilter() {
         parent::beforeFilter();
+
+        // autoload lib
+        App::build(array(
+          'Lib' => array(CAKE_CORE_INCLUDE_PATH.'/Lib/')
+        ));
+
+        App::uses('Output', 'Lib');
         
     	$user = ClassRegistry::init('User');
         $profile = $user->profile($this->Session->read('user_id'));
