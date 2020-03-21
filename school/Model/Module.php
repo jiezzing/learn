@@ -59,4 +59,33 @@
             return $result;
         }
 
+        public function moduleNameExist($moduleId, $schoolId, $name) {
+            $condition = array(
+                'Module.id' => $moduleId,
+                'Module.school_id' => $schoolId,
+                'Module.name' => $name
+            );
+            
+            $result = $this->hasAny($condition);
+
+            return $result;
+        }
+
+        public function updateModule($id, $name) {
+            $data['name'] = $name;
+
+            $this->read(null, $id);
+            $this->set($data);
+
+            $result = $this->save();
+
+            return $result;
+        }
+
+        public function deleteModule($id) {
+            $result = $this->delete($id);
+            
+            return $result;
+        }
+
     }

@@ -1,17 +1,19 @@
 $(function () {
 	var id = null;
+	var moduleId = null;
 	var ajaxCall;
 	var pendingRequests = [];
 	Ladda.bind('#add-pdf-btn');
 
-	$('#add-module-btn').on('click', function () {
-        var name = $('input[name=name]').val();
+	$('#add-module-btn').on('click', function (event) {
+		event.preventDefault();
 
-        if (name == '') {
+        var name = $('input[name=name]').val().trim();
+
+        if (!name) {
         	return toastr.error('Module name must not be empty.', 'Error');
         }
         else {
-        	$('#add-module-modal').modal('toggle');
 	        swal({
 	            title: "Confirmation",
 	            text: "Do you want to publish this announcement?",
@@ -27,9 +29,8 @@ $(function () {
 			            url: '../school/modules/addModule',
 			            cache: false,
 			            data: { name: name },
+			            dataType: 'json',
 			            success: function(response) {
-			                var response = $.parseJSON(response);
-
 			                if(response.status) {
 			                	swal.close();
 				            	return toastr.success(response.message, response.type);
@@ -43,14 +44,13 @@ $(function () {
 			            }
 			        })
 		        }
-		        else {
-        			return $('#add-module-modal').modal('show');
-		        }
-	        });
+	        })
         }
 	})
 
-	$(document).on('click', '.add-submodule-btn',function () {
+	$(document).on('click', '.add-submodule-btn',function (event) {
+		event.preventDefault();
+
 		var id = $(this).attr('value');
 		var name = $(this).attr('for');
 		var submodule = $('#submodule-' + id).val().trim();
@@ -77,35 +77,35 @@ $(function () {
 			            	id: id,
 			            	submodule: submodule
 			            },
+			            dataType: 'json',
 			            success: function(response) {
-			                var response = $.parseJSON(response);
-
 			                if(response.status) {
-				            	return toastr.success(response.message, "Success");
+			                	swal.close();
+				            	return toastr.success(response.message, response.type);
 			                }
 			                else {
-			                	return toastr.error(response.message, 'Error');
+			                	return toastr.error(response.message, response.type);
 			                }
 			            },      
 			            error: function (response, desc, exception) {
 			                alert(exception);
 			            }
-			        }).done(function() {
-			        	swal.close();
 			        })
 		        }
-		        else {
-        			return false;
-		        }
-	        });
+	        })
         }
 	})
 
-	$(document).on('click', '.get-id', function() {
+	$(document).on('click', '.get-id', function(event) {
+		event.preventDefault();
+
 		id = $(this).attr('value');
+		moduleId = $(this).attr('module-id');
 	})
 
-	$(document).on('click', '.edit-submodule', function() {
+	$(document).on('click', '.edit-submodule', function(event) {
+		event.preventDefault();
+
 		var url = $(this).attr('href');
 
 		$.ajax({
@@ -113,9 +113,8 @@ $(function () {
             url: url,
             cache: false,
             data: { id: id },
+            dataType: 'json',
             success: function(response) {
-                var response = $.parseJSON(response);
-
                 if(response.status) {
                 	$('#edit-submodule-modal').modal('show');
                 	$('#submodule-name').val(response.result.Submodule.name);
@@ -179,6 +178,171 @@ $(function () {
                 alert(exception);
             }
         }) 
+	})
+
+	$('#update-submodule-btn').on('click', function(event) {
+		event.preventDefault();
+
+		var name = $('#submodule-name').val().trim();
+
+		if(!name) {
+			return toastr.error('Submodule name must not be empty.', 'Error');
+		}
+		else {
+			$.ajax({
+	            type: 'POST',
+	            url: '../school/modules/updateSubmodule',
+	            cache: false,
+	            data: { 
+	            	id: id,
+	            	moduleId: moduleId,
+	            	name: name 
+	            },
+	            dataType: 'json',
+	            success: function(response) {
+	                if(response.status) {
+	                	return toastr.success(response.message, response.type);
+	                }
+	                else {
+	                	return toastr.error(response.message, response.type);
+	                }
+	            },      
+	            error: function (response, desc, exception) {
+	                alert(exception);
+	            }
+	        })
+		}
+	})
+
+	$(document).on('click', '.delete-submodule', function(event) {
+		var url = $(this).attr('href');
+
+		swal({
+            title: "Confirmation",
+            text: "Do you want to delete this submodule?",
+            showCancelButton: true,
+            confirmButtonColor: "#1AB394",
+            confirmButtonText: "Yes",
+            closeOnConfirm: false,
+            closeOnClickOutside: true
+        }, function (confirmed) {
+	        if(confirmed) {
+	        	$.ajax({
+		            type: 'POST',
+		            url: url,
+		            cache: false,
+		            data: { id: id },
+		            dataType: 'json',
+		            success: function(response) {
+		                if(response.status) {
+		                	swal.close();
+			            	return toastr.success(response.message, response.type);
+		                }
+		                else {
+		                	return toastr.error(response.message, response.type);
+		                }
+		            },      
+		            error: function (response, desc, exception) {
+		                alert(exception);
+		            }
+		        })
+	        }
+        })
+	})
+
+	$(document).on('click', '.edit-module', function(event) {
+		event.preventDefault();
+
+		var url = $(this).attr('href');
+
+		$.ajax({
+            type: 'POST',
+            url: url,
+            cache: false,
+            data: { id: id },
+            dataType: 'json',
+            success: function(response) {
+                if(response.status) {
+                	$('#edit-module-modal').modal('show');
+                	$('#module-name').val(response.result.Module.name);
+                }
+                else {
+                	return toastr.error(response.message, response.type);
+                }
+            },      
+            error: function (response, desc, exception) {
+                alert(exception);
+            }
+        })
+	})
+
+	$('#update-module-btn').on('click', function(event) {
+		event.preventDefault();
+
+		var name = $('#module-name').val().trim();
+
+		if(!name) {
+			return toastr.error('Module name must not be empty.', 'Error');
+		}
+		else {
+			$.ajax({
+	            type: 'POST',
+	            url: '../school/modules/updateModule',
+	            cache: false,
+	            data: { 
+	            	id: id,
+	            	name: name 
+	            },
+	            dataType: 'json',
+	            success: function(response) {
+	                if(response.status) {
+	                	return toastr.success(response.message, response.type);
+	                }
+	                else {
+	                	return toastr.error(response.message, response.type);
+	                }
+	            },      
+	            error: function (response, desc, exception) {
+	                alert(exception);
+	            }
+	        })
+		}
+	})
+
+	$(document).on('click', '.delete-module', function(event) {
+		var url = $(this).attr('href');
+		
+		swal({
+            title: "Confirmation",
+            text: "Do you want to delete this module?",
+            showCancelButton: true,
+            confirmButtonColor: "#1AB394",
+            confirmButtonText: "Yes",
+            closeOnConfirm: false,
+            closeOnClickOutside: true
+        }, function (confirmed) {
+	        if(confirmed) {
+	        	$.ajax({
+		            type: 'POST',
+		            url: url,
+		            cache: false,
+		            data: { id: id },
+		            dataType: 'json',
+		            success: function(response) {
+		                if(response.status) {
+		                	swal.close();
+			            	return toastr.success(response.message, response.type);
+		                }
+		                else {
+		                	return toastr.error(response.message, response.type);
+		                }
+		            },      
+		            error: function (response, desc, exception) {
+		                alert(exception);
+		            }
+		        })
+	        }
+        })
 	})
 
 })

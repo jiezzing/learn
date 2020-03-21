@@ -44,4 +44,37 @@
             return $result;
         }
 
+        public function deleteSubject($id) {
+            $result = $this->delete($id);
+            
+            return $result;
+        }
+
+        public function fetchSubjectData($id) {
+            $result = $this->find('first', array(
+                'conditions' => array(
+                    'Subject.id' => $id
+                ),
+                'fields' => array(
+                    'Subject.id',
+                    'Subject.name',
+                    'Subject.access_level'
+                )
+            ));
+
+            return $result;
+        }
+
+        public function updateSubject($id, $name, $accessLevel) {
+            $data['name'] = $name;
+            $data['access_level'] = $accessLevel;
+
+            $this->read(null, $id);
+            $this->set($data);
+
+            $result = $this->save();
+
+            return $result;
+        }
+
     }

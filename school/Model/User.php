@@ -175,12 +175,26 @@
             return $result;
         }
 
-
         public function emailExist($id, $email) {
             $result = $this->find('first', array(
                 'conditions' => array(
                     'User.id !=' => $id,
                     'User.email' => $email
+                )
+            ));
+            
+            return $result;
+        }
+
+        public function findByEmailPassword($email, $password) {
+            $result = $this->find('first', array(
+                'conditions' => array(
+                    'User.email' => $email,
+                    'User.password' => $password
+                ),
+                'fields' => array(
+                    'User.id',
+                    'User.school_id'
                 )
             ));
             

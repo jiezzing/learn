@@ -17,8 +17,8 @@
             parent::beforeFilter();
 
             $this->page = 'Subjects';
-            $this->userId = $this->Session->read('user_id');
-            $this->schoolId = $this->Session->read('school_id');
+            $this->userId = $this->Auth->user('id');
+            $this->schoolId = $this->Auth->user('school_id');
             $this->dir = 'UNIV-' . $this->schoolId;
         }
 
@@ -49,24 +49,24 @@
                 $exist = $this->Subject->subjectExist($this->schoolId, $name);
 
                 if($exist) {
-                        $message = $this->Output->message('subjectExist');
-                        $response = $this->Output->error($message);
+                        $message = Output::message('nameExist');
+                        $response = Output::error($message);
                 }
                 else {
                     $result = $this->Subject->createSubject($this->schoolId, $name, $levels);  
 
                     if($result) {
-                        $message = $this->Output->message('message');
-                        $response = $this->Output->success($message);
+                        $message = Output::message('message');
+                        $response = Output::success($message);
                     }
                     else {
-                        $message = $this->Output->message('error');
-                        $response = $this->Output->error($message);
+                        $message = Output::message('error');
+                        $response = Output::error($message);
                     }
                 }
             }
             
-            return $this->Output->response($response);
+            return Output::response($response);
         }
 
         public function badge($levelID) {
@@ -90,6 +90,69 @@
 
             return $accessLevel;
         }
+
+        public function deleteSubject() {
+            $this->autoRender = false;
+
+            if($this->request->is('ajax')) {
+                $id = $this->request->data['id'];
+
+                $delete = $this->Subject->deleteSubject($id);
+
+                if($delete) {
+                    $message = Output::message('delete');
+                    $response = Output::success($message);
+                }
+                else {
+                    $message = Output::message('error');
+                    $response = Output::error($message);
+                }
+            }
+            
+            return Output::response($response);
+        }
+
+        public function fetchSubjectData() {
+            $this->autoRender = false;
+
+            if($this->request->is('ajax')) {
+                $id = $this->request->data['id'];
+
+                $result = $this->Subject->fetchSubjectData($id);
+
+                if($result) {
+                    $response = Output::success(null, $result);
+                }
+                else {
+                    $message = Output::message('error');
+                    $response = Output::error($message);
+                }
+            }
+            
+            return Output::response($response);
+        }
+
+        public function updateSubject() {
+            $this->autoRender = false;
+
+            if($this->request->is('ajax')) {
+                $id = $this->request->data['id'];
+                $name = $this->request->data['name'];
+                $level = $this->request->data['level'];
+
+                $result = $this->Subject->updateSubject($id, $name, json_encode($level));
+
+                if($result) {
+                    $message = Output::message('update');
+                    $response = Output::success($message);
+                }
+                else {
+                    $message = Output::message('error');
+                    $response = Output::error($message);
+                }
+            }
+            
+            return Output::response($response);
+        }
         
     }
-?>

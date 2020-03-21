@@ -4,21 +4,28 @@
 
         public $uses = array(
             'Level',
-            'Common',
             'Section'
         );
 
+        public $page = null;
+        public $userId = null;
+        public $schoolId = null;
+
         public function beforeFilter() {
             parent::beforeFilter();
+
+            $this->page = 'Sections';
+            $this->userId = $this->Auth->user('id');
+            $this->schoolId = $this->Auth->user('school_id');
         }
 
         public function index(){
+            $sections = $this->Section->fetchSections($this->schoolId);
+            $IDs = $this->Section->fetchLevelID($this->schoolId);
             $levels = $this->Level->fetchLevels();
-            $sections = $this->Section->fetchSections($this->Session->read('user_id'));
-            $IDs = $this->Section->fetchLevelID($this->Session->read('user_id'));
-            $badges = $this->makeBadge($sections, $IDs, $levels);
+            $badges = $this->makeBadge($sections);
 
-            $this->set('page',  'Sections');
+            $this->set('page', $this->page);
             $this->set('level', $levels);
             $this->set('badge', $badges);
         }
@@ -27,53 +34,38 @@
             $this->autoRender = false;
             
             if($this->request->is('ajax')) {
-                $stored = $this->Section->addSection(
-                    $this->request->data['level'],
-                    $this->Session->read('user_id'),
-                    $this->request->data['name'],
-                    2
-                );
+                $level = $this->request->data['level'];
+                $name = $this->request->data['name'];
 
-                if($stored) {
-                    $data = array(
-                        'status' => 1,
-                        'message' => 'New section has been successfully saved.'
-                    );
+                $result = $this->Section->addSection($level, $this->userId, $name);
+
+                if($result) {
+                    $message = Output::message('message');
+                    $response = Output::success($message);
                 }
                 else {
-                    $data = array(
-                        'status' => 0,
-                        'message' => 'An error occured during your request. Please try again.'
-                    );
+                    $message = Output::message('error');
+                    $response = Output::error($message);
                 }
 
-                $this->Common->response($data);
             }
+
+            return Output::response($response);
         }
 
-        public function makeBadge($data, $IDs, $level) {
-            $badge = null;
-            $badgeSections = array();
+        public function makeBadge($sections) {
+            $badges = array();
 
-            foreach ($data as $key => $value) {
-                if($key > 1) {
-                    if($value['Section']['level_id'] != $IDs[$key - 1]['Section']['level_id']) {
-                         $badge = null;
-                    } 
-                    $badges[$value['Section']['level_id']] = $badge .= '<p><span class="badge badge-success mr-2">' . $value['Section']['name'] . '</span></p>';
+            foreach ($sections as $value) {
+                if(array_key_exists($value['Section']['level_id'], $badges)) {
+                    $badges[$value['Section']['level_id']] = $badges[$value['Section']['level_id']] .= '<p><span class="badge badge-success mr-2">' . $value['Section']['name'] . '</span></p>';
                 }
                 else {
-                    $badges[$value['Section']['level_id']] = $badge .= '<p><span class="badge badge-success mr-2">' . $value['Section']['name'] . '</span></p>';
+                    $badges[$value['Section']['level_id']] = '<p><span class="badge badge-success mr-2">' . $value['Section']['name'] . '</span></p>';
                 }
             }
 
-            foreach ($level as $key => $value) {
-                if(isset($badges[$key + 1])) {
-                    $badgeSections[$value['Level']['id']] = $badges[$key + 1];
-                }
-            }
-
-            return $badgeSections;
+            return $badges;
         }
         
     }

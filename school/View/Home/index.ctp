@@ -62,11 +62,6 @@
             <div class="ibox "  style="height: 100%">
                 <div class="ibox-title">
                     <h5>School Announcements</h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                    </div>
                 </div>
                 <?php if (count($announcement) > 0) : ?>
                     <div class="ibox-content ibox-heading">
@@ -91,7 +86,7 @@
                 </div>
                 <?php else : ?>
                     <div class="ibox-content ibox-heading text-center">
-                        <h3>Currently no announcements were published.</h3>
+                        <h3>Currently no announcements published.</h3>
                         <small><i class="fa fa-tim"></i> No announcements published.</small>
                     </div>
                 <?php endif ?>
@@ -101,11 +96,6 @@
             <div class="ibox ">
                 <div class="ibox-title">
                     <h5>Trivia</h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                    </div>
                 </div>
                 <div class="ibox-content ibox-heading">
                     <h3><i class="fa fa-puzzle-piece"></i> Trivia Questionaires</h3>
@@ -183,9 +173,4 @@
     </div>
 </div>
 
-<?php 
-    echo $this->Html->script(array(
-        'scripts/index.js',
-        'scripts/initialize.js'
-    )); 
-?>
+<?php echo $this->Html->script('scripts/initialize.js') ?>

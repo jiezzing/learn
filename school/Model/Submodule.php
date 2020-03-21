@@ -75,4 +75,29 @@
             return $result;
         }
 
+        public function updateSubmodule($id, $name) {
+            $data['name'] = $name;
+
+            $this->read(null, $id);
+            $this->set($data);
+
+            $result = $this->save();
+
+            return $result;
+        }
+
+        public function deleteSubmodule($id) {
+            $result = $this->delete($id);
+
+            return $result;
+        }
+
+        public function deleteRelatedSubmodule($moduleId) {
+            $result = $this->deleteAll(array(
+                'Submodule.module_id' => $moduleId
+            ));
+
+            return $result;
+        }
+
     }

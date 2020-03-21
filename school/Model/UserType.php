@@ -14,4 +14,17 @@
         	return $types;
         }
 
+        public function type($id) {
+            $types = $this->find('first', array(
+                'conditions' => array(
+                    'UserType.id' => $id
+                ),
+                'fields' => array(
+                    'UserType.type'
+                )
+            ));
+
+            return $types;
+        }
+
     }

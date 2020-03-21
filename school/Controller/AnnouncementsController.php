@@ -8,57 +8,60 @@
     	);
 
     	public $page = null;
+        public $userId = null;
+        public $schoolId = null;
+        public $announcementId = null;
 
     	public function beforeFilter() {
             parent::beforeFilter();
+
     		$this->page = 'Announcements';
+            $this->userId = $this->Auth->user('id');
+            $this->schoolId = $this->Auth->user('school_id');
     	}
 
-    	// show announcements
         public function index(){
-        	$announcements = $this->Announcement->announcements();
+        	$announcements = $this->Announcement->fetchAnnouncements($this->schoolId);
+            $recipients = $this->recipientBadges($announcements);
             $types = $this->UserType->fetchUserTypes();
 
-            $this->set('page', 'Announcements');
+            $this->set('page', $this->page);
             $this->set('announcement', $announcements);
             $this->set('type', $types);
+            $this->set('recipient', $recipients);
         }
         
-        // publish created announcement
         public function publish() {
         	$this->autoRender = false;
 
         	if ($this->request->is('ajax')) {
-        		$checkFields = $this->emptyFieldsChecker($_POST); 
+                $recipient = json_encode($this->request->data['recipient']);
+                $announcement = json_encode($this->request->data['announcement']);
 
-        		if ($checkFields) {
-        			return $this->output(0, 'Announcement title must not be empty.');
-        		}
-        		else {
-        			$this->Announcement->create();
+                $result = $this->Announcement->createAnnouncement(
+                    $this->userId, 
+                    $this->schoolId, 
+                    $recipient, 
+                    $announcement
+                );
 
-        			$data = array(
-        				'admin_id' => 2,
-        				'announcement' => json_encode($this->request->data['announcement']),
-        				'status_id' => 1,
-        			);
-
-        			$this->Announcement->set($data);
-
-        			if ($this->Announcement->save()) {
-        				return $this->output(1, 'Announcement successfully published.');
-        			}
-        			else {
-        				return $this->output(0, 'An error occured, please try again.');
-        			}
-        		}
+    			if($result) {
+    				$message = Output::message('message');
+                    $response = Output::success($message);
+    			}
+    			else {
+                    $message = Output::message('error');
+                    $response = Output::error($message);
+    			}
         	}
+
+            return Output::response($response);
         }
 
         public function delete() {
             $this->autoRender = false;
 
-            if ($this->request->is('ajax')) {
+            if($this->request->is('ajax')) {
                 $data = $this->request->data['id'];
 
                 $deleteAnnouncement = $this->Announcement->delete($data);
@@ -75,64 +78,61 @@
         public function edit($id = null) {
             $details = $this->Announcement->edit($id);
             $types = $this->UserType->fetchUserTypes();
+            
+            $this->announcementId = $this->request->params['pass'][0];
 
-            $data = array(
-                'page' => 'Editing announcement',
-                'details' => $details,
-                'types' => $types
-            );
-
-            $this->set('data', $data);
+            $this->set('page', $this->page);
+            $this->set('detail', $details);
+            $this->set('type', $types);
         }
 
         public function update() {
             $this->autoRender = false;
 
             if($this->request->is('ajax')) {
+                $recipient = json_encode($this->request->data['recipient']);
+                $announcement = json_encode($this->request->data['announcement']);
 
-                $announcement = array(
-                    'title' => $this->request->data['announcement']['title'],
-                    'description' => $this->request->data['announcement']['description'],
-                    'announcement' => $this->request->data['announcement']['announcement']
+                $result = $this->Announcement->updateAnnouncement(
+                    $this->userId,
+                    $this->schoolId,
+                    $this->announcementId, 
+                    $recipient, 
+                    $announcement
                 );
 
-                $data = array(
-                    'admin_id' => $this->Session->read('user_id'),
-                    'univ_id' => 1,
-                    'recipient' => $this->request->data['announcement']['recipient'],
-                    'announcement' => json_encode($announcement)
-                );
-
-                $this->Announcement->read(null, $this->request->data['id']);
-
-                $this->Announcement->set($data);
-
-                if ($this->Announcement->save()) {
-                    return $this->output(1, 'Announcement successfully updated.');
+                if($result) {
+                    $message = Output::message('update');
+                    $response = Output::success($message);
                 }
                 else {
-                    return $this->output(0, 'An error occured, please try again.');
+                    $message = Output::message('error');
+                    $response = Output::error($message);
                 }
             }
+
+            return Output::response($response);
         }
 
-        // validate fields if empty
-        private function emptyFieldsChecker($data = array()) {
-        	foreach ($data as $key => $value) {
-        		if (empty($value)) {
-        			return true;
-        		}
-        	}
-        }
+        public function recipientBadges($recipient) {
+            $recipients = array();
 
-        // display
-        private function output($status, $message) {
-        	$result = array(
-        		'status' => $status,
-        		'message' => $message
-        	);
+            foreach ($recipient as $value) {
+                $listOfRecipients = json_decode($value['Announcement']['recipient'], true);
 
-        	echo json_encode($result);
+                foreach ($listOfRecipients as $key => $recipientItem) {
+                    $userType = $this->UserType->type($recipientItem);
+
+                    if(array_key_exists($value['Announcement']['id'], $recipients)) {
+                        $recipients[$value['Announcement']['id']] = $recipients[$value['Announcement']['id']] .= '<p><span class="badge badge-success mr-2">' . $userType['UserType']['type'] . '</span></p>';
+                    }
+                    else {
+                        $recipients[$value['Announcement']['id']] = '<p><span class="badge badge-success mr-2">' . $userType['UserType']['type'] . '</span></p>';
+                    }
+                }
+            }
+
+            return $recipients;
         }
     }
 

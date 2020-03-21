@@ -17,8 +17,8 @@
             parent::beforeFilter();
 
     		$this->page = 'Modules';
-            $this->userId = $this->Session->read('user_id');
-            $this->schoolId = $this->Session->read('school_id');
+            $this->userId = $this->Auth->user('user_id');
+            $this->schoolId = $this->Auth->user('school_id');
             $this->dir = 'UNIV-' . $this->schoolId;
     	}
 
@@ -43,19 +43,19 @@
                 $exist = $this->Module->moduleExist($this->schoolId, $name);
 
                 if($exist) {
-                    $message = $this->Output->message('moduleExist');
-                    $response = $this->Output->error($message);
+                    $message = Output::message('nameExist');
+                    $response = Output::error($message);
                 }
                 else {
                     $result = $this->Module->addModule($this->schoolId, $name);
 
                     if($result) {
-                        $message = $this->Output->message('message');
-                        $response = $this->Output->success($message);
+                        $message = Output::message('message');
+                        $response = Output::success($message);
                     }
                     else {
-                        $message = $this->Output->message('error');
-                        $response = $this->Output->error($message);
+                        $message = Output::message('error');
+                        $response = Output::error($message);
                     }
                 }
         	}
@@ -73,24 +73,24 @@
                 $exist = $this->Submodule->submoduleExist($id, $this->schoolId, $submodule);
 
                 if($exist) {
-                    $message = $this->Output->message('submoduleExist');
-                    $response = $this->Output->error($message);
+                    $message = Output::message('nameExist');
+                    $response = Output::error($message);
                 }
                 else {
                     $result = $this->Submodule->addSubmodule($id, $this->schoolId,$submodule);
 
                     if($result) {
-                        $message = $this->Output->message('message');
-                        $response = $this->Output->success($message);
+                        $message = Output::message('message');
+                        $response = Output::success($message);
                     }
                     else {
-                        $message = $this->Output->message('error');
-                        $response = $this->Output->error($message);
+                        $message = Output::message('error');
+                        $response = Output::error($message);
                     }
                 }
             }
 
-            return $this->Output->response($response);
+            return Output::response($response);
         }
 
         public function addContents() {
@@ -146,14 +146,142 @@
                 $result = $this->Submodule->specificSubmoduleData($this->request->data['id']);
 
                 if($result) {
-                    $response = $this->Output->success(null, $result);
+                    $response = Output::success(null, $result);
                 }
                 else {
-                    $message = $this->Output->message('error');
-                    $response = $this->Output->error($message);
+                    $message = Output::message('error');
+                    $response = Output::error($message);
                 }
             }
 
-            return $this->Output->response($response);
+            return Output::response($response);
         }
+
+        public function updateSubmodule() {
+            $this->autoRender = false;
+
+            if($this->request->is('ajax')) {
+                $id = $this->request->data['id'];
+                $moduleId = $this->request->data['moduleId'];
+                $name = $this->request->data['name'];
+
+                $exist = $this->Submodule->submoduleExist($moduleId, $this->schoolId, $name);
+
+                if($exist) {
+                    $message = Output::message('noChanges');
+                    $response = Output::info($message);
+                }
+                else {  
+                    $result = $this->Submodule->updateSubmodule($id, $name);
+
+                    if($result) {
+                        $message = Output::message('update');
+                        $response = Output::success($message);
+                    }
+                    else {
+                        $message = Output::message('error');
+                        $response = Output::error($message);
+                    }
+                }
+            }
+
+            return Output::response($response);
+        }
+
+        public function deleteSubmodule() {
+            $this->autoRender = false;
+
+            if($this->request->is('ajax')) {
+                $id = $this->request->data['id'];
+
+                $delete = $this->Submodule->deleteSubmodule($id);
+
+                if($delete) {
+                    $message = Output::message('delete');
+                    $response = Output::success($message);
+                }
+                else {  
+                    $message = Output::message('error');
+                    $response = Output::error($message);
+                }
+            }
+
+            return Output::response($response);
+        }
+
+        public function fetchModuleData() {
+            $this->autoRender = false;
+
+            if($this->request->is('ajax')) {
+                $id = $this->request->data['id'];
+
+                $result = $this->Module->fetchModuleData($id);
+
+                if($result) {
+                    $response = Output::success(null, $result);
+                }
+                else {
+                    $message = Output::message('error');
+                    $response = Output::error($message);
+                }
+            }
+
+            return Output::response($response);
+        }
+
+        public function updateModule() {
+            $this->autoRender = false;
+
+            if($this->request->is('ajax')) {
+                $id = $this->request->data['id'];
+                $name = $this->request->data['name'];
+
+                $exist = $this->Module->moduleNameExist($id, $this->schoolId, $name);
+
+                if($exist) {
+                    $message = Output::message('noChanges');
+                    $response = Output::info($message);
+                }
+                else {  
+                    $result = $this->Module->updateModule($id, $name);
+
+                    if($result) {
+                        $message = Output::message('update');
+                        $response = Output::success($message);
+                    }
+                    else {
+                        $message = Output::message('error');
+                        $response = Output::error($message);
+                    }
+                }
+            }
+
+            return Output::response($response);
+        }
+
+        public function deleteModule() {
+            $this->autoRender = false;
+
+            if($this->request->is('ajax')) {
+                $id = $this->request->data['id'];
+
+                $delete = $this->Module->deleteModule($id);
+
+                if($delete) {
+                    $deleteSubmodules = $this->Submodule->deleteRelatedSubmodule($id);
+                    
+                    if($deleteSubmodules) {
+                        $message = Output::message('delete');
+                        $response = Output::success($message);
+                    }
+                }
+                else {  
+                    $message = Output::message('error');
+                    $response = Output::error($message);
+                }
+            }
+
+            return Output::response($response);
+        }
+
     }

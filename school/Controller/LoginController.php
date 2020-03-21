@@ -1,7 +1,5 @@
 <?php
 
-    App::uses('AuthComponent', 'Controller/Component');
-
     class LoginController extends AppController{
 
         public $uses = array(
@@ -12,7 +10,7 @@
         public function beforeFilter() {
             parent::beforeFilter();
 
-            $this->Auth->allow(array('login'));
+            $this->Auth->allow('login');
         }
 
         public function login(){
@@ -20,14 +18,15 @@
 
             if($this->request->is('post')){
                 $email = $this->request->data['email'];
-                $password = $this->request->data['password'];
+                $password = AuthComponent::password($this->request->data['password']);
 
-                $result = $this->User->findByEmail($email);
+                $result = $this->User->findByEmailPassword($email, $password);
 
-                if(!empty($result) && $result['User']['password'] == AuthComponent::password($password)) {
-                    $this->Auth->login($result);
+                if($result) {
+                    $this->Auth->login($result['User']);
                     
                     $message = Output::message('successLogin');
+                    $redirect = $this->Auth->loginRedirect;
                     $response = Output::success($message);
                 }
                 else {
@@ -40,15 +39,17 @@
         }
 
         public function index(){
+            if($this->Auth->loggedIn()) {
+                return $this->redirect($this->Auth->loginRedirect);
+            }
+            
             $this->render('index');
         }
 
         public function logout() {
-            $this->Session->destroy();
-            $this->redirect(array(
-                'controller' => 'login',
-                'action' => 'index'
-            ));
+            $this->Auth->logout();
+
+            return $this->redirect($this->Auth->logoutRedirect);
         }
     }
 

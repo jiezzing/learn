@@ -26,7 +26,17 @@
             return $data;
         }
 
-        public static function message($index = null) {
+        public static function info($message = null) {
+            $data = array(
+                'status' => 1,
+                'message' => $message,
+                'type' => 'Info'
+            );
+
+            return $data;
+        }
+
+        public static function message($key = null) {
             $data = array(
                 'successLogin' => 'Successfully logged in.',
                 'errorLogin' => 'Invalid username or password. Please try again.',
@@ -34,13 +44,14 @@
                 'error' => 'An error occured upon processing your request. Please try again.',
                 'emailExist' => 'Email address already exist. Please try again.',
                 'message' => 'Request has been successfully created.',
-                'moduleExist' => 'Module name already exist. Please try again.',
-                'submoduleExist' => 'Submodule name already exist. Please try again.',
+                'nameExist' => 'Name already exist. Please try again.',
                 'file' => 'Files has been successfully uploaded.',
-                'subjectExist' => 'Subject name already exist. Please try again.'
+                'update' => 'Successfully updated.',
+                'noChanges' => 'No changes detected.',
+                'delete' => 'Successfully deleted.'
             );
 
-            return $data[$index];
+            return $data[$key];
         }
 
 	}

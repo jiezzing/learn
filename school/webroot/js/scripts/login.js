@@ -20,11 +20,11 @@ $(function () {
                 },
                 dataType: 'json',
                 success: function(response) {
-                    if (response.status == 0) {
-                        return toastr.error(response.message, 'Error');
+                    if (response.status) {
+                        return window.location.href = '../school/home';
                     }
                     else {
-                        return toastr.success(response.message, 'Success');
+                        return toastr.error(response.message, 'Error');
                     }
                 },      
                 error: function (response, desc, exception) {

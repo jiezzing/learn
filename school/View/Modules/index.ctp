@@ -1,5 +1,6 @@
 <?php 
     echo $this->element('add_content');
+    echo $this->element('edit_submodule');
     echo $this->element('edit_module');
 ?>
 
@@ -8,7 +9,7 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-8">
-                    <?php if (count($module) == 0) : ?>
+                    <?php if (empty($module)) : ?>
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="panel panel-danger">
@@ -33,14 +34,38 @@
                                             <i class="fa fa-cog"></i>
                                         </a>
                                         <ul class="dropdown-menu dropdown-user">
-                                            <li><a href="#" class="dropdown-item">Edit</a>
+                                            <li>
+                                                <?php echo $this->Html->link(
+                                                    $this->Html->tag('i', false, array('class' => 'fa fa-pencil')) . '' . 
+                                                    $this->Html->tag('span', ' Edit', array('class' => 'nav-label')), array(
+                                                        'controller' => 'modules',
+                                                        'action' => 'fetchModuleData'
+                                                    ), array(
+                                                        'escape' => false,
+                                                        'data-toggle' => 'modal',
+                                                        'class' => 'get-id edit-module',
+                                                        'value' => $moduleItem['Module']['id']
+                                                    )) 
+                                                ?>
                                             </li>
-                                            <li><a href="#" class="dropdown-item">Delete</a>
+                                            <li>
+                                                <?php echo $this->Html->link(
+                                                    $this->Html->tag('i', false, array('class' => 'fa fa-trash')) . '' . 
+                                                    $this->Html->tag('span', ' Delete', array('class' => 'nav-label')), array(
+                                                        'controller' => 'modules',
+                                                        'action' => 'deleteModule'
+                                                    ), array(
+                                                        'escape' => false,
+                                                        'data-toggle' => 'modal',
+                                                        'class' => 'get-id delete-module',
+                                                        'value' => $moduleItem['Module']['id']
+                                                    )) 
+                                                ?>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
-                                <?php if(count($submodule[$moduleItem['Module']['id']])) : ?>
+                                <?php if(!empty($submodule[$moduleItem['Module']['id']])) : ?>
                                 <div class="ibox-content">
                                     <div class="row">
                                         <div class="col-sm-12">
@@ -53,65 +78,71 @@
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed mt-3"></div>
-                                    
-                                                <?php foreach($submodule[$moduleItem['Module']['id']] as $submodulesItem) : ?>
-                                                    <div class="mt-4">
-                                                        <h4>
-                                                        <label><?php echo $submodulesItem['Submodule']['name'] ?></label>
-                                                        <span class="float-right">
-                                                            <ol class="breadcrumb">
-                                                                <li class="breadcrumb-item">
-                                                                    <small>
-                                                                        <a href="#" class="get-id" data-toggle="modal" data-target="#add-content-modal" value="<?php echo $submodulesItem['Submodule']['id'] ?>"><i class="fa fa-plus"></i> Add Files</a> 
-                                                                    </small>
-                                                                </li>
-                                                                <li class="breadcrumb-item">
-                                                                    <small>
-                                                                        <?php echo $this->Html->link(
-                                                                            $this->Html->tag('i', false, array('class' => 'fa fa-pencil')) . '' . 
-                                                                            $this->Html->tag('span', ' Edit', array('class' => 'nav-label')), array(
-                                                                                'controller' => 'modules',
-                                                                                'action' => 'fetchSubmoduleData'
-                                                                            ), array(
-                                                                                'escape' => false,
-                                                                                'data-toggle' => 'modal',
-                                                                                'class' => 'get-id edit-submodule',
-                                                                                'value' => $submodulesItem['Submodule']['id']
-                                                                            )) 
-                                                                        ?>
-                                                                    </small>
-                                                                </li>
-                                                                <li class="breadcrumb-item">
-                                                                    <small>
-                                                                        <?php echo $this->Html->link(
-                                                                            $this->Html->tag('i', false, array('class' => 'fa fa-eye')) . '' . 
-                                                                            $this->Html->tag('span', ' View contents', array('class' => 'nav-label')), array(
-                                                                                'controller' => 'modules',
-                                                                                'action' => 'contents', $submodulesItem['Submodule']['id']
-                                                                            ), array(
-                                                                                'escape' => false
-                                                                            )) 
-                                                                        ?>
-                                                                    </small>
-                                                                </li>
-                                                            </ol>
-                                                        </span>
-                                                        </h4>
-                                                    </div>
-                                                <div class="hr-line-dashed"></div>
-                                                <?php endforeach ?>
-                                </div>
-                                <div class="ibox-footer">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control search-submodule-btn" placeholder="Search here . . .">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                                </div>
+                                        <?php foreach($submodule[$moduleItem['Module']['id']] as $submodulesItem) : ?>
+                                            <div class="mt-4">
+                                                <h4>
+                                                <label><?php echo $submodulesItem['Submodule']['name'] ?></label>
+                                                <span class="float-right">
+                                                    <ol class="breadcrumb">
+                                                        <li class="breadcrumb-item">
+                                                            <small>
+                                                                <a href="#" class="get-id" data-toggle="modal" data-target="#add-content-modal" value="<?php echo $submodulesItem['Submodule']['id'] ?>"><i class="fa fa-plus"></i> Add Files</a> 
+                                                            </small>
+                                                        </li>
+                                                        <li class="breadcrumb-item">
+                                                            <small>
+                                                                <?php echo $this->Html->link(
+                                                                    $this->Html->tag('i', false, array('class' => 'fa fa-pencil')) . '' . 
+                                                                    $this->Html->tag('span', ' Edit', array('class' => 'nav-label')), array(
+                                                                        'controller' => 'modules',
+                                                                        'action' => 'fetchSubmoduleData'
+                                                                    ), array(
+                                                                        'escape' => false,
+                                                                        'data-toggle' => 'modal',
+                                                                        'class' => 'get-id edit-submodule',
+                                                                        'value' => $submodulesItem['Submodule']['id'],
+                                                                        'module-id' => $moduleItem['Module']['id']
+                                                                    )) 
+                                                                ?>
+                                                            </small>
+                                                        </li>
+                                                        <li class="breadcrumb-item">
+                                                            <small>
+                                                                <?php echo $this->Html->link(
+                                                                    $this->Html->tag('i', false, array('class' => 'fa fa-trash')) . '' . 
+                                                                    $this->Html->tag('span', ' Delete', array('class' => 'nav-label')), array(
+                                                                        'controller' => 'modules',
+                                                                        'action' => 'deleteSubmodule'
+                                                                    ), array(
+                                                                        'escape' => false,
+                                                                        'data-toggle' => 'modal',
+                                                                        'class' => 'get-id delete-submodule',
+                                                                        'value' => $submodulesItem['Submodule']['id'],
+                                                                        'module-id' => $moduleItem['Module']['id']
+                                                                    )) 
+                                                                ?>
+                                                            </small>
+                                                        </li>
+                                                        <li class="breadcrumb-item">
+                                                            <small>
+                                                                <?php echo $this->Html->link(
+                                                                    $this->Html->tag('i', false, array('class' => 'fa fa-file')) . '' . 
+                                                                    $this->Html->tag('span', ' Contents', array('class' => 'nav-label')), array(
+                                                                        'controller' => 'modules',
+                                                                        'action' => 'contents', $submodulesItem['Submodule']['id']
+                                                                    ), array(
+                                                                        'escape' => false,
+                                                                        'target' => '_blank'
+                                                                    )) 
+                                                                ?>
+                                                            </small>
+                                                        </li>
+                                                    </ol>
+                                                </span>
+                                                </h4>
                                             </div>
-                                        </div>
-                                    </div>
+                                        <div class="hr-line-dashed"></div>
+                                        <?php endforeach ?>
                                 </div>
                                 <?php else : ?>
                                     <div class="ibox-content">
@@ -127,7 +158,7 @@
                                     </div>
                                     <div class="hr-line-dashed mt-3"></div>
                                         <div class="mt-4 text-center">
-                                            <h4>NO SUBMODULES DATA</h4>
+                                            <h4>Submodules not available</h4>
                                         </div>
                                 </div>
                                 <?php endif ?>

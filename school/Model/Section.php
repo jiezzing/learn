@@ -6,10 +6,10 @@
 
         public $usesTable = 'sections';
 
-        public function fetchSections($univ_id) {
+        public function fetchSections($schoolId) {
             $result = $this->find('all', array(
                 'conditions' => array(
-                    'Section.univ_id' => $univ_id
+                    'Section.school_id' => $schoolId
                 ),
                 'fields' => array(
                     'Section.id',
@@ -21,10 +21,10 @@
             return $result;
         }
 
-        public function fetchLevelID($univ_id) {
+        public function fetchLevelID($schoolId) {
             $result = $this->find('all', array(
                 'conditions' => array(
-                    'Section.univ_id' => $univ_id
+                    'Section.school_id' => $schoolId
                 ),
                 'fields' => array(
                     'Section.level_id'
@@ -34,17 +34,16 @@
             return $result;
         }
 
-        public function addSection($level_id, $univ_id, $name, $status) {
-        	$this->create();
+        public function addSection($levelId, $schoolId, $name) {
+            $this->create();
 
-            $data = array(
-                'level_id' => $level_id,
-                'univ_id' => $univ_id,
-                'name' => $name,
-                'status_id' => $status
-            );
+            $data['level_id'] = $levelId;
+            $data['school_id'] = $schoolId;
+            $data['name'] = $name;
+            $data['status_id'] = 1;
 
             $this->set($data);
+
             $result = $this->save();
 
             return $result;

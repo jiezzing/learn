@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2020 at 05:23 AM
+-- Generation Time: Mar 21, 2020 at 05:01 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -30,14 +30,22 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `announcements` (
   `id` int(11) NOT NULL,
-  `admin_id` int(11) NOT NULL,
-  `univ_id` int(11) NOT NULL,
-  `recipient` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
+  `recipient` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`recipient`)),
   `announcement` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`announcement`)),
   `created` datetime NOT NULL DEFAULT current_timestamp(),
   `modified` datetime NOT NULL DEFAULT current_timestamp(),
   `status_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `announcements`
+--
+
+INSERT INTO `announcements` (`id`, `user_id`, `school_id`, `recipient`, `announcement`, `created`, `modified`, `status_id`) VALUES
+(1, 1, 1, '[\"4\"]', '{\"title\":\"A Big Disco\",\"description\":\"This is all for the youths\",\"announcement\":\"<p>There will be a big disco to be held in discohan and this is all for the students.<\\/p>\"}', '2020-03-21 23:20:34', '2020-03-21 23:20:34', 1),
+(8, 1, 1, '[\"3\"]', '{\"title\":\"A Big Disco\",\"description\":\"This is all for the youths\",\"announcement\":\"<p>There will be a big disco to be held in discohan and this is all for the students.<\\/p>\"}', '2020-03-21 23:58:56', '2020-03-21 23:58:56', 1);
 
 -- --------------------------------------------------------
 
@@ -53,16 +61,6 @@ CREATE TABLE `contents` (
   `modified` datetime NOT NULL DEFAULT current_timestamp(),
   `status_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `contents`
---
-
-INSERT INTO `contents` (`id`, `sub_id`, `name`, `created`, `modified`, `status_id`) VALUES
-(1, 1, 'EXPLORATORY k_to_12_commercial_cooking_learning_module.pdf', '2020-03-18 09:59:39', '2020-03-18 09:59:39', 2),
-(2, 1, 'LM_Cookery G.9 .pdf', '2020-03-18 09:59:39', '2020-03-18 09:59:39', 2),
-(3, 1, 'Marc-Lennard-Colina-Resume-2.pdf', '2020-03-18 09:59:39', '2020-03-18 09:59:39', 2),
-(4, 2, 'LM_Cookery G.9 .pdf', '2020-03-18 10:14:18', '2020-03-18 10:14:18', 2);
 
 -- --------------------------------------------------------
 
@@ -120,8 +118,8 @@ CREATE TABLE `modules` (
 --
 
 INSERT INTO `modules` (`id`, `school_id`, `name`, `created`, `modified`, `status_id`) VALUES
-(1, 1, 'Technology and Livelihood Education', '2020-03-18 09:25:07', '2020-03-18 09:25:07', 2),
-(2, 2, 'Physical Education', '2020-03-18 10:13:42', '2020-03-18 10:13:42', 2);
+(1, 1, 'Technology and Livelihood Education', '2020-03-21 15:33:51', '2020-03-21 15:33:51', 2),
+(2, 1, 'MAPEH', '2020-03-21 15:34:34', '2020-03-21 15:34:34', 2);
 
 -- --------------------------------------------------------
 
@@ -155,12 +153,22 @@ INSERT INTO `schools` (`id`, `code`, `name`, `created`, `modified`, `status_id`)
 CREATE TABLE `sections` (
   `id` int(11) NOT NULL,
   `level_id` int(11) NOT NULL,
-  `univ_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `created` datetime NOT NULL DEFAULT current_timestamp(),
   `modified` datetime NOT NULL DEFAULT current_timestamp(),
   `status_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `sections`
+--
+
+INSERT INTO `sections` (`id`, `level_id`, `school_id`, `name`, `created`, `modified`, `status_id`) VALUES
+(1, 10, 1, 'Topaz', '2020-03-21 21:57:15', '2020-03-21 21:57:15', 1),
+(2, 10, 1, 'Ruby', '2020-03-21 21:57:24', '2020-03-21 21:57:24', 1),
+(3, 10, 1, 'Pearl', '2020-03-21 21:57:29', '2020-03-21 21:57:29', 1),
+(4, 7, 1, 'Bato', '2020-03-21 21:58:41', '2020-03-21 21:58:41', 1);
 
 -- --------------------------------------------------------
 
@@ -218,8 +226,7 @@ CREATE TABLE `subjects` (
 --
 
 INSERT INTO `subjects` (`id`, `school_id`, `name`, `access_level`, `created`, `modified`, `status_id`) VALUES
-(1, 1, 'a', '[\"2\"]', '2020-03-18 11:29:36', '2020-03-18 11:29:36', 2),
-(2, 1, 'adasd', '[\"6\",\"7\"]', '2020-03-18 11:30:00', '2020-03-18 11:30:00', 2);
+(3, 1, 'TLE', '[\"9\"]', '2020-03-21 16:23:38', '2020-03-21 16:23:38', 2);
 
 -- --------------------------------------------------------
 
@@ -242,8 +249,8 @@ CREATE TABLE `submodules` (
 --
 
 INSERT INTO `submodules` (`id`, `module_id`, `school_id`, `name`, `created`, `modified`, `status_id`) VALUES
-(1, 1, 1, 'Home Economics', '2020-03-18 09:38:51', '2020-03-18 09:38:51', 2),
-(2, 2, 2, 'Health Benefits', '2020-03-18 10:14:03', '2020-03-18 10:14:03', 2);
+(1, 1, 1, 'Physical Education', '2020-03-21 15:34:13', '2020-03-21 15:34:13', 2),
+(2, 1, 1, 'Home Economics', '2020-03-21 15:34:20', '2020-03-21 15:34:20', 2);
 
 -- --------------------------------------------------------
 
@@ -414,13 +421,13 @@ ALTER TABLE `user_types`
 -- AUTO_INCREMENT for table `announcements`
 --
 ALTER TABLE `announcements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `contents`
 --
 ALTER TABLE `contents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `levels`
@@ -444,7 +451,7 @@ ALTER TABLE `schools`
 -- AUTO_INCREMENT for table `sections`
 --
 ALTER TABLE `sections`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `status`
@@ -462,7 +469,7 @@ ALTER TABLE `student_sections`
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `submodules`

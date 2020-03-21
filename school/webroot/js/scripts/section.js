@@ -7,25 +7,24 @@ $(function () {
         var level = $('#levels').val();
 
     	if(!name){
-    		toastr.error('Some fields are missing.', 'Error');
+    		toastr.error('Section field must not be empty.', 'Error');
     	}
         else{
             $.ajax({
                 type: "POST",
-                url: '../university/sections/create',
+                url: '../school/sections/create',
                 cache: false,
                 data: {
                     name: name,
                     level: level
                 },
+                dataType: 'json',
                 success: function(response) {
-                    var response = $.parseJSON(response);
-
-                    if (response.status == 0) {
-                        toastr.error(response.message, 'Error');
+                    if (response.status) {
+                        toastr.success(response.message, response.type);
                     }
                     else {
-                        toastr.success(response.message, 'Success');
+                        toastr.error(response.message, response.type);
                     }
                 },      
                 error: function (response, desc, exception) {
