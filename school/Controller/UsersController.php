@@ -1,29 +1,40 @@
 <?php
 
-    App::uses('AuthComponent', 'Controller/Component');
-
     class UsersController extends AppController{
+
+        public $uses = array(
+            'User',
+            'UserType'
+        );
+
+        public $page = null;
+        public $userId = null;
+        public $schoolId = null;
+        public $dir = null;
 
         public function beforeFilter() {
             parent::beforeFilter();
+
+            $this->page = 'Users';
+            $this->userId = $this->Auth->user('id');
+            $this->schoolId = $this->Auth->user('school_id');
+            $this->dir = '/UNIV-' . $this->schoolId . '/';
         }
 
-    	public $uses = array(
-    		'User',
-    		'UserType',
-            'Common'
-    	);
-
         public function index(){
-        	$users = $this->User->fetchUsers();
+            if(!$this->Auth->loggedIn()) {
+                return $this->redirect($this->Auth->loginAction);
+            }
+            
+        	$users = $this->User->fetchUsers($this->schoolId);
         	
-            $this->set('page', 'Users');
+            $this->set('page', $this->page);
             $this->set('user', $users);
         }
 
-        // register new user
         public function register() {
         	$types = $this->UserType->fetchUserTypes();
+            $page = 'User Registration';
 
         	$data = array(
                 'page' => 'Users',
@@ -31,9 +42,9 @@
             );
 
             $this->set('data', $data);
+            $this->set('page', $page);
         }
 
-        // create user
         public function create() {
         	$this->autoRender = false;
 
@@ -83,119 +94,124 @@
         }
 
         public function update() {
+            $this->autoRender = false;
+
             if($this->request->is('ajax')) {
-                $this->autoRender = false;
-                $isEmailExist = $this->User->emailExist(
-                    $this->Session->read('user_id'),
-                    $this->request->data['email']
-                );
+                $firstname = $this->request->data['firstname'];
+                $lastname = $this->request->data['lastname'];
+                $middleInitial = $this->request->data['middleInitial'];
+                $address = $this->request->data['address'];
+                $age = $this->request->data['age'];
+                $about = $this->request->data['about'];
+                $birthdate = $this->request->data['birthdate'];
+                $email = $this->request->data['email'];
+
+                $isEmailExist = $this->User->emailExist($this->userId, $email);
 
                 if($isEmailExist) {
-                    $status = 0;
-                    $message = 'Email already exist!';
+                    $message = Output::message('emailExist');
+                    $response = Output::error($message);
                 }
                 else {
-
-                    empty($middle_initial) ? 
-                        $middle_initial = NULL :  
-                        $middle_initial = $this->request->data['middle_initial'];
+                    empty($middleInitial) ? 
+                        $middleInitial = NULL :  
+                        $middleInitial = $middleInitial;
 
                     empty($address) ? 
                         $address = NULL :  
-                        $address = $this->request->data['address'];
+                        $address = $address;
 
-                    isset($age) ? 
+                    empty($age) ? 
                         $age = NULL :  
-                        $age = $this->request->data['age'];
+                        $age = $age;
 
                     empty($about) ? 
                         $about = NULL :  
-                        $about = $this->request->data['about'];
+                        $about = $about;
 
-                    isset($birthdate) ? 
+                    empty($birthdate) ? 
                         $birthdate = NULL :  
-                        $birthdate = $this->request->data['birthdate'];
+                        $birthdate = date('Y-m-d', strtotime($birthdate));
 
-                    if(empty($_FILES['file']['name'])) {
-                        $update = $this->User->updateProfile(
-                            $this->Session->read('user_id'),
-                            $this->request->data['firstname'],
-                            $this->request->data['lastname'],
-                            $middle_initial,
-                            $address,
-                            $age,
-                            $about,
-                            $birthdate,
-                            $this->request->data['email'],
-                            NULL
-                        );
+                    if(array_key_exists('password', $this->request->data)) {
+                        $password = AuthComponent::password($this->request->data['password']);
+                        $this->User->updatePassword($this->userId, $password);
                     }
-                    else {
-                        $filepath = $_SERVER['DOCUMENT_ROOT'] . '/learn/university/webroot/img/' . $_FILES['file']['name'];
+
+                    if(isset($_FILES['file']['name'])) {
+                        $filepath = $_SERVER['DOCUMENT_ROOT'] . '/learn/school/webroot/files'. $this->dir . $_FILES['file']['name'];
                         $image = array(
                             'name' => $_FILES['file']['name'],
                             'size' => $_FILES['file']['size']
                         );
+                        $profileImage = $this->User->updateProfileImage($this->userId, json_encode($image));
 
-                        if(move_uploaded_file($_FILES['file']['tmp_name'], $filepath)){
-                            $update = $this->User->updateProfile(
-                                $this->Session->read('user_id'),
-                                $this->request->data['firstname'],
-                                $this->request->data['lastname'],
-                                $this->request->data['middle_initial'],
+                        if(move_uploaded_file($_FILES['file']['tmp_name'], $filepath) && $profileImage){
+                            $result = $this->User->updateProfile(
+                                $this->userId,
+                                $firstname,
+                                $lastname,
+                                strtoupper($middleInitial),
                                 $address,
                                 $age,
                                 $about,
                                 $birthdate,
-                                $this->request->data['email'],
-                                json_encode($image)
+                                $email
                             );
                         }
                         else{
-                            $status = 0;
-                            $message = 'Unable to upload file, please try again.';
+                            $message = Output::message('failUpload');
+                            $response = Output::error($message);
                         }
                     }
+                    else {
+                        $result = $this->User->updateProfile(
+                            $this->userId,
+                            $firstname,
+                            $lastname,
+                            strtoupper($middleInitial),
+                            $address,
+                            $age,
+                            $about,
+                            $birthdate,
+                            $email
+                        );
+                    }
 
-                    if($update) {
-                        $status = 1;
-                        $message = 'Account successfully updated.';
+                    if($result) {
+                        $message = Output::message('message');
+                        $response = Output::success($message);
                     }
                     else {
-                        $status = 0;
-                        $message = 'An error occured, please try again.';
+                        $message = Output::message('error');
+                        $response = Output::error($message);
                     }
                 }
-
-                return $this->output($status, $message);
             }
+
+            return Output::response($response);
         }
 
-        // validate fields if empty
-        private function emptyFieldsChecker($data = array()) {
-        	foreach ($data as $key => $value) {
-        		if (empty($value)) {
-        			return true;
-        		}
-        	}
-        }
+        public function findPassword() {
+            $this->autoRender = false;
 
-        // checks email
-        private function isEmailExist($email) {
-        	$condition = array('email' => $email);
-        	$result =  $this->User->hasAny($condition);
+            if($this->request->is('ajax')) {
+                $email = $this->request->data['email'];
+                $password = AuthComponent::password($this->request->data['password']);
 
-        	return $result;
-        }
+                $result = $this->User->findByEmailPassword($email, $password);
 
-        // display
-        private function output($status, $message) {
-        	$result = array(
-        		'status' => $status,
-        		'message' => $message
-        	);
+                if($result) {
+                    $message = Output::message('verifyPassword');
+                    $response = Output::success($message);
+                }
+                else {
+                    $message = Output::message('errorLogin');
+                    $response = Output::error($message);
+                }
+            }
 
-        	echo json_encode($result);
+            return Output::response($response);
         }
         
     }

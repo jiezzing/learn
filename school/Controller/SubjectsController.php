@@ -23,6 +23,10 @@
         }
 
         public function index(){
+            if(!$this->Auth->loggedIn()) {
+                return $this->redirect($this->Auth->loginAction);
+            }
+            
             $levelID = array();
             $subjects = $this->Subject->fetchSubjects();
             $levels = $this->Level->fetchLevels();

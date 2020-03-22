@@ -41,18 +41,29 @@
             return $result;
         }
 
-        public function fetchUsers() {
+        public function fetchUsers($schoolId) {
         	$users = $this->find('all', array(
         		'joins' => array(
         			array(
         				'alias' => 'UserType',
         				'table' => 'user_types',
-        				'type' => 'LEFT',
+        				'type' => 'INNER',
         				'conditions' => array(
         					'UserType.id = User.user_type'
         				)
-        			)
+        			),
+                    array(
+                        'alias' => 'Status',
+                        'table' => 'status',
+                        'type' => 'INNER',
+                        'conditions' => array(
+                            'Status.id = User.status_id'
+                        )
+                    )
         		),
+                'conditions' => array(
+                    'User.school_id' => $schoolId
+                ),
 				'fields' => array(
                     'User.id',
 					'User.firstname',
@@ -65,7 +76,8 @@
                     'User.birthdate',
                     'User.address',
 					'User.status_id',
-					'UserType.type'
+					'UserType.type',
+                    'Status.status'
 				)
 
         	));
@@ -156,7 +168,7 @@
             return $tally;
         }
 
-        public function updateProfile($id, $firstname, $lastname, $middle_initial, $address, $age, $about, $birthdate, $email, $image) {
+        public function updateProfile($id, $firstname, $lastname, $middle_initial, $address, $age, $about, $birthdate, $email) {
             $data['firstname'] = $firstname;
             $data['lastname'] = $lastname;
             $data['middle_initial'] = $middle_initial;
@@ -165,6 +177,16 @@
             $data['about'] = $about;
             $data['birthdate'] = $birthdate;
             $data['email'] = $email;
+
+            $this->read(null, $id);
+            $this->set($data);
+
+            $result = $this->save();
+            
+            return $result;
+        }
+
+        public function updateProfileImage($id, $image) {
             $data['image'] = $image;
 
             $this->read(null, $id);
@@ -175,13 +197,24 @@
             return $result;
         }
 
-        public function emailExist($id, $email) {
-            $result = $this->find('first', array(
-                'conditions' => array(
-                    'User.id !=' => $id,
-                    'User.email' => $email
-                )
-            ));
+        public function updatePassword($id, $password) {
+            $data['password'] = $password;
+
+            $this->read(null, $id);
+            $this->set($data);
+
+            $result = $this->save();
+            
+            return $result;
+        }
+
+        public function emailExist($userId, $email) {
+            $conditions = array(
+                'User.id !=' => $userId,
+                'User.email' => $email
+            );
+
+            $result = $this->hasAny($conditions);
             
             return $result;
         }

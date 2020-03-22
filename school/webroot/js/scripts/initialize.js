@@ -7,15 +7,13 @@ $(function () {
     // summernote initialization
     $('.summernote').summernote({
         height: 300,
-        placeholder: 'Your text here...'
+        placeholder: 'Your text here...',
+        toolbar: false
     });
 
     var mem = $('#data_1 .input-group.date').datepicker({
-        todayBtn: "linked",
-        keyboardNavigation: false,
-        forceParse: false,
-        calendarWeeks: true,
-        autoclose: true
+        autoclose: true,
+        dateFormat: 'Y-m-d'
     });
 
     $('.i-checks').iCheck({

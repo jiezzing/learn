@@ -48,7 +48,9 @@
                 'file' => 'Files has been successfully uploaded.',
                 'update' => 'Successfully updated.',
                 'noChanges' => 'No changes detected.',
-                'delete' => 'Successfully deleted.'
+                'delete' => 'Successfully deleted.',
+                'uploadFail' => 'An error occured upon uploading file. Please try again.',
+                'verifyPassword' => 'You can now update your current password.',
             );
 
             return $data[$key];

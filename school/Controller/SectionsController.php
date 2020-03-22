@@ -20,6 +20,10 @@
         }
 
         public function index(){
+            if(!$this->Auth->loggedIn()) {
+                return $this->redirect($this->Auth->loginAction);
+            }
+            
             $sections = $this->Section->fetchSections($this->schoolId);
             $IDs = $this->Section->fetchLevelID($this->schoolId);
             $levels = $this->Level->fetchLevels();

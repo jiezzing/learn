@@ -1,3 +1,7 @@
+<script>
+    var announcementId = '<?php echo $this->request->params['pass'][0] ?>';
+</script>
+
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
@@ -38,6 +42,16 @@
                                         <option value="<?php echo $dataItems['UserType']['id'] ?>"><?php echo $dataItems['UserType']['type'] ?></option>
                                     <?php endforeach ?>
                                 </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <?php echo $this->Form->input('subject', array(
+                                        'class' => 'form-control',
+                                        'type' => 'text',
+                                        'placeholder' => 'Your subject here...',
+                                        'label' => false,
+                                        'value' => $details['subject']
+                                    ));
+                                ?>
                             </div>
                         </div>
                     <div class="ibox-content no-padding">

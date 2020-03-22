@@ -23,6 +23,10 @@
     	}
 
         public function index(){
+            if(!$this->Auth->loggedIn()) {
+                return $this->redirect($this->Auth->loginAction);
+            }
+            
         	$modules = $this->Module->fetchModules($this->schoolId);
             $submodules = array();
 

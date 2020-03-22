@@ -10,7 +10,6 @@
     	public $page = null;
         public $userId = null;
         public $schoolId = null;
-        public $announcementId = null;
 
     	public function beforeFilter() {
             parent::beforeFilter();
@@ -21,6 +20,10 @@
     	}
 
         public function index(){
+            if(!$this->Auth->loggedIn()) {
+                return $this->redirect($this->Auth->loginAction);
+            }
+            
         	$announcements = $this->Announcement->fetchAnnouncements($this->schoolId);
             $recipients = $this->recipientBadges($announcements);
             $types = $this->UserType->fetchUserTypes();
@@ -29,6 +32,13 @@
             $this->set('announcement', $announcements);
             $this->set('type', $types);
             $this->set('recipient', $recipients);
+        }
+
+        public function create(){
+            $types = $this->UserType->fetchUserTypes();
+
+            $this->set('page', 'Creating Announcement');
+            $this->set('type', $types);
         }
         
         public function publish() {
@@ -62,44 +72,90 @@
             $this->autoRender = false;
 
             if($this->request->is('ajax')) {
-                $data = $this->request->data['id'];
+                $id = $this->request->data['id'];
 
-                $deleteAnnouncement = $this->Announcement->delete($data);
+                $result = $this->Announcement->deleteAnnouncement($id);
 
-                if ($deleteAnnouncement) {
-                    return $this->output(1, 'Succesfully deleted.');
+                if($result) {
+                    $message = Output::message('delete');
+                    $response = Output::success($message);
                 }
                 else {
-                    return $this->output(0, 'An error occured upon deleting announcement. Please try again.');
+                    $message = Output::message('error');
+                    $response = Output::error($message);
                 }
             }
+
+            return Output::response($response);
         }
 
         public function edit($id = null) {
-            $details = $this->Announcement->edit($id);
+            $details = $this->Announcement->fetchAnnouncementData($id);
             $types = $this->UserType->fetchUserTypes();
-            
-            $this->announcementId = $this->request->params['pass'][0];
 
             $this->set('page', $this->page);
             $this->set('detail', $details);
             $this->set('type', $types);
         }
 
+        public function fetchAnnouncementsData() {
+            $this->autoRender = false;
+
+            if($this->request->is('ajax')) {
+                $id = $this->request->data['id'];
+                $result = $this->Announcement->fetchAnnouncementData($id);
+                $recipients = $this->recipients($result);
+                
+                if($result) {
+                    $result['Announcement']['recipient'] = $recipients;
+                    $response = Output::success(null, $result);
+                }
+                else {
+                    $message = Output::message('error');
+                    $response = Output::error($message);
+                }
+            }
+
+            return Output::response($response);
+        }
+
         public function update() {
             $this->autoRender = false;
 
             if($this->request->is('ajax')) {
+                $id = $this->request->data['id'];
                 $recipient = json_encode($this->request->data['recipient']);
                 $announcement = json_encode($this->request->data['announcement']);
 
                 $result = $this->Announcement->updateAnnouncement(
+                    $id,
                     $this->userId,
-                    $this->schoolId,
-                    $this->announcementId, 
+                    $this->schoolId, 
                     $recipient, 
                     $announcement
                 );
+
+                if($result) {
+                    $message = Output::message('update');
+                    $response = Output::success($message);
+                }
+                else {
+                    $message = Output::message('error');
+                    $response = Output::error($message);
+                }
+            }
+
+            return Output::response($response);
+        }
+
+        public function updateStatus() {
+            $this->autoRender = false;
+
+            if($this->request->is('ajax')) {
+                $id = $this->request->data['id'];
+                $status = $this->request->data['status'];
+
+                $result = $this->Announcement->updateStatus($id, $status);
 
                 if($result) {
                     $message = Output::message('update');
@@ -130,6 +186,18 @@
                         $recipients[$value['Announcement']['id']] = '<p><span class="badge badge-success mr-2">' . $userType['UserType']['type'] . '</span></p>';
                     }
                 }
+            }
+
+            return $recipients;
+        }
+
+        public function recipients($data) {
+            $recipients = null;
+
+            $listOfRecipients = json_decode($data['Announcement']['recipient'], true);
+            foreach ($listOfRecipients as $key => $recipientItem) {
+                $userType = $this->UserType->type($recipientItem);
+                $recipients = $recipients .= $userType['UserType']['type'] . ', ';
             }
 
             return $recipients;
