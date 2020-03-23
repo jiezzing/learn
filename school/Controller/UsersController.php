@@ -93,6 +93,13 @@
             $this->set('profile', $profile);
         }
 
+        public function profile($id) {
+            $profile = $this->User->profile($id);
+            
+            $this->set('page', 'User Information');
+            $this->set('profile', $profile);
+        }
+
         public function update() {
             $this->autoRender = false;
 

@@ -103,7 +103,15 @@
                 ?>
             </li>
             <li>
-                <a href="#" data-toggle="modal" data-target="#profile-modal"><i class="fa fa-cogs"></i> <span class="nav-label">Profile</span>  </a>
+                <?php echo $this->Html->link(
+                    $this->Html->tag('i', false, array('class' => 'fa fa-cogs')) . '' . 
+                    $this->Html->tag('span', 'Profile', array('class' => 'nav-label')), array(
+                        'controller' => 'users', 
+                        'action' => 'profile', AuthComponent::user('id')
+                    ), array(
+                        'escape' => false
+                    )) 
+                ?>
             </li>
             <li class="special_link">
                 <?php echo $this->Html->link(

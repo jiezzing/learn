@@ -66,7 +66,7 @@
                                     <div class="form-group" id="data_1">
                                         <label class="font-normal">Birthdate</label>
                                         <div class="input-group date">
-                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input placeholder="Birthdate (optional)" id="birthdate" type="text" class="form-control" value="<?php echo $profile['User']['birthdate'] ?>">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input placeholder="Birthdate (optional)" id="birthdate" type="text" class="form-control" value="<?php echo date('m/d/Y', strtotime($profile['User']['birthdate'])) ?>">
                                         </div>
                                     </div>
                                 </div>

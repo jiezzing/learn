@@ -4,8 +4,7 @@
 
         public $uses = array(
             'Level',
-            'Subject',
-            'Output'
+            'Subject'
         );
 
         public $page = null;

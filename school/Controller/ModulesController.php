@@ -4,8 +4,7 @@
         public $uses = array(
             'Module',
             'Submodule',
-            'Content',
-            'Output'
+            'Content'
         );
 
     	public $page = null;
@@ -132,14 +131,12 @@
         }
 
         public function contents($id) {
-            $filepath = '/learn/school/webroot/files/' . $this->dir . '/';
             $contents = $this->Content->fetchContents($id);
             $submodule = $this->Submodule->fetchSubmoduleData($id);
 
             $this->set('page', 'Contents');
             $this->set('content', $contents);
             $this->set('submodule', $submodule);
-            $this->set('filepath', $filepath);
             $this->set('dir', $this->dir);
         }
 

@@ -4,7 +4,8 @@
 
     	public $uses = array(
     		'Announcement',
-            'User'
+            'User',
+            'Trivia'
     	);
 
     	public $page = null;
@@ -14,29 +15,26 @@
             parent::beforeFilter();
 
     		$this->page = 'Home';
-            $this->Auth->allow('index');
             $this->schoolId = $this->Auth->user('school_id');
     	}
 
-        public function afterFilter() {
-            parent::afterFilter();
-        }
-
-        public function index(){
+        public function index() {
             if(!$this->Auth->loggedIn()) {
                 return $this->redirect($this->Auth->loginAction);
             }
 
         	$announcements = $this->Announcement->fetchAnnouncements($this->schoolId);
+            $trivias = $this->Trivia->fetchTrivia($this->schoolId);
         	$totalAnnouncement = $this->Announcement->tallyAnnouncement($this->schoolId);
-            $tally = $this->User->tally($this->Auth->user('id'));
-            
+            $tallyUsers = $this->User->tallyUsers($this->schoolId);
+            $tallyTrivia = $this->Trivia->tallyTrivia($this->schoolId);
+
             $this->set('page', 'Home');
             $this->set('announcement', $announcements);
             $this->set('totalAnnouncement', $totalAnnouncement);
-            $this->set('stats', $tally);
+            $this->set('stats', $tallyUsers);
+            $this->set('tallyTrivia', $tallyTrivia);
+            $this->set('trivia', $trivias);
         }
         
     }
-
-?>

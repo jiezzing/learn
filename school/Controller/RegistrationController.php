@@ -1,20 +1,22 @@
 <?php
 
-    App::uses('AuthComponent', 'Controller/Component');
     App::uses('Folder', 'Utility');
 
-    class RegistrationController extends AppController{
+    class RegistrationController extends AppController {
 
         public $uses = array(
             'School',
-            'User',
-            'Output'
+            'User'
         );
 
         public function beforeFilter() {
             parent::beforeFilter();
 
-            $this->Auth->allow('index');
+            $this->Auth->allow(array(
+                'index', 
+                'register',
+                'checkEmail'
+            ));
         }
 
         public function index() {
@@ -32,13 +34,14 @@
                 $lastname = $this->request->data['lastname'];
                 $email = $this->request->data['email'];
                 $password = AuthComponent::password($this->request->data['password']);
-                $isEmailExist = $this->Output->checkEmail($email);
                 $folder = new Folder();
                 $dir = WWW_ROOT . 'files/UNIV-' . $school;
 
+                $isEmailExist = $this->User->checkEmail($email);
+
                 if($isEmailExist) {
-                    $message = $this->Output->message('emailExist');
-                    $response = $this->Output->error($message);
+                    $message = Output::message('emailExist');
+                    $response = Output::error($message);
                 }
                 else {
                     $result = $this->User->registration($school, $firstname, $lastname, $email, $password);
@@ -48,17 +51,17 @@
                             $folder->create($dir); 
                         }
 
-                        $message = $this->Output->message('registered');
-                        $response = $this->Output->success($message);
+                        $message = Output::message('registered');
+                        $response = Output::success($message);
                     }
                     else {
-                        $message = $this->Output->message('error');
-                        $response = $this->Output->error($message);
+                        $message = Output::message('error');
+                        $response = Output::error($message);
                     }
                 }
             }
 
-            return $this->Output->response($response);
+            return Output::response($response);
         }
         
     }

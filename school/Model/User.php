@@ -6,23 +6,6 @@
 
         public $usesTable = 'user';
 
-        public function login($email, $password) {
-            $result = $this->find('first', array(
-                'conditions' => array(
-                    'User.email' => $email,
-                    'User.password' => $password
-                ),
-                'fields' => array(
-                    'User.id',
-                    'User.user_type',
-                    'User.school_id',
-                    'User.firstname'
-                )
-            ));
-
-            return $result;
-        }
-
         public function registration($schoolId, $firstname, $lastname, $email, $password) {
             $this->create();
 
@@ -128,33 +111,24 @@
             return $profile;
         }
 
-        public function tally($id) {
-            $univId = $this->find('first', array(
-                'conditions' => array(
-                    'User.id' => $id
-                ),
-                'fields' => array(
-                    'User.school_id'
-                )
-            ));
-
+        public function tallyUsers($schoolId) {
             $admin = $this->find('count', array(
                 'conditions' => array(
-                    'User.school_id' => $univId['User']['school_id'],
+                    'User.school_id' => $schoolId,
                     'User.user_type' => 2
                 )
             ));
 
             $teachers = $this->find('count', array(
                 'conditions' => array(
-                    'User.school_id' => $univId['User']['school_id'],
+                    'User.school_id' => $schoolId,
                     'User.user_type' => 3
                 )
             ));
 
             $students = $this->find('count', array(
                 'conditions' => array(
-                    'User.school_id' => $univId['User']['school_id'],
+                    'User.school_id' => $schoolId,
                     'User.user_type' => 4
                 )
             ));
@@ -204,6 +178,16 @@
             $this->set($data);
 
             $result = $this->save();
+            
+            return $result;
+        }
+
+        public function checkEmail($email) {
+            $conditions = array(
+                'User.email' => $email
+            );
+
+            $result = $this->hasAny($conditions);
             
             return $result;
         }

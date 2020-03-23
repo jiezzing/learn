@@ -174,7 +174,6 @@
                 <?php echo $this->element('footer') ?>
             </div>
         </div>
-        <?php echo $this->element('profile') ?>
     </body>
 <?php else : ?>
     <body class="gray-bg">

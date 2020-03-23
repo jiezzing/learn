@@ -3,8 +3,7 @@
     class LoginController extends AppController{
 
         public $uses = array(
-            'User',
-            'Output'
+            'User'
         );
 
         public function beforeFilter() {
@@ -38,7 +37,7 @@
             return Output::response($response);
         }
 
-        public function index(){
+        public function index() {
             if($this->Auth->loggedIn()) {
                 return $this->redirect($this->Auth->loginRedirect);
             }

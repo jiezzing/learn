@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2020 at 05:01 PM
+-- Generation Time: Mar 23, 2020 at 08:33 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -44,8 +44,7 @@ CREATE TABLE `announcements` (
 --
 
 INSERT INTO `announcements` (`id`, `user_id`, `school_id`, `recipient`, `announcement`, `created`, `modified`, `status_id`) VALUES
-(1, 1, 1, '[\"4\"]', '{\"title\":\"A Big Disco\",\"description\":\"This is all for the youths\",\"announcement\":\"<p>There will be a big disco to be held in discohan and this is all for the students.<\\/p>\"}', '2020-03-21 23:20:34', '2020-03-21 23:20:34', 1),
-(8, 1, 1, '[\"3\"]', '{\"title\":\"A Big Disco\",\"description\":\"This is all for the youths\",\"announcement\":\"<p>There will be a big disco to be held in discohan and this is all for the students.<\\/p>\"}', '2020-03-21 23:58:56', '2020-03-21 23:58:56', 1);
+(2, 1, 1, '[\"2\"]', '{\"title\":\"A Big Disco\",\"description\":\"In this example, you can see how effectively ELOQUII is announcing their new store\\u2019s location. As you can see, they start by mentioning the area of the new location and follow-up by showing an image that helps their fans refresh their memory regarding all the store locations.\",\"announcement\":\"<p style=\\\"margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 17px; line-height: 1.6; font-family: Roboto, Arial, sans-serif; color: rgb(121, 122, 128); padding: 0px 0px 20px; border: 0px; outline: 0px; vertical-align: baseline; text-align: justify;\\\">In today\\u2019s modern world, much of our conversation happens through the medium of email. Whether it is for marketing purposes or for personal use, utilizing email\\u2019s power has proven to work better and be more efficient than other communication channels for a multitude of reasons.<br><\\/p><p style=\\\"margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 17px; line-height: 1.6; font-family: Roboto, Arial, sans-serif; color: rgb(121, 122, 128); padding: 0px 0px 20px; border: 0px; outline: 0px; vertical-align: baseline; text-align: justify;\\\">Today, we\\u2019d like to center our focus around announcement email templates, the sort of which you will often see within the context of business.<br><\\/p><p style=\\\"margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 17px; line-height: 1.6; font-family: Roboto, Arial, sans-serif; color: rgb(121, 122, 128); padding: 0px 0px 20px; border: 0px; outline: 0px; vertical-align: baseline; text-align: justify;\\\">What we love about announcement emails is that they are directly related to marketing, but they are also used for internal, company-related matters, such as the promotion or the resignation of an employee.<br><\\/p><p style=\\\"margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-variant-numeric: normal; font-variant-east-asian: normal; font-stretch: normal; font-size: 17px; line-height: 1.6; font-family: Roboto, Arial, sans-serif; color: rgb(121, 122, 128); padding: 0px 0px 20px; border: 0px; outline: 0px; vertical-align: baseline; text-align: justify;\\\">For that reason, we decided to create an article where you can find templates for all the different types of announcement emails you may need to use. So, let\\u2019s get started!<\\/p>\",\"subject\":\"General Meetings\"}', '2020-03-22 10:57:14', '2020-03-22 10:57:14', 1);
 
 -- --------------------------------------------------------
 
@@ -61,6 +60,15 @@ CREATE TABLE `contents` (
   `modified` datetime NOT NULL DEFAULT current_timestamp(),
   `status_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `contents`
+--
+
+INSERT INTO `contents` (`id`, `sub_id`, `name`, `created`, `modified`, `status_id`) VALUES
+(1, 1, 'EXPLORATORY k_to_12_commercial_cooking_learning_module.pdf', '2020-03-22 14:55:35', '2020-03-22 14:55:35', 2),
+(2, 1, 'LM_Cookery G.9 .pdf', '2020-03-22 14:55:35', '2020-03-22 14:55:35', 2),
+(3, 1, 'Marc-Lennard-Colina-Resume-2.pdf', '2020-03-22 14:55:35', '2020-03-22 14:55:35', 2);
 
 -- --------------------------------------------------------
 
@@ -261,7 +269,7 @@ INSERT INTO `submodules` (`id`, `module_id`, `school_id`, `name`, `created`, `mo
 CREATE TABLE `trivias` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `univ_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
   `trivias` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`trivias`)),
   `created` datetime NOT NULL DEFAULT current_timestamp(),
   `modified` datetime NOT NULL DEFAULT current_timestamp(),
@@ -272,9 +280,9 @@ CREATE TABLE `trivias` (
 -- Dumping data for table `trivias`
 --
 
-INSERT INTO `trivias` (`id`, `user_id`, `univ_id`, `trivias`, `created`, `modified`, `status_id`) VALUES
-(1, 6, 1, '{\"question\":\"Where do I live?\",\"answer\":\"Hinunagan\",\"hint\":\"Malocate ni siya sa southern part.\"}', '2020-03-13 04:00:27', '2020-03-13 04:00:27', 2),
-(2, 6, 1, '{\"question\":\"Where do I live?\",\"answer\":\"Hinunagan\",\"hint\":\"Malocate ni siya sa southern part.\"}', '2020-03-13 05:58:13', '2020-03-13 05:58:13', 2);
+INSERT INTO `trivias` (`id`, `user_id`, `school_id`, `trivias`, `created`, `modified`, `status_id`) VALUES
+(1, 1, 1, '{\"question\":\"Where do I live?\",\"answer\":\"Hinunagan\",\"hint\":\"Malocate ni siya sa southern part.\"}', '2020-03-13 04:00:27', '2020-03-13 04:00:27', 2),
+(2, 1, 1, '{\"question\":\"Where do I live?\",\"answer\":\"Hinunagan\",\"hint\":\"Malocate ni siya sa southern part.\"}', '2020-03-13 05:58:13', '2020-03-13 05:58:13', 2);
 
 -- --------------------------------------------------------
 
@@ -307,7 +315,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_type`, `school_id`, `firstname`, `lastname`, `middle_initial`, `about`, `email`, `password`, `image`, `gender`, `birthdate`, `address`, `age`, `created`, `modified`, `status_id`) VALUES
-(1, 2, 1, 'Edsy', 'Edillo', NULL, NULL, 'edsy@gmail.com', '55a11c3208ca5770ad21508dbd4ce9d42de2b9d9', NULL, NULL, NULL, NULL, NULL, '2020-03-16 10:46:36', '2020-03-16 10:46:36', 1),
+(1, 2, 1, 'Edsy', 'Edillo', '', NULL, 'edsy@gmail.com', '55a11c3208ca5770ad21508dbd4ce9d42de2b9d9', '{\"name\":\"midoriya.jpg\",\"size\":25954}', NULL, '2020-03-12', NULL, NULL, '2020-03-16 10:46:36', '2020-03-16 10:46:36', 1),
 (2, 2, 2, 'Fritz Gerald', 'Dumdum', NULL, NULL, 'jiezzing@gmail.com', '55a11c3208ca5770ad21508dbd4ce9d42de2b9d9', NULL, NULL, NULL, NULL, NULL, '2020-03-18 08:45:19', '2020-03-18 08:45:19', 1);
 
 -- --------------------------------------------------------
@@ -421,13 +429,13 @@ ALTER TABLE `user_types`
 -- AUTO_INCREMENT for table `announcements`
 --
 ALTER TABLE `announcements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `contents`
 --
 ALTER TABLE `contents`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `levels`
@@ -487,7 +495,7 @@ ALTER TABLE `trivias`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_types`
