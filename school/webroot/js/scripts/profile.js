@@ -7,7 +7,7 @@ $(function () {
 
         data.append('file', image);
 
-        if(data.get('firstname') == "" || data.get('lastname') == "" || data.get('email') == "") {
+        if(data.get('firstname') == "" || data.get('lastname') == "") {
             return toastr.error("Some fields are missing.", 'Error');
         }
         else {

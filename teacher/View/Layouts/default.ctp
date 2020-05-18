@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<?php echo $this->Html->charset(); ?>
+    <?php
+        header("Cache-Control: no-cache, no-store, must-revalidate"); 
+        header("Pragma: no-cache");
+        header("Expires: 0");
+        echo $this->Html->charset(); 
+    ?>
 	<title>
 		<?php echo $this->fetch('title'); ?>
 	</title>
@@ -54,7 +59,10 @@
             'plugins/jqGrid/ui.jqgrid.css',
 
             // chosen
-            'plugins/chosen/bootstrap-chosen.css'
+            'plugins/chosen/bootstrap-chosen.css',
+
+            // daterangepicker
+            'plugins/daterangepicker/daterangepicker-bs3.css'
         ]);
 
         echo $this->Html->script([
@@ -133,7 +141,13 @@
             'plugins/jqGrid/jquery.jqGrid.min.js',
 
             // chosen
-            'plugins/chosen/chosen.jquery.js'
+            'plugins/chosen/chosen.jquery.js',
+
+            // moment
+            'plugins/fullcalendar/moment.min.js',
+
+            // daterangepicker
+            'plugins/daterangepicker/daterangepicker.js'
         ]);
 
 		echo $this->fetch('meta');
@@ -141,7 +155,7 @@
 		echo $this->fetch('script');
 	?>
 </head>
-<?php if($this->Session->read('logged_in') && $this->Session->read('user_id')) : ?>
+<?php if(AuthComponent::user('id')) : ?>
     <body>
         <div class="pace  pace-inactive">
             <div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
@@ -160,7 +174,6 @@
                 <?php echo $this->element('footer') ?>
             </div>
         </div>
-        <?php echo $this->element('profile') ?>
     </body>
 <?php else : ?>
     <body class="gray-bg">

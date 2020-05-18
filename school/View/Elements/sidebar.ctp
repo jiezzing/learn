@@ -71,13 +71,6 @@
                             )) 
                         ?>
                     </li>
-                    <li>
-                        <?php echo $this->Html->link('Sections', array(
-                                'controller' => 'sections', 
-                                'action' => 'index'
-                            )) 
-                        ?>
-                    </li>
                 </ul>
             </li>
             <li>

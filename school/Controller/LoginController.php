@@ -12,14 +12,17 @@
             $this->Auth->allow('login');
         }
 
-        public function login(){
+        public function login() {
             $this->autoRender = false;
 
             if($this->request->is('post')){
-                $email = $this->request->data['email'];
-                $password = AuthComponent::password($this->request->data['password']);
+                $userType = 2;
 
-                $result = $this->User->findByEmailPassword($email, $password);
+                $result = $this->User->useEmailAndPassword(
+                    $this->request->data['email'], 
+                    AuthComponent::password($this->request->data['password']),
+                    $userType
+                );
 
                 if($result) {
                     $this->Auth->login($result['User']);
@@ -50,5 +53,6 @@
 
             return $this->redirect($this->Auth->logoutRedirect);
         }
+        
     }
 

@@ -89,7 +89,7 @@ $(function () {
             success: function(response) {
                 if(response.status) {
                     $('#edit-subject-modal').modal('show');
-                    $('#subject-name').val(response.result.Subject.name);
+                    $('#update-subject-name').val(response.result.Subject.name);
                 }
                 else {
                     return toastr.error(response.message, response.type);
@@ -102,7 +102,7 @@ $(function () {
     })
 
     $('#update-subject-btn').on('click', function(event) {
-        var name = $('#subject-name').val().trim();
+        var name = $('#update-subject-name').val().trim();
         var levels = $('#update-levels').val();
 
         if(!name || levels == '') {

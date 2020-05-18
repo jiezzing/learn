@@ -26,16 +26,6 @@
             return $data;
         }
 
-        public static function info($message = null) {
-            $data = array(
-                'status' => 1,
-                'message' => $message,
-                'type' => 'Info'
-            );
-
-            return $data;
-        }
-
         public static function message($key = null) {
             $data = array(
                 'successLogin' => 'Successfully logged in.',

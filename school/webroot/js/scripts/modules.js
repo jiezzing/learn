@@ -129,6 +129,7 @@ $(function () {
         })
 	})
 
+	// upload new submodules contents
 	$('#add-pdf-btn').on('click', function(event) {
 		event.preventDefault();
 
@@ -147,6 +148,7 @@ $(function () {
             data: data,
             contentType: false,
             processData: false,
+            dataType: 'json',
     		xhr: function() {
     			var xhr = new window.XMLHttpRequest();
 
@@ -167,8 +169,6 @@ $(function () {
             	$('.progress').removeAttr('hidden');
             },
             success: function(response) {
-                var response = $.parseJSON(response);
-
             	$('#add-pdf-btn').removeAttr('disabled data-loading');
             	$('.progress-bar').removeClass('progress-bar-animated progress-bar-striped');
 

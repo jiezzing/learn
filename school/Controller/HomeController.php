@@ -8,13 +8,11 @@
             'Trivia'
     	);
 
-    	public $page = null;
         public $schoolId = null;
 
     	public function beforeFilter() {
             parent::beforeFilter();
 
-    		$this->page = 'Home';
             $this->schoolId = $this->Auth->user('school_id');
     	}
 
@@ -31,10 +29,10 @@
 
             $this->set('page', 'Home');
             $this->set('announcement', $announcements);
+            $this->set('trivia', $trivias);
             $this->set('totalAnnouncement', $totalAnnouncement);
             $this->set('stats', $tallyUsers);
             $this->set('tallyTrivia', $tallyTrivia);
-            $this->set('trivia', $trivias);
         }
         
     }

@@ -1,3 +1,5 @@
+<?php echo $this->element('edit_subject') ?>
+
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-8">
@@ -7,28 +9,51 @@
                         <table class="table table-bordered table-hover dataTables-example" >
                             <thead>
                                 <tr>
-                                    <th><input type="checkbox" class="i-checks"></th>
                                     <th>Subject </th>
                                     <th>Accessed level</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($subject as $key => $subject) : ?>
+                                <?php foreach($subject as $key => $value) : ?>
                                     <tr>
-                                        <td><input type="checkbox"  class="i-checks" value="<?php echo $subject['Subject']['id'] ?>"></td>
-                                        <td><?php echo $subject['Subject']['name'] ?></td>
+                                        <td><?php echo $value['Subject']['name'] ?></td>
                                         <td>
                                             <div class="row col-sm-12">
                                                 <?php echo $badge[$key] ?>
                                             </div>
                                         </td>
                                         <td>
-                                            <a href="#"><i class="fa fa-check text-navy"></i></a>
-                                            <a href="#"><i class="fa fa-check text-navy"></i></a>
+                                            <ol class="breadcrumb">
+                                                <li class="breadcrumb-item">
+                                                    <?php echo $this->Html->link(
+                                                        $this->Html->tag('i', false, array('class' => 'fa fa-pencil')) . '' . 
+                                                        $this->Html->tag('span', ' Edit', array('class' => 'nav-label')), array(
+                                                            'controller' => 'subjects',
+                                                            'action' => 'fetchSubjectData'
+                                                        ), array(
+                                                            'escape' => false,
+                                                            'data-toggle' => 'modal',
+                                                            'class' => 'text-navy edit-subject get-id',
+                                                            'value' => $value['Subject']['id']
+                                                        )) 
+                                                    ?>
+                                                </li>
+                                                <li class="breadcrumb-item">
+                                                    <?php echo $this->Html->link(
+                                                        $this->Html->tag('i', false, array('class' => 'fa fa-trash')) . '' . 
+                                                        $this->Html->tag('span', ' Delete', array('class' => 'nav-label')), array(
+                                                            'controller' => 'subjects',
+                                                            'action' => 'deleteSubject'
+                                                        ), array(
+                                                            'escape' => false,
+                                                            'class' => 'text-navy delete-subject get-id',
+                                                            'value' => $value['Subject']['id']
+                                                        )) 
+                                                    ?>
+                                                </li>
+                                            </ol>
                                         </td>
-
-
                                     </tr>
                                 <?php endforeach ?>
                             </tbody>
@@ -75,16 +100,16 @@
                                 ?>
                             </div>
                             <div class="col-sm-12 mt-4">
-                                    <p>
-                                        Select levels that can have this subject
-                                    </p>
-                                    <select class="chosen-select form-control" data-placeholder="Choose level..." id="levels" multiple tabindex="4">
-                                        <?php foreach($level as $level) : ?>
-                                            <option value="<?php echo $level['Level']['id'] ?>"><?php echo $level['Level']['name'] ?></option>
-                                        <?php endforeach ?>
-                                    </select>
+                                <p>
+                                    Select levels that can have this subject
+                                </p>
+                                <select class="chosen-select form-control" data-placeholder="Choose level..." id="levels" multiple tabindex="4">
+                                    <?php foreach($level as $level) : ?>
+                                        <option value="<?php echo $level['Level']['id'] ?>"><?php echo $level['Level']['name'] ?></option>
+                                    <?php endforeach ?>
+                                </select>
 
-                                </div>
+                            </div>
                         </div>
                     <?php echo $this->Form->end() ?>
 

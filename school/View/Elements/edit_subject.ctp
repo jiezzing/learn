@@ -11,7 +11,7 @@
         <div class="row">
           <div class="col-sm-12 mb">
               <?php
-                  echo $this->Form->input('subject-name', array(
+                  echo $this->Form->input('update-subject-name', array(
                       'class' => 'form-control',
                       'type' => 'text',
                       'label' => 'Name',

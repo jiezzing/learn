@@ -11,37 +11,68 @@
                         <table class="table table-bordered table-hover dataTables-example" >
                             <thead>
                                 <tr>
-                                    <th><input type="checkbox" class="i-checks"></th>
                                     <th>Name</th>
+                                    <th>Grade Level</th>
+                                    <th>Section</th>
                                     <th>About</th>
                                     <th>Gender</th>
                                     <th>Birthday</th>
                                     <th>Address</th>
                                     <th>Email</th>
                                     <th>Password</th>
-                                    <th>Type</th>
                                     <th>Status</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($user as $usersItem) : ?>
+                                <?php foreach ($student as $value) : ?>
                                     <?php 
-                                        !isset($usersItem['User']['about']) ? $about = 'Not set' : $about = $usersItem['User']['about'];
-                                        !isset($usersItem['User']['gender']) ? $gender = 'Not set' : $gender = $usersItem['User']['gender'];
-                                        !isset($usersItem['User']['birthdate']) ? $birthdate = 'Not set' : $birthdate = $usersItem['User']['birthdate'];
-                                        !isset($usersItem['User']['address']) ? $address = 'Not set' : $address = $usersItem['User']['address'];
+                                        empty($value['User']['about']) ? 
+                                            $about = 'Not set' : 
+                                            $about = $value['User']['about'];
+
+                                        empty($value['User']['gender']) ? 
+                                            $gender = 'Not set' : 
+                                            $gender = $value['User']['gender'];
+
+                                        empty($value['User']['birthdate']) ? 
+                                            $birthdate = 'Not set' : 
+                                            $birthdate = $value['User']['birthdate'];
+
+                                        empty($value['User']['address']) ? 
+                                            $address = 'Not set' : 
+                                            $address = $value['User']['address'];
+                                        empty($value['User']['middle_initial']) ? 
+                                            $name = $value['User']['lastname'] . ', ' . $value['User']['firstname'] : 
+                                            $name = $value['User']['lastname'] . ', ' . $value['User']['firstname'] . ' ' . $value['User']['middle_initial'] . '.';
                                     ?>
                                     <tr class="gradeX">
-                                        <td><input type="checkbox"  class="i-checks" value="<?php echo $usersItem['User']['id'] ?>"></td>
-                                        <td><?php echo $usersItem['User']['lastname'] . ', ' . $usersItem['User']['firstname'] . ' ' . $usersItem['User']['middle_initial'] . '.'?></td>
+                                        <td><?php echo $name ?></td>
+                                        <td><?php echo $value['Level']['name'] ?></td>
+                                        <td><?php echo $value['Section']['name'] ?></td>
                                         <td><?php echo $about ?></td>
                                         <td><?php echo $gender ?></td>
                                         <td><?php echo $birthdate ?></td>
                                         <td><?php echo $address ?></td>
-                                        <td><?php echo $usersItem['User']['email'] ?></td>
-                                        <td><?php echo $usersItem['User']['password'] ?></td>
-                                        <td class="center"><?php echo $usersItem['UserType']['type'] ?></td>
-                                        <td class="center"><?php echo $usersItem['User']['status_id'] ?></td>
+                                        <td><?php echo $value['User']['email'] ?></td>
+                                        <td><?php echo $value['User']['password'] ?></td>
+                                        <td class="center"><?php echo $value['Status']['status'] ?></td>
+                                        <td>
+                                            <ol class="breadcrumb">
+                                                <li class="breadcrumb-item">
+                                                    <?php echo $this->Html->link(
+                                                        $this->Html->tag('i', false, array('class' => 'fa fa-pencil')) . '' . 
+                                                        $this->Html->tag('span', ' Edit', array('class' => 'nav-label')), array(
+                                                            'controller' => 'users',
+                                                            'action' => 'edit', $value['User']['id']
+                                                        ), array(
+                                                            'escape' => false,
+                                                            'class' => 'text-navy'
+                                                        )) 
+                                                    ?>
+                                                </li>
+                                            </ol>
+                                        </td>
                                     </tr>
                                 <?php endforeach ?>
                             </tbody>

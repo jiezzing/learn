@@ -4,35 +4,38 @@
 
     	public $uses = array(
     		'Announcement',
-            'User'
+            'User',
+            'Userv2',
+            'Trivia'
     	);
 
     	public $page = null;
+        public $schoolId = null;
 
     	public function beforeFilter() {
             parent::beforeFilter();
+
     		$this->page = 'Home';
+            $this->schoolId = $this->Auth->user('school_id');
     	}
 
-        public function afterFilter() {
-            parent::afterFilter();
-        }
+        public function index() {
+            if(!$this->Auth->loggedIn()) {
+                return $this->redirect($this->Auth->loginAction);
+            }
 
-        public function index(){
-        	$announcements = $this->Announcement->announcements();
-        	$totalAnnouncement = $this->Announcement->tallyAnnouncement($this->Session->read('user_id'));
-            $tally = $this->User->tally($this->Session->read('user_id'));
-            
+        	$announcements = $this->Announcement->fetchAnnouncements($this->schoolId);
+            $trivias = $this->Trivia->fetchTrivia($this->schoolId);
+        	$totalAnnouncement = $this->Announcement->tallyAnnouncement($this->schoolId);
+            $tallyUsers = $this->User->tallyUsers($this->schoolId);
+            $tallyTrivia = $this->Trivia->tallyTrivia($this->schoolId);
+
             $this->set('page', 'Home');
             $this->set('announcement', $announcements);
             $this->set('totalAnnouncement', $totalAnnouncement);
-            $this->set('stats', $tally);
-        }
-
-        public function sample() {
-            echo "Sample";
+            $this->set('stats', $tallyUsers);
+            $this->set('tallyTrivia', $tallyTrivia);
+            $this->set('trivia', $trivias);
         }
         
     }
-
-?>

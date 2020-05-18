@@ -81,7 +81,8 @@
                                             'type' => 'email',
                                             'value' => $profile['User']['email'],
                                             'placeholder' => 'Email Address',
-                                            'label' => false
+                                            'label' => false,
+                                            'readonly' => true
                                         ));
                                     ?>
                                 </div>
@@ -144,6 +145,8 @@
         </div>
     </div>
 </div>
+
+
 
 <?php echo $this->Html->script(array(
         'scripts/initialize.js',

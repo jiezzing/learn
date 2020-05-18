@@ -3,17 +3,16 @@ $(function() {
 
     $('#publish-btn').on('click', function () {
         var summernoteBody = $('.summernote').summernote('code');
-        var title = $('#title').val().trim();
+        var title = $('#announcement-title').val().trim();
         var description = $('#description').val().trim();
         var recipient = $('#recipient').val();
-        var subject = $('#subject').val().trim();
+        var subject = $('#sub').val().trim();
         var announcement = {
             'title': title,
             'description': description,
             'announcement': summernoteBody,
             'subject': subject
         };
-        alert(startDate);
 
         if(!title || !description || recipient == '' || $('.summernote').summernote('isEmpty') || !subject) {
             return toastr.error('Some fields are missing.', 'Error');
@@ -40,6 +39,7 @@ $(function() {
                         dataType: 'json',
                         success: function(response) {
                             if(response.status) {
+                                swal.close();
                                 return toastr.success(response.message, response.type);
                             }
                             else {

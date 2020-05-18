@@ -7,18 +7,14 @@
             'Content'
         );
 
-    	public $page = null;
         public $userId = null;
         public $schoolId = null;
-        public $dir = null;
 
     	public function beforeFilter() {
             parent::beforeFilter();
 
-    		$this->page = 'Modules';
             $this->userId = $this->Auth->user('user_id');
             $this->schoolId = $this->Auth->user('school_id');
-            $this->dir = 'UNIV-' . $this->schoolId;
     	}
 
         public function index(){
@@ -26,14 +22,14 @@
                 return $this->redirect($this->Auth->loginAction);
             }
             
-        	$modules = $this->Module->fetchModules($this->schoolId);
             $submodules = array();
+        	$modules = $this->Module->fetchModules($this->schoolId);
 
             foreach ($modules as $value) {
                 $submodules[$value['Module']['id']] = $this->Submodule->fetchSubmodules($value['Module']['id']);
             }
 
-            $this->set('page', $this->page);
+            $this->set('page', 'Modules');
             $this->set('module', $modules);
             $this->set('submodule', $submodules);
         }
@@ -42,15 +38,20 @@
         	$this->autoRender = false;
 
         	if($this->request->is('ajax')) {
-                $name = $this->request->data['name'];
-                $exist = $this->Module->moduleExist($this->schoolId, $name);
+                $exist = $this->Module->moduleExist(
+                    $this->schoolId, 
+                    $this->request->data['name']
+                );
 
                 if($exist) {
                     $message = Output::message('nameExist');
                     $response = Output::error($message);
                 }
                 else {
-                    $result = $this->Module->addModule($this->schoolId, $name);
+                    $result = $this->Module->addModule(
+                        $this->schoolId, 
+                        $this->request->data['name']
+                    );
 
                     if($result) {
                         $message = Output::message('message');
@@ -63,24 +64,29 @@
                 }
         	}
 
-            return $this->Output->response($response);
+            return Output::response($response);
         }
 
         public function addSubmodule() {
             $this->autoRender = false;
 
             if($this->request->is('ajax')) {
-                $id = $this->request->data['id'];
-                $submodule = $this->request->data['submodule'];
-
-                $exist = $this->Submodule->submoduleExist($id, $this->schoolId, $submodule);
+                $exist = $this->Submodule->submoduleExist(
+                    $this->request->data['id'], 
+                    $this->schoolId, 
+                    $this->request->data['submodule']
+                );
 
                 if($exist) {
                     $message = Output::message('nameExist');
                     $response = Output::error($message);
                 }
                 else {
-                    $result = $this->Submodule->addSubmodule($id, $this->schoolId,$submodule);
+                    $result = $this->Submodule->addSubmodule(
+                        $this->request->data['id'],
+                        $this->schoolId,
+                        $this->request->data['submodule']
+                    );
 
                     if($result) {
                         $message = Output::message('message');
@@ -100,51 +106,50 @@
             $this->autoRender = false;
 
             if($this->request->is('ajax')) {
-                $id = $this->request->data['id'];
-                $stored = false;
-
-                foreach ($_FILES as $key => $file) {
-                    $path = $this->dir . '/' . $file['name'];
-                    $filepath = $_SERVER['DOCUMENT_ROOT'] . '/learn/school/webroot/files/' . $path;
+                foreach ($_FILES as $file) {
+                    $filepath = $_SERVER['DOCUMENT_ROOT'] . '/learn/school/webroot/files/' . $file['name'];
 
                     if(move_uploaded_file($file['tmp_name'], $filepath)){
-                        $result = $this->Content->addContents($id, $file['name']);
-                        $stored = true;
+                        $result = $this->Content->addContents(
+                            $this->request->data['id'], 
+                            $file['name']
+                        );
+
+                        if($result) {
+                            $message = Output::message('file');
+                            $response = Output::success($message);
+                        }
+                        else {
+                            $message = Output::message('error');
+                            $response = Output::error($message);
+                        }
                     }
                     else{
-                        $stored = false;
-                        break;
+                        $message = Output::message('uploadFail');
+                        $response = Output::error($message);
                     }
-                }
-
-                if($stored) {
-                    $message = $this->Output->message('file');
-                    $response = $this->Output->success($message);
-                }
-                else {
-                    $message = $this->Output->message('error');
-                    $response = $this->Output->error($message);
                 }
             }
 
-            return $this->Output->response($response);
+            return Output::response($response);
         }
 
         public function contents($id) {
             $contents = $this->Content->fetchContents($id);
-            $submodule = $this->Submodule->fetchSubmoduleData($id);
+            $submodules = $this->Submodule->fetchSubmoduleData($id);
 
             $this->set('page', 'Contents');
             $this->set('content', $contents);
-            $this->set('submodule', $submodule);
-            $this->set('dir', $this->dir);
+            $this->set('submodule', $submodules);
         }
 
         public function fetchSubmoduleData() {
             $this->autoRender = false;
 
             if($this->request->is('ajax')) {
-                $result = $this->Submodule->specificSubmoduleData($this->request->data['id']);
+                $result = $this->Submodule->fetchSubmoduleData(
+                    $this->request->data['id']
+                );
 
                 if($result) {
                     $response = Output::success(null, $result);
@@ -162,18 +167,21 @@
             $this->autoRender = false;
 
             if($this->request->is('ajax')) {
-                $id = $this->request->data['id'];
-                $moduleId = $this->request->data['moduleId'];
-                $name = $this->request->data['name'];
-
-                $exist = $this->Submodule->submoduleExist($moduleId, $this->schoolId, $name);
+                $exist = $this->Submodule->submoduleExist(
+                    $this->request->data['moduleId'],
+                    $this->schoolId, 
+                    $this->request->data['name']
+                );
 
                 if($exist) {
                     $message = Output::message('noChanges');
                     $response = Output::info($message);
                 }
                 else {  
-                    $result = $this->Submodule->updateSubmodule($id, $name);
+                    $result = $this->Submodule->updateSubmodule(
+                        $this->request->data['id'], 
+                        $this->request->data['name']
+                    );
 
                     if($result) {
                         $message = Output::message('update');
@@ -193,9 +201,9 @@
             $this->autoRender = false;
 
             if($this->request->is('ajax')) {
-                $id = $this->request->data['id'];
-
-                $delete = $this->Submodule->deleteSubmodule($id);
+                $delete = $this->Submodule->deleteSubmodule(
+                    $this->request->data['id']
+                );
 
                 if($delete) {
                     $message = Output::message('delete');
@@ -214,9 +222,9 @@
             $this->autoRender = false;
 
             if($this->request->is('ajax')) {
-                $id = $this->request->data['id'];
-
-                $result = $this->Module->fetchModuleData($id);
+                $result = $this->Module->fetchModuleData(
+                    $this->request->data['id']
+                );
 
                 if($result) {
                     $response = Output::success(null, $result);
@@ -234,17 +242,21 @@
             $this->autoRender = false;
 
             if($this->request->is('ajax')) {
-                $id = $this->request->data['id'];
-                $name = $this->request->data['name'];
-
-                $exist = $this->Module->moduleNameExist($id, $this->schoolId, $name);
+                $exist = $this->Module->moduleNameExist(
+                    $this->request->data['id'], 
+                    $this->schoolId, 
+                    $this->request->data['name']
+                );
 
                 if($exist) {
                     $message = Output::message('noChanges');
-                    $response = Output::info($message);
+                    $response = Output::success($message);
                 }
                 else {  
-                    $result = $this->Module->updateModule($id, $name);
+                    $result = $this->Module->updateModule(
+                        $this->request->data['id'], 
+                        $this->request->data['name']
+                    );
 
                     if($result) {
                         $message = Output::message('update');
@@ -264,17 +276,40 @@
             $this->autoRender = false;
 
             if($this->request->is('ajax')) {
-                $id = $this->request->data['id'];
-
-                $delete = $this->Module->deleteModule($id);
+                $delete = $this->Module->deleteModule(
+                    $this->request->data['id']
+                );
 
                 if($delete) {
-                    $deleteSubmodules = $this->Submodule->deleteRelatedSubmodule($id);
+                    $deleteSubmodules = $this->Submodule->deleteRelatedSubmodule(
+                        $this->request->data['id']
+                    );
                     
                     if($deleteSubmodules) {
                         $message = Output::message('delete');
                         $response = Output::success($message);
                     }
+                }
+                else {  
+                    $message = Output::message('error');
+                    $response = Output::error($message);
+                }
+            }
+
+            return Output::response($response);
+        }
+
+        public function deleteContent() {
+            $this->autoRender = false;
+
+            if($this->request->is('ajax')) {
+                $delete = $this->Content->deleteContent(
+                    $this->request->data['id']
+                );
+
+                if($delete) {
+                    $message = Output::message('delete');
+                    $response = Output::success($message);
                 }
                 else {  
                     $message = Output::message('error');

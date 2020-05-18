@@ -1,94 +1,59 @@
 <?php
 
-    App::uses('AuthComponent', 'Controller/Component');
-
     class LoginController extends AppController{
 
         public $uses = array(
-            'User',
-            'Common'
+            'User'
         );
 
         public function beforeFilter() {
             parent::beforeFilter();
-        }
 
-        public function afterFilter() {
-            parent::afterFilter();
-            
-            if(!empty($this->Session->read('logged_in'))){
-                return $this->redirect(array(
-                    'controller' => 'home',
-                    'action' => 'index'
-                ));
-            }
+            $this->Auth->allow(array(
+                'login',
+                'index'
+            ));
         }
 
         public function login(){
             $this->autoRender = false;
 
-            if($this->request->is('ajax')){
-                $result = $this->User->find('first', array(
-                    'conditions' => array(
-                        'User.email' => $this->request->data['email'],
-                        'User.password' => AuthComponent::password($this->request->data['password'])
-                    ),
-                    'fields' => array(
-                        'User.id',
-                        'User.univ_id',
-                        'User.user_type',
-                        'User.firstname'
-                    )
-                ));
+            if($this->request->is('post')){
+                $email = $this->request->data['email'];
+                $password = AuthComponent::password($this->request->data['password']);
+                $userType = 3;
 
-                if($result){
-                    $response = array(
-                        'status' => 1,
-                        'type' => $result['User']['user_type'],
-                        'message' => 'Welcome, ' . $result['User']['firstname'] . '!'
-                    );
+                $result = $this->User->useEmailAndPassword($email, $password, $userType);
 
-                    $this->Session->write('user_id', $result['User']['id']);
-                    $this->Session->write('logged_in', true);
-                    $this->Session->write('univ_id', $result['User']['univ_id']);
+                if($result) {
+                    $this->Auth->login($result['User']);
+                    
+                    $message = Output::message('successLogin');
+                    $redirect = $this->Auth->loginRedirect;
+                    $response = Output::success($message);
                 }
-                else{
-                    $response = array(
-                        'status' => 0,
-                        'type' => null,
-                        'message' => 'Invalid email or password, please try again.'
-                    );
+                else {
+                    $message = Output::message('errorLogin');
+                    $response = Output::error($message);
                 }
-
-                return $this->Common->response($response);
             }
+
+            return Output::response($response);
         }
 
-        public function index(){
-            $data = array(
-                'page' => 'Login'
-            );
+        public function index() {
+            if($this->Auth->loggedIn()) {
+                return $this->redirect($this->Auth->loginRedirect);
+            }
             
-            $this->set('data', $data);
+            $this->render('index');
         }
 
         public function logout() {
-            $this->Session->destroy();
-            $this->redirect(array(
-                'controller' => 'login',
-                'action' => 'index'
-            ));
-        }
+            $this->Auth->logout();
 
-        private function output($status = 0, $type = null, $message = '') {
-            $result = array(
-                'status' => $status,
-                'type' => $type,
-                'message' => $message
-            );
-
-            echo json_encode($result);
+            return $this->redirect($this->Auth->logoutRedirect);
         }
+        
     }
 
-?>

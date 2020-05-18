@@ -38,15 +38,16 @@ class AppController extends Controller {
 
         // configure path
         App::build(array(
+          'Model' => array(CAKE_CORE_INCLUDE_PATH . '/Model/'),
           'Lib' => array(CAKE_CORE_INCLUDE_PATH . '/Lib/')
         ));
 
         // autoload library
         App::uses('Output', 'Lib');
         
-    	$user = ClassRegistry::init('User');
+        $user = ClassRegistry::init('User');
         $profile = $user->profile($this->Auth->user('id'));
 
         $this->set('profile', $profile);
-	}
+    }
 }

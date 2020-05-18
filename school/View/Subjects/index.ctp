@@ -11,6 +11,8 @@
                                 <tr>
                                     <th>Subject </th>
                                     <th>Accessed level</th>
+                                    <th>Created</th>
+                                    <th>Last modified</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -23,6 +25,8 @@
                                                 <?php echo $badge[$key] ?>
                                             </div>
                                         </td>
+                                        <td><?php echo CakeTime::niceShort($value['Subject']['created']) ?></td>
+                                        <td><?php echo CakeTime::niceShort($value['Subject']['modified']) ?></td>
                                         <td>
                                             <ol class="breadcrumb">
                                                 <li class="breadcrumb-item">
@@ -86,39 +90,37 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <?php echo $this->Form->create(false, array('id' => 'module')) ?>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <?php
-                                    echo $this->Form->input(false, array(
-                                        'class' => 'form-control',
-                                        'type' => 'text',
-                                        'placeholder' => 'Subject name here...',
-                                        'label' => 'Name',
-                                        'id' => 'subject-name'
-                                    ));
-                                ?>
-                            </div>
-                            <div class="col-sm-12 mt-4">
-                                <p>
-                                    Select levels that can have this subject
-                                </p>
-                                <select class="chosen-select form-control" data-placeholder="Choose level..." id="levels" multiple tabindex="4">
-                                    <?php foreach($level as $level) : ?>
-                                        <option value="<?php echo $level['Level']['id'] ?>"><?php echo $level['Level']['name'] ?></option>
-                                    <?php endforeach ?>
-                                </select>
-
-                            </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <?php
+                                echo $this->Form->input(false, array(
+                                    'class' => 'form-control',
+                                    'type' => 'text',
+                                    'placeholder' => 'Subject name here...',
+                                    'label' => 'Name',
+                                    'id' => 'subject-name'
+                                ));
+                            ?>
                         </div>
-                    <?php echo $this->Form->end() ?>
+                        <div class="col-sm-12 mt-4">
+                            <p>
+                                Select levels that can have this subject
+                            </p>
+                            <select class="chosen-select form-control" data-placeholder="Choose level..." id="levels" multiple tabindex="4">
+                                <?php foreach($level as $level) : ?>
+                                    <option value="<?php echo $level['Level']['id'] ?>"><?php echo $level['Level']['name'] ?></option>
+                                <?php endforeach ?>
+                            </select>
 
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group row">
-                            <div class="col-sm-4 col-sm-offset-2">
-                                <button class="btn btn-primary btn-sm" type="button" id="add-subject-btn">Add subject</button>
-                            </div>
                         </div>
+                    </div>
+
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group row">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button class="btn btn-primary btn-sm" type="button" id="add-subject-btn">Add subject</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

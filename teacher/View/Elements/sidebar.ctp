@@ -55,15 +55,23 @@
                 ?>
             </li>
             <li>
-                <?php echo $this->Html->link(
-                    $this->Html->tag('i', false, array('class' => 'fa fa-file')) . '' . 
-                    $this->Html->tag('span', 'Modules', array('class' => 'nav-label')), array(
-                        'controller' => 'modules', 
-                        'action' => 'index'
-                    ), array(
-                        'escape' => false
-                    )) 
-                ?>
+                <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Academic</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li>
+                        <?php echo $this->Html->link('Modules', array(
+                                'controller' => 'modules', 
+                                'action' => 'index'
+                            )) 
+                        ?>
+                    </li>
+                    <li>
+                        <?php echo $this->Html->link('Trivias', array(
+                                'controller' => 'subjects', 
+                                'action' => 'index'
+                            )) 
+                        ?>
+                    </li>
+                </ul>
             </li>
             <li>
                 <?php echo $this->Html->link(
@@ -78,28 +86,14 @@
             </li>
             <li>
                 <?php echo $this->Html->link(
-                    $this->Html->tag('i', false, array('class' => 'fa fa-puzzle-piece fa-lg')) . '' . 
-                    $this->Html->tag('span', 'Trivia', array('class' => 'nav-label')), array(
-                        'controller' => 'trivias', 
-                        'action' => 'index'
+                    $this->Html->tag('i', false, array('class' => 'fa fa-cogs')) . '' . 
+                    $this->Html->tag('span', 'Profile', array('class' => 'nav-label')), array(
+                        'controller' => 'users', 
+                        'action' => 'profile', AuthComponent::user('id')
                     ), array(
                         'escape' => false
                     )) 
                 ?>
-            </li>
-            <li>
-                <?php echo $this->Html->link(
-                    $this->Html->tag('i', false, array('class' => 'fa fa-users')) . '' . 
-                    $this->Html->tag('span', 'Students', array('class' => 'nav-label')), array(
-                        'controller' => 'students', 
-                        'action' => 'index'
-                    ), array(
-                        'escape' => false
-                    )) 
-                ?>
-            </li>
-            <li>
-                <a href="#" data-toggle="modal" data-target="#profile-modal"><i class="fa fa-cogs"></i> <span class="nav-label">Profile</span>  </a>
             </li>
             <li class="special_link">
                 <?php echo $this->Html->link(

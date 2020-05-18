@@ -2098,10 +2098,10 @@ button.dim:active:before {
   border-radius: 2px;
   box-shadow: none;
   color: #333333;
-  cursor: default;
+  cursor: pointer;
   line-height: 13px;
   margin: 3px 0 3px 5px;
-  padding: 3px 20px 3px 5px;
+  padding: 5px 20px 5px 5px;
   position: relative;
 }
 /* Tags Input Plugin */
@@ -4839,7 +4839,7 @@ img.circle-border {
   cursor: move;
 }
 .breadcrumb {
-  background-color: #ffffff;
+  background-color: transparent !important;
   padding: 0;
   margin-bottom: 0;
 }

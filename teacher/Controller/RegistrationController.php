@@ -1,92 +1,76 @@
 <?php
 
-    App::uses('AuthComponent', 'Controller/Component');
     App::uses('Folder', 'Utility');
-    App::uses('File', 'Utility');
 
-    class RegistrationController extends AppController{
+    class RegistrationController extends AppController {
 
         public $uses = array(
-            'University',
-            'User',
-            'Common'
+            'School',
+            'User'
         );
 
-        public $page = null;
-        public $typeId = null;
-
         public function beforeFilter() {
-            $this->page = 'Registration';
-            $this->typeId = 2;
-        }
+            parent::beforeFilter();
 
-        public function index(){
-            $universities = $this->University->find('all', array(
-                'fields' => array('id', 'name')
+            $this->Auth->allow(array(
+                'index', 
+                'register',
+                'checkEmail'
             ));
-
-        	$data = array(
-                'page' => 'Registration',
-                'universities' => $universities
-            );
-
-            $this->set('university', $universities);
         }
 
-        public function register(){
+        public function index() {
+            $schools = $this->School->fetchSchools();
+
+            $this->set('school', $schools);
+        }
+
+        public function register() {
             $this->autoRender = false;
 
             if($this->request->is('ajax')) {
-                $this->User->create();
+                $school = $this->request->data['school'];
+                $firstname = $this->request->data['firstname'];
+                $lastname = $this->request->data['lastname'];
+                $email = $this->request->data['email'];
+                $password = AuthComponent::password($this->request->data['password']);
+                $userType = 3;
+                $folder = new Folder();
+                $dir = WWW_ROOT . 'files/UNIV-' . $school;
 
-                $isEmailExist = $this->Common->checkEmail($this->request->data['email']);
+                $isEmailExist = $this->User->checkEmail($email);
 
                 if($isEmailExist) {
-                    $status = 0;
-                    $message = 'Email already exist!';
+                    $message = Output::message('emailExist');
+                    $response = Output::error($message);
                 }
                 else {
-                    $data = array(
-                        'user_type' => $this->typeId,
-                        'univ_id' => $this->request->data['university'],
-                        'firstname' => $this->request->data['firstname'],
-                        'lastname' => $this->request->data['lastname'],
-                        'email' => $this->request->data['email'],
-                        'password' => AuthComponent::password($this->request->data['password']),
-                        'status_id' => 1,
+                    $result = $this->User->registration(
+                        $userType, 
+                        $school, 
+                        $firstname, 
+                        $lastname, 
+                        $email, 
+                        $password
                     );
 
-                    $this->User->set($data);
+                    if($result) {
+                        if(!$folder->inPath($dir)) {
+                            $folder->create($dir); 
+                        }
 
-                    $result = $this->User->save();
-
-                    $path = WWW_ROOT . 'files/UNIV-' . $result['User']['univ_id'];
-                    $folder = new Folder();
-                    $folder->create($path); 
-
-                    if ($result) {
-                        $status = 1;
-                        $message = 'Account successfully created.';
+                        $message = Output::message('registered');
+                        $response = Output::success($message);
                     }
                     else {
-                        $status = 0;
-                        $message = 'Registration failed, please try again.';
+                        $message = Output::message('error');
+                        $response = Output::error($message);
                     }
                 }
-
-                return $this->response($status, $message);
             }
-        }
 
-        private function response($status, $message) {
-            $result = array(
-                'status' => $status,
-                'message' => $message
-            );
-
-            echo json_encode($result);
+            return Output::response($response);
         }
         
     }
 
-?>

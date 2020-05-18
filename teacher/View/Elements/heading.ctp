@@ -9,11 +9,11 @@
                     )) 
                 ?>
             </li>
-            <?php if ($page == 'Students') : ?>
+            <?php if ($page == 'Users') : ?>
                 <li class="breadcrumb-item active">
                     <strong>
                         <?php echo $this->Html->link($page, array(
-                                'controller' => 'students', 
+                                'controller' => 'users', 
                                 'action' => 'index'
                             )) 
                         ?>
@@ -22,7 +22,7 @@
                 <li class="breadcrumb-item active">
                     <strong>
                         <?php echo $this->Html->link('Register', array(
-                                'controller' => 'students', 
+                                'controller' => 'users', 
                                 'action' => 'register'
                             )) 
                         ?>
@@ -34,6 +34,15 @@
                         <?php echo $this->Html->link($page, array(
                                 'controller' => 'announcements', 
                                 'action' => 'index'
+                            )) 
+                        ?>
+                    </strong>
+                </li>
+                <li class="breadcrumb-item active">
+                    <strong>
+                        <?php echo $this->Html->link('Create Announcement', array(
+                                'controller' => 'announcements', 
+                                'action' => 'create'
                             )) 
                         ?>
                     </strong>
@@ -85,6 +94,45 @@
                 </li>
                 <li class="breadcrumb-item active">
                     <strong>Edit</strong>
+                </li>
+            <?php elseif($page == 'Creating Announcement') : ?>
+                <li class="breadcrumb-item active">
+                    <strong>
+                        <?php echo $this->Html->link('Announcements', array(
+                                'controller' => 'announcements', 
+                                'action' => 'index'
+                            )) 
+                        ?>
+                    </strong>
+                </li>
+                <li class="breadcrumb-item active">
+                    <strong>Create</strong>
+                </li>
+            <?php elseif($page == 'Edit Profile') : ?>
+                <li class="breadcrumb-item active">
+                    <strong>
+                        <?php echo $this->Html->link('Users', array(
+                                'controller' => 'users', 
+                                'action' => 'index'
+                            )) 
+                        ?>
+                    </strong>
+                </li>
+                <li class="breadcrumb-item active">
+                    <strong>Editing Profile</strong>
+                </li>
+            <?php elseif($page == 'User Registration') : ?>
+                <li class="breadcrumb-item active">
+                    <strong>
+                        <?php echo $this->Html->link('Users', array(
+                                'controller' => 'users', 
+                                'action' => 'index'
+                            )) 
+                        ?>
+                    </strong>
+                </li>
+                <li class="breadcrumb-item active">
+                    <strong><?php echo $page ?></strong>
                 </li>
             <?php elseif($page == 'Sections') : ?>
                 <li class="breadcrumb-item active">

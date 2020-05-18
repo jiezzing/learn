@@ -110,6 +110,43 @@ $(function () {
         fileReader(this);
     })
 
+    $('#register-btn').on('click', function(e){
+        var firstname = $('#firstname').val().trim();
+        var lastname = $('#lastname').val().trim();
+        var email = $('#email').val().trim();
+        var type = $('#type').val();
+        
+        if(!firstname || !lastname || !email) {
+            return toastr.error('Some fields are missing.', 'Error');
+        }
+        else {
+            $.ajax({
+                type: "POST",
+                url: '../../school/users/create',
+                cache: false,
+                dataType: 'json',
+                data: {
+                    firstname: firstname,
+                    lastname: lastname,
+                    email: email,
+                    type: type
+                },
+                success: function(response) {
+                    if (response.status) {
+                        toastr.success(response.message, response.type);
+                    }
+                    else {
+                        toastr.error(response.message, response.type);
+                    }
+                },      
+                error: function (response, desc, exception) {
+                    alert(exception);
+                }
+            })
+
+        }
+    })
+
     function fileReader(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();

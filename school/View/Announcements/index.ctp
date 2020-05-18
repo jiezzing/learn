@@ -110,7 +110,7 @@
                         <div class="ibox-content">
                             <div class="form-group  row">
                                 <div class="col-sm-6">
-                                    <?php echo $this->Form->input('title', array(
+                                    <?php echo $this->Form->input('announcement-title', array(
                                             'class' => 'form-control',
                                             'type' => 'text',
                                             'placeholder' => 'Your text here...',
@@ -137,7 +137,7 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
-                                    <?php echo $this->Form->input('subject', array(
+                                    <?php echo $this->Form->input('sub', array(
                                             'class' => 'form-control',
                                             'type' => 'text',
                                             'placeholder' => 'Your subject here...',
