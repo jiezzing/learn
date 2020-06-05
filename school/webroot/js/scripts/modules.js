@@ -32,7 +32,8 @@ $(function () {
 			            dataType: 'json',
 			            success: function(response) {
 			                if(response.status) {
-			                	swal.close();
+								swal.close();
+								$('input[name=name]').val(null);
 				            	return toastr.success(response.message, response.type);
 			                }
 			                else {
@@ -167,12 +168,13 @@ $(function () {
             	pendingRequests.push(xhrRequests);
             	$('.progress-bar').width('0%');
             	$('.progress').removeAttr('hidden');
-            },
+			},
             success: function(response) {
             	$('#add-pdf-btn').removeAttr('disabled data-loading');
-            	$('.progress-bar').removeClass('progress-bar-animated progress-bar-striped');
-
-            	toastr.success(response.message, response.type);
+				$('.progress-bar').removeClass('progress-bar-animated progress-bar-striped');
+				
+				toastr.success(response.message, response.type);
+				$('#add-content-modal').modal('toggle');
             },      
             error: function (response, desc, exception) {
                 alert(exception);
@@ -201,6 +203,7 @@ $(function () {
 	            dataType: 'json',
 	            success: function(response) {
 	                if(response.status) {
+						$('#edit-submodule-modal').modal('toggle');
 	                	return toastr.success(response.message, response.type);
 	                }
 	                else {
@@ -296,6 +299,7 @@ $(function () {
 	            dataType: 'json',
 	            success: function(response) {
 	                if(response.status) {
+						$('#edit-module-modal').modal('toggle');
 	                	return toastr.success(response.message, response.type);
 	                }
 	                else {

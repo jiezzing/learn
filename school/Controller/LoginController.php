@@ -16,7 +16,7 @@
             $this->autoRender = false;
 
             if($this->request->is('post')){
-                $userType = 2;
+                $userType = 3;
 
                 $result = $this->User->useEmailAndPassword(
                     $this->request->data['email'], 

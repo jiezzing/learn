@@ -43,7 +43,7 @@
                     IN+
                 </div>
             </li>
-            <li>
+            <li class="<?php if($this->params->controller == 'home') echo 'active' ?>">
                 <?php echo $this->Html->link(
                     $this->Html->tag('i', false, array('class' => 'fa fa-home fa-lg')) . '' . 
                     $this->Html->tag('span', 'Home', array('class' => 'nav-label')), array(
@@ -54,17 +54,17 @@
                     )) 
                 ?>
             </li>
-            <li>
+            <li class="<?php if($this->params->controller == 'modules' || $this->params->controller == 'subjects') echo 'active' ?>">
                 <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Academic</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse">
-                    <li>
+                    <li class="<?php if($this->params->controller == 'modules') echo 'active' ?>">
                         <?php echo $this->Html->link('Modules', array(
                                 'controller' => 'modules', 
                                 'action' => 'index'
                             )) 
                         ?>
                     </li>
-                    <li>
+                    <li class="<?php if($this->params->controller == 'subjects') echo 'active' ?>">
                         <?php echo $this->Html->link('Subjects', array(
                                 'controller' => 'subjects', 
                                 'action' => 'index'
@@ -73,7 +73,7 @@
                     </li>
                 </ul>
             </li>
-            <li>
+            <li class="<?php if($this->params->controller == 'announcements') echo 'active' ?>">
                 <?php echo $this->Html->link(
                     $this->Html->tag('i', false, array('class' => 'fa fa-bell')) . '' . 
                     $this->Html->tag('span', 'Announcements', array('class' => 'nav-label')), array(
@@ -84,7 +84,7 @@
                     )) 
                 ?>
             </li>
-            <li>
+            <li class="<?php if($this->params->controller == 'users' && $this->params->action == 'index') echo 'active' ?>">
                 <?php echo $this->Html->link(
                     $this->Html->tag('i', false, array('class' => 'fa fa-users')) . '' . 
                     $this->Html->tag('span', 'Users', array('class' => 'nav-label')), array(
@@ -95,7 +95,7 @@
                     )) 
                 ?>
             </li>
-            <li>
+            <li class="<?php if($this->params->controller == 'users' && $this->params->action == 'profile') echo 'active' ?>">
                 <?php echo $this->Html->link(
                     $this->Html->tag('i', false, array('class' => 'fa fa-cogs')) . '' . 
                     $this->Html->tag('span', 'Profile', array('class' => 'nav-label')), array(

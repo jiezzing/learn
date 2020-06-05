@@ -33,9 +33,6 @@
                                         ?>
                                     </div>
                                     <div class="ibox-tools">
-                                        <a class="collapse-link">
-                                            <i class="fa fa-chevron-down"></i>
-                                        </a>
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                             <i class="fa fa-gear"></i>
                                         </a>

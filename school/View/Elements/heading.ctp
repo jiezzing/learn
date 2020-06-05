@@ -38,15 +38,6 @@
                         ?>
                     </strong>
                 </li>
-                <li class="breadcrumb-item active">
-                    <strong>
-                        <?php echo $this->Html->link('Create Announcement', array(
-                                'controller' => 'announcements', 
-                                'action' => 'create'
-                            )) 
-                        ?>
-                    </strong>
-                </li>
             <?php elseif ($page == 'Modules') : ?>
                 <li class="breadcrumb-item active">
                     <strong>

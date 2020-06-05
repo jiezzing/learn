@@ -29,28 +29,23 @@
             $this->autoRender = false;
 
             if($this->request->is('ajax')) {
-                $school = $this->request->data['school'];
-                $firstname = $this->request->data['firstname'];
-                $lastname = $this->request->data['lastname'];
-                $email = $this->request->data['email'];
-                $password = AuthComponent::password($this->request->data['password']);
-                $folder = new Folder();
-                $dir = WWW_ROOT . 'files/UNIV-' . $school;
-
-                $isEmailExist = $this->User->checkEmail($email);
+                $isEmailExist = $this->User->checkEmail($this->request->data['email']);
 
                 if($isEmailExist) {
                     $message = Output::message('emailExist');
                     $response = Output::error($message);
                 }
                 else {
-                    $result = $this->User->registration($school, $firstname, $lastname, $email, $password);
+                    $result = $this->User->registration(
+                        3,
+                        $this->request->data['school'],
+                        $this->request->data['firstname'],
+                        $this->request->data['lastname'],
+                        $this->request->data['email'],
+                        AuthComponent::password($this->request->data['password'])
+                    );
 
                     if($result) {
-                        if(!$folder->inPath($dir)) {
-                            $folder->create($dir); 
-                        }
-
                         $message = Output::message('registered');
                         $response = Output::success($message);
                     }

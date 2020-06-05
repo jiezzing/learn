@@ -27,9 +27,6 @@
                                 <div class="ibox-title">
                                     <h5><?php echo $moduleItem['Module']['name'] ?> </h5>
                                     <div class="ibox-tools">
-                                        <a class="collapse-link" href="">
-                                            <i class="fa fa-chevron-up"></i>
-                                        </a>
                                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                             <i class="fa fa-cog"></i>
                                         </a>
@@ -131,8 +128,7 @@
                                                                         'controller' => 'modules',
                                                                         'action' => 'contents', $submodulesItem['Submodule']['id']
                                                                     ), array(
-                                                                        'escape' => false,
-                                                                        'target' => '_blank'
+                                                                        'escape' => false
                                                                     )) 
                                                                 ?>
                                                             </small>

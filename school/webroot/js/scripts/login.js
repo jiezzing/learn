@@ -1,5 +1,7 @@
 $(function () {
 
+    toastr.success('Login using your registered email and password.', 'Login');
+
     $('#login-btn').on('click', function(event){
     	event.preventDefault();
 

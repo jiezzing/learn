@@ -27,12 +27,11 @@ $(function() {
                 dataType: 'json',
                 success: function(response) {
                     if (response.status == 1) {
-                        swal("Success", response.message, "success");
+                        swal(response.type, response.message, 'success');
                     }
                     else {
-                        swal("Failed", response.message, "error");
+                        swal(response.type, response.message, 'error');
                     }
-                    
                 },      
                 error: function (response, desc, exception) {
                     alert(exception);

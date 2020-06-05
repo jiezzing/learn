@@ -126,7 +126,7 @@
                 }
 
                 if(isset($_FILES['file']['name'])) {
-                    $filepath = $_SERVER['DOCUMENT_ROOT'] . '/learn/school/webroot/files'. $this->dir . $_FILES['file']['name'];
+                    $filepath = '../../school/webroot/img/'. $_FILES['file']['name'];
                     $image = array(
                         'name' => $_FILES['file']['name'],
                         'size' => $_FILES['file']['size']

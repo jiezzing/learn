@@ -132,7 +132,7 @@ $(function() {
                         dataType: 'json',
                         success: function(response) {
                             if(response.status) {
-                                return toastr.success(response.message, response.type);
+                                return window.location.href = '../../../school/announcements';
                             }
                             else {
                                 return toastr.error(response.message, response.type);

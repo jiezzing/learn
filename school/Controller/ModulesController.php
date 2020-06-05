@@ -107,7 +107,7 @@
 
             if($this->request->is('ajax')) {
                 foreach ($_FILES as $file) {
-                    $filepath = $_SERVER['DOCUMENT_ROOT'] . '/learn/school/webroot/files/' . $file['name'];
+                    $filepath = '../../school/webroot/files/' . $file['name'];
 
                     if(move_uploaded_file($file['tmp_name'], $filepath)){
                         $result = $this->Content->addContents(

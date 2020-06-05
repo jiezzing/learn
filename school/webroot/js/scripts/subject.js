@@ -22,6 +22,8 @@ $(function () {
                 dataType: 'json',
                 success: function(response) {
                     if (response.status) {
+                        $('#subject-name').val('');
+                        $('#levels').val('').trigger('chosen:updated');
                         toastr.success(response.message, response.type);
                     }
                     else {
@@ -121,6 +123,7 @@ $(function () {
                 dataType: 'json',
                 success: function(response) {
                     if(response.status) {
+                        $('#edit-subject-modal').modal('toggle');
                         return toastr.success(response.message, response.type);
                     }
                     else {

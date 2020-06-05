@@ -13,7 +13,7 @@
         <div class="col-md-3">
             <div class="ibox">
                 <div class="ibox-content product-box">
-                    <embed class="d-block w-100" height="300" src="<?php echo '/learn/school/files/' . $value['Content']['name'] ?>">
+                    <embed class="d-block w-100" height="300" src="<?php echo '../../../school/files/' . $value['Content']['name'] ?>">
                     <div class="product-desc">
                         <small class="text-muted">File</small>
                         <a href="#" class="product-name ellipsis"><?php echo $value['Content']['name'] ?></a>
